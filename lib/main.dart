@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/routes/homePage/shoolSystem.dart';
 import 'package:flutter_app/routes/myPage/feedBack.dart';
-import 'package:flutter_app/routes/myPage/logout.dart';
 import 'package:flutter_app/routes/testRoute.dart';
 
 import 'routes/login.dart';
@@ -17,11 +17,12 @@ class MyApp extends StatelessWidget {
         home: SplashPage(),
         initialRoute: '/',
         routes: {
-          '/login':(context)=> Login(),
-          '/main':(context)=> Tabs(),
+          '/login':(context)=> Login(),  //登录
+          '/main':(context)=> Tabs(),    //主页面
           '/test':(context)=> Test(),
-          '/logout':(context)=> Logout(),
-          '/feedback':(context)=> FeedBack(),
+          '/vpn':(context)=> VPN(),      //vpn
+          '/experimentSys':(context) => ExperimentSys(), //实验系统
+          '/feedback':(context)=> FeedBack(),   //反馈
         },
     );
   }

@@ -53,6 +53,7 @@ class _LoginState extends State<Login> {
     if (res.statusCode == 200) {
       Navigator.pop(context);
       print(res);
+      // 数据缓存
       if (res.data['code'] == 200) {
         String name = res.data['info'][0]['name'];
         String academy = res.data['info'][0]['academy'];
@@ -92,9 +93,6 @@ class _LoginState extends State<Login> {
     sharedPreferences.setBool(LocalShare.IS_LOGIN, true);
     sharedPreferences.setStringList(LocalShare.STU_INFO, list);
     print('in');
-//    setState(() {
-//      LocalShare.loginFlag = sharedPreferences.getBool(LocalShare.IS_LOGIN);
-//    });
   }
 
   @override

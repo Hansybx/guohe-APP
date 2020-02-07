@@ -41,3 +41,17 @@ class LoadingDialog extends SimpleDialog {
     );
   }
 }
+
+//间隙
+class Margin extends StatelessWidget {
+  final double indent;
+
+  const Margin({Key key, this.indent: 0.0}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return new Container(
+      margin: new EdgeInsets.all(indent),
+    );
+  }
+}

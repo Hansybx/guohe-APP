@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/widgets/browser.dart';
+import 'package:flutter_app/routes/myPage/one.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:webview_flutter/webview_flutter.dart';
 
 class MyPage extends StatefulWidget {
   @override
@@ -9,6 +8,8 @@ class MyPage extends StatefulWidget {
 }
 
 class _MyPageState extends State<MyPage> {
+
+//  登出时清空本机缓存
   Future<void> clean() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     sharedPreferences.clear();
@@ -29,23 +30,29 @@ class _MyPageState extends State<MyPage> {
           "我",
         ),
       ),
-      body: Column(
-        children: <Widget>[
-          InkWellContainer('/test', 'test'),
+      body: SingleChildScrollView(
+        child: Column(
+          children: <Widget>[
+            One(),
+            SizedBox(height: 20,),
+            InkWellContainer('/test', 'test'),
+            InkWellContainer('/experimentSys', 'expsys'),
+            InkWell(
+              onTap: () => logout(),
+              child: LogoutContainer(),
+            ),
 
-          InkWell(
-            onTap: () => logout(),
-            child: LogoutContainer(),
-          ),
+            InkWellContainer('/feedback', '反馈'),
 
-          InkWellContainer('/feedback', '反馈'),
+          ],
+        ),
+      )
 
-        ],
-      ),
     );
   }
 }
 
+// 路径名 功能名 list内容封装
 class InkWellContainer extends StatefulWidget {
   String routeName;
   String funcName;
@@ -110,3 +117,4 @@ class LogoutContainer extends StatelessWidget {
     );
   }
 }
+

@@ -1,5 +1,4 @@
 class LocalShare {
-
   //记录是否已经登录
   static final String IS_LOGIN = "isLogin";
   static bool loginFlag = false;
@@ -7,7 +6,7 @@ class LocalShare {
   //记录base64码的照片
   static final String IMAGE_BASE_64 = "image_base_64";
 
-  static final String STU_INFO="stu_info";
+  static final String STU_INFO = "stu_info";
 
   //记录姓名
   static final String STU_NAME = "stu_name";
@@ -44,4 +43,12 @@ class LocalShare {
 
   //判断是否已经有校历信息，默认false表示没有导入校历信息
   static final String IS_HAVE_XIAOLI = "is_have_xiaoli";
+
+//  one 接口需求信息
+  static String DATE = "date";
+  static String IMG_URL = 'imgUrl';
+  static String IMG_AUTHOR = "imgAuthor";
+  static String IMG_KIND = "imgKind";
+  static String WORD = "word";
+  static String WORD_FROM = "wordFrom";
 }

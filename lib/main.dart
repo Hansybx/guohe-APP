@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/routes/homePage/schoolBus.dart';
 import 'package:flutter_app/routes/homePage/shoolSystem.dart';
 import 'package:flutter_app/routes/myPage/feedBack.dart';
 import 'package:flutter_app/routes/testRoute.dart';
@@ -23,6 +24,11 @@ class MyApp extends StatelessWidget {
           '/vpn':(context)=> VPN(),      //vpn
           '/experimentSys':(context) => ExperimentSys(), //实验系统
           '/feedback':(context)=> FeedBack(),   //反馈
+          '/jiaowuSys':(context)=> JiaowuSys(),  //教务系统
+          '/aolanSys':(context)=> AolanSys(), //奥兰系统
+          '/schoolBus':(context)=> SchoolBus(), //校车
+          '/infoSys':(context)=> InfoSys(), //信息系统
+          '/graduationProject':(context)=> GraduationProject(), //毕业设计
         },
     );
   }

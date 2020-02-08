@@ -51,4 +51,5 @@ class LocalShare {
   static String IMG_KIND = "imgKind";
   static String WORD = "word";
   static String WORD_FROM = "wordFrom";
+
 }

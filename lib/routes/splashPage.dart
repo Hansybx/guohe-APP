@@ -4,6 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/common/constUrl.dart';
 import 'package:flutter_app/common/localShare.dart';
+import 'package:flutter_app/common/secure.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashPage extends StatefulWidget {
@@ -16,9 +17,6 @@ class _SplashPageState extends State<SplashPage> {
   Future<void> get()  async {
     SharedPreferences pref = await SharedPreferences.getInstance();
     flag = pref.getBool(LocalShare.IS_LOGIN);
-//    setState(() {
-//    LocalShare.loginFlag = flag;
-//    });
     print('splash');
   }
 
@@ -32,8 +30,6 @@ class _SplashPageState extends State<SplashPage> {
         LocalShare.WORD_FROM = res.data['data']['words_info'];
     });
   }
-
-
 
   // 延时跳转
   jumpPage() {

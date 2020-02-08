@@ -49,6 +49,7 @@ flutter:
   assets:
      - assets/imgs/login_background.png
      - assets/imgs/guohe_logo.jpg
+     - assets/imgs/hw.jpg
   #  - images/a_dot_burr.jpeg
   #  - images/a_dot_ham.jpeg
 

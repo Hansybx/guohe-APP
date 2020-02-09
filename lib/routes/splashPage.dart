@@ -1,10 +1,10 @@
 import 'dart:async';
 
 import 'package:dio/dio.dart';
+import 'package:flustars/flustars.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/common/constUrl.dart';
 import 'package:flutter_app/common/localShare.dart';
-import 'package:flutter_app/common/secure.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashPage extends StatefulWidget {
@@ -33,7 +33,7 @@ class _SplashPageState extends State<SplashPage> {
 
   // 延时跳转
   jumpPage() {
-    return Timer(Duration(milliseconds: 100), () {
+    return Timer(Duration(milliseconds: 500), () {
       get().then((value) {
         if(flag != null && flag == true){
           Navigator.pushReplacementNamed(context, '/main');
@@ -44,12 +44,19 @@ class _SplashPageState extends State<SplashPage> {
     });
   }
 
+  _initAsync() async {
+    /// App启动时读取Sp数据，需要异步等待Sp初始化完成。
+    await SpUtil.getInstance();
+    Future.delayed(new Duration(milliseconds: 500));
+  }
+
 
   @ override
   void initState()  {
     super.initState();
     jumpPage();
     getOneContent();
+    _initAsync();
   }
 
   @override

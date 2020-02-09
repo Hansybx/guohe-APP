@@ -58,14 +58,11 @@ class _LoginState extends State<Login> {
         String name = res.data['info'][0]['name'];
         String academy = res.data['info'][0]['academy'];
         String major = res.data['info'][0]['major'];
-        String stuId = account;
-        String stuPasswd = password;
+
         List<String> list = new List();
         list.add(name);
         list.add(academy);
         list.add(major);
-        list.add(stuId);
-        list.add(stuPasswd);
         store(list);
         print('loginflag');
         print(LocalShare.loginFlag);
@@ -92,6 +89,8 @@ class _LoginState extends State<Login> {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     sharedPreferences.setBool(LocalShare.IS_LOGIN, true);
     sharedPreferences.setStringList(LocalShare.STU_INFO, list);
+    sharedPreferences.setString(LocalShare.STU_ID, _account.trim());
+    sharedPreferences.setString(LocalShare.STU_PASSWD, _password.trim());
     print('in');
   }
 

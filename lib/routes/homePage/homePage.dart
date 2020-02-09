@@ -1,4 +1,3 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
@@ -30,7 +29,7 @@ class _HomePageState extends State<HomePage> {
                 Expanded(
                   flex: 1,
                   child: InkWellButton(
-                      '/infoSys', '信息系统', Icon(AntDesign.cloudo)),
+                      '/gpa', '成绩绩点', Icon(AntDesign.carryout)),
                 ),
                 Expanded(
                   flex: 1,
@@ -54,7 +53,27 @@ class _HomePageState extends State<HomePage> {
                 Expanded(
                   flex: 1,
                   child: InkWellButton(
-                      '/experimentSys', '实验系统', Icon(AntDesign.codesquareo)),
+                      '/aolanSys', '奥兰系统', Icon(Feather.briefcase)),
+                ),
+                Expanded(
+                  flex: 1,
+                  child: InkWellButton(
+                      '/graduationProject', '空教室', Icon(Feather.clipboard)),
+                ),
+
+              ],
+            ),
+            Row(
+              children: <Widget>[
+                Expanded(
+                  flex: 1,
+                  child: InkWellButton(
+                      '/jiaowuSys', '教务系统', Icon(Feather.airplay)),
+                ),
+                Expanded(
+                  flex: 1,
+                  child: InkWellButton(
+                      '/infoSys', '信息门户', Icon(AntDesign.cloudo)),
                 ),
                 Expanded(
                   flex: 1,
@@ -75,7 +94,7 @@ class _HomePageState extends State<HomePage> {
                 Expanded(
                   flex: 1,
                   child: InkWellButton(
-                      '/experimentSys', '实验系统', Icon(AntDesign.codesquareo)),
+                      '/jiaowuSys', '教务系统', Icon(Feather.airplay)),
                 ),
                 Expanded(
                   flex: 1,
@@ -84,7 +103,6 @@ class _HomePageState extends State<HomePage> {
                 ),
               ],
             ),
-
           ],
         )
     );

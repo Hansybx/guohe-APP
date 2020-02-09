@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/routes/homePage/gpa.dart';
 import 'package:flutter_app/routes/homePage/schoolBus.dart';
 import 'package:flutter_app/routes/homePage/shoolSystem.dart';
 import 'package:flutter_app/routes/myPage/feedBack.dart';
@@ -8,7 +9,9 @@ import 'routes/login.dart';
 import 'routes/splashPage.dart';
 import 'routes/tabs.dart';
 
-void main() => runApp(new MyApp());
+//void main() => runApp(new MyApp());
+
+void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
   @override
@@ -29,6 +32,7 @@ class MyApp extends StatelessWidget {
           '/schoolBus':(context)=> SchoolBus(), //校车
           '/infoSys':(context)=> InfoSys(), //信息系统
           '/graduationProject':(context)=> GraduationProject(), //毕业设计
+          '/gpa':(context)=> GPA(), //gpa
         },
     );
   }

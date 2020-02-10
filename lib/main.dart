@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/routes/homePage/emptyClassroom.dart';
 import 'package:flutter_app/routes/homePage/gpa.dart';
 import 'package:flutter_app/routes/homePage/schoolBus.dart';
 import 'package:flutter_app/routes/homePage/shoolSystem.dart';
@@ -33,6 +34,7 @@ class MyApp extends StatelessWidget {
           '/infoSys':(context)=> InfoSys(), //信息系统
           '/graduationProject':(context)=> GraduationProject(), //毕业设计
           '/gpa':(context)=> GPA(), //gpa
+          '/classroom':(context)=> EmptyClassroom(),
         },
     );
   }

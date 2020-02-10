@@ -58,7 +58,7 @@ class _HomePageState extends State<HomePage> {
                 Expanded(
                   flex: 1,
                   child: InkWellButton(
-                      '/graduationProject', '空教室', Icon(Feather.clipboard)),
+                      '/classroom', '空教室', Icon(Feather.clipboard)),
                 ),
 
               ],

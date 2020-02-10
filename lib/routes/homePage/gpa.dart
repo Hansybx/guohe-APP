@@ -21,6 +21,7 @@ class _GPAState extends State<GPA> {
     futureReady(context);
   }
 
+//  获取学号密码
   void futureReady(BuildContext context) {
     _uid = SpUtil.getString(LocalShare.STU_ID);
     _passwd = SpUtil.getString(LocalShare.STU_PASSWD);
@@ -28,6 +29,7 @@ class _GPAState extends State<GPA> {
     print('c');
   }
 
+//  获取绩点
   Future<void> getGPA(BuildContext context, String uid, String passwd) async {
     print('a');
 
@@ -43,6 +45,8 @@ class _GPAState extends State<GPA> {
     }
   }
 
+
+//绩点组件渲染
   Widget GPABuild() {
     List<Widget> info = [];
     Widget content;
@@ -72,6 +76,7 @@ class _GPAState extends State<GPA> {
     return content;
   }
 
+//  获取成绩信息
   Future<void> getScore(BuildContext context, String uid, String passwd) async {
     FormData formData = FormData.fromMap({"username": uid, "password": passwd});
     Response response = await Dio().post(Constant.SCORE, data: formData);
@@ -128,7 +133,7 @@ class _GPAState extends State<GPA> {
           textAlign: TextAlign.center,
         ),
       ),
-      body: DefaultTextStyle(
+      body: DefaultTextStyle(   //字体style默认继承设置
         textAlign: TextAlign.center,
         style: TextStyle(
           fontSize: 20,
@@ -138,7 +143,7 @@ class _GPAState extends State<GPA> {
         child: SingleChildScrollView(
             child: Column(
           children: <Widget>[
-            FutureBuilder(
+            FutureBuilder(    //异步等待组件
               future: getGPA(context, _uid, _passwd),
               builder: (BuildContext context, AsyncSnapshot snapshot) {
                 // 等待

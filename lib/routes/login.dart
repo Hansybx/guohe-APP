@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flustars/flustars.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/common/constUrl.dart';
 
@@ -26,6 +27,7 @@ class _LoginState extends State<Login> {
     if (_form.validate()) {
       _form.save();
       login(context, _account.trim(), _password.trim());
+      getCalendarInLogin(_account.trim(), _password.trim());
     }
     else {
       AlertDialog(
@@ -37,6 +39,22 @@ class _LoginState extends State<Login> {
           )
         ],
       );
+    }
+  }
+
+  //校历
+  Future<void> getCalendarInLogin(uid,passwd) async {
+    if (uid != null) {
+      FormData formData = FormData.fromMap({
+        "username": uid,
+        "password": passwd,
+      });
+      await Dio().post(Constant.CALENDAR,data: formData).then((res) {
+        print('calendar');
+        List<String> temp = List<String>.from(res.data['info']['allYear']);
+        SpUtil.putStringList(LocalShare.ALL_YEAR, temp);
+        SpUtil.putInt(LocalShare.SERVER_WEEK, res.data['info']['weekNum']);
+      });
     }
   }
 

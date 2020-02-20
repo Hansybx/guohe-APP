@@ -30,6 +30,10 @@ dependencies:
   flutter_icons: ^1.0.0+1
   flustars: ^0.2.6+1
 
+  flutter_spinkit: ^3.0.0
+  sqflite: ^0.12.2
+  path_provider: ^0.4.1
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -51,6 +55,8 @@ flutter:
      - assets/imgs/login_background.png
      - assets/imgs/guohe_logo.jpg
      - assets/imgs/hw.jpg
+     - assets/imgs/schoolbus1.png
+     - assets/imgs/schoolbus2.png
   #  - images/a_dot_burr.jpeg
   #  - images/a_dot_ham.jpeg
 

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/routes/homePage/homePage.dart';
+import 'package:flutter_app/routes/myPage/myPage.dart';
+import 'package:flutter_app/routes/schedulePage.dart';
 
-import 'homePage/homePage.dart';
-import 'myPage/myPage.dart';
-import 'schedulePage.dart';
+
 
 class Tabs extends StatefulWidget {
   @override
@@ -11,7 +12,7 @@ class Tabs extends StatefulWidget {
 
 class _TabsState extends State<Tabs> {
   var _lastPressedAt;
-  int _currentIndex = 1;
+  int _currentIndex = 0;
   List _pageList = [
     SchedulePage(),
     HomePage(),

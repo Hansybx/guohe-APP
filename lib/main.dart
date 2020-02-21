@@ -4,7 +4,6 @@ import 'package:flutter_app/routes/homePage/gpa.dart';
 import 'package:flutter_app/routes/homePage/schoolBus.dart';
 import 'package:flutter_app/routes/homePage/shoolSystem.dart';
 import 'package:flutter_app/routes/myPage/feedBack.dart';
-import 'package:flutter_app/routes/testRoute.dart';
 
 import 'routes/login.dart';
 import 'routes/splashPage.dart';
@@ -18,29 +17,27 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
-        title: 'Welcome to Flutter',
-        home: SplashPage(),
-        initialRoute: '/',
-        routes: {
-          '/login':(context)=> Login(),  //登录
-          '/main':(context)=> Tabs(),    //主页面
-          '/test':(context)=> Test(),
-          '/vpn':(context)=> VPN(),      //vpn
-          '/experimentSys':(context) => ExperimentSys(), //实验系统
-          '/feedback':(context)=> FeedBack(),   //反馈
-          '/jiaowuSys':(context)=> JiaowuSys(),  //教务系统
-          '/aolanSys':(context)=> AolanSys(), //奥兰系统
-          '/peSys':(context)=>PeSys(),
-          '/schoolBus':(context)=> SchoolBus(), //校车
-          '/infoSys':(context)=> InfoSys(), //信息系统
-          '/graduationProject':(context)=> GraduationProject(), //毕业设计
-          '/gpa':(context)=> GPA(), //gpa
-          '/classroom':(context)=> EmptyClassroom(),
-          '/schoolcalenderImg':(context)=>CalendarSys(),
-        },
+      title: 'Welcome to Flutter',
+      home: SplashPage(),
+      initialRoute: '/',
+      routes: {
+        '/login': (context) => Login(), //登录
+        '/main': (context) => Tabs(), //主页面
+        '/vpn': (context) => VPN(), //vpn
+        '/experimentSys': (context) => ExperimentSys(), //实验系统
+        '/feedback': (context) => FeedBack(), //反馈
+        '/jiaowuSys': (context) => JiaowuSys(), //教务系统
+        '/aolanSys': (context) => AolanSys(), //奥兰系统
+        '/peSys': (context) => PeSys(),
+        '/schoolBus': (context) => SchoolBus(), //校车
+        '/infoSys': (context) => InfoSys(), //信息系统
+        '/graduationProject': (context) => GraduationProject(), //毕业设计
+        '/gpa': (context) => GPA(), //gpa
+        '/classroom': (context) => EmptyClassroom(),
+        '/schoolcalenderImg': (context) => CalendarSys(),
+      },
     );
   }
-
 }
 
 //SharedPreferences sp = await SharedPreferences.getInstance();
@@ -57,7 +54,6 @@ class MyApp extends StatelessWidget {
 //    return WillPopScope();
 //  }
 //}
-
 
 //get(BuildContext context) async {
 //  var flag;
@@ -78,7 +74,6 @@ class MyApp extends StatelessWidget {
 //    return Login();
 //  }
 //}
-
 
 // *******************************
 

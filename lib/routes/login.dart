@@ -7,9 +7,7 @@ import 'package:flutter_app/common/localShare.dart';
 import 'package:flutter_app/widgets/customViews.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-
 class Login extends StatefulWidget {
-
   @override
   _LoginState createState() => _LoginState();
 }
@@ -28,8 +26,7 @@ class _LoginState extends State<Login> {
       _form.save();
       login(context, _account.trim(), _password.trim());
       getCalendarInLogin(_account.trim(), _password.trim());
-    }
-    else {
+    } else {
       AlertDialog(
         content: Text("账号密码错误"),
         actions: <Widget>[
@@ -43,13 +40,13 @@ class _LoginState extends State<Login> {
   }
 
   //校历
-  Future<void> getCalendarInLogin(uid,passwd) async {
+  Future<void> getCalendarInLogin(uid, passwd) async {
     if (uid != null) {
       FormData formData = FormData.fromMap({
         "username": uid,
         "password": passwd,
       });
-      await Dio().post(Constant.CALENDAR,data: formData).then((res) {
+      await Dio().post(Constant.CALENDAR, data: formData).then((res) {
         print('calendar');
         List<String> temp = List<String>.from(res.data['info']['allYear']);
         SpUtil.putStringList(LocalShare.ALL_YEAR, temp);
@@ -66,7 +63,7 @@ class _LoginState extends State<Login> {
           return LoadingDialog(content: "登录中，请稍后......");
         });
     FormData formData =
-    FormData.fromMap({"username": account, "password": password});
+        FormData.fromMap({"username": account, "password": password});
     Response res = await Dio().post(Constant.LOGIN, data: formData);
     if (res.statusCode == 200) {
       Navigator.pop(context);

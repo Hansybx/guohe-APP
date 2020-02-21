@@ -1,5 +1,5 @@
 class Constant {
-  //  static final String = 'https://guohe3.cn/api/v1/stu/';
+  //  static final String = ;
 
   // 登录
   static final String LOGIN = 'https://guohe3.cn/api/v1/stu/login';
@@ -14,6 +14,12 @@ class Constant {
   static final String GPA= 'https://guohe3.cn/api/v1/stu/gpa';
   static final String SCORE= 'https://guohe3.cn/api/v1/stu/score';
   static final String CLASSROOM_EMPTY='https://guohe3.cn/api/v1/stu/classroom/empty';
+
+  //校历
+  static final String CALENDAR='https://guohe3.cn/api/v1/stu/school/calendar';
+
+  // 课表
+  static final String KB= 'https://guohe3.cn/api/v1/stu/class/schedule';
 
 //  天气
 //  static final String WEATHER = 'https://free-api.heweather.net/s6/weather/now?location=auto_ip&key=';

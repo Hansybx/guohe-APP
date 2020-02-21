@@ -20,10 +20,10 @@ class _SplashPageState extends State<SplashPage> {
   Future<void> get() async {
     SharedPreferences pref = await SharedPreferences.getInstance();
     flag = pref.getBool(LocalShare.IS_LOGIN);
-    if (flag!=null && flag == true){
+    if (flag != null && flag == true) {
       uid = pref.getString(LocalShare.STU_ID);
       passwd = pref.getString(LocalShare.STU_PASSWD);
-      getCalendar(uid,passwd);
+      getCalendar(uid, passwd);
     }
 
     print('splash');
@@ -42,8 +42,6 @@ class _SplashPageState extends State<SplashPage> {
       LocalShare.WORD_FROM = res.data['data']['words_info'];
     });
   }
-
-
 
   // 延时跳转
   jumpPage() {
@@ -64,13 +62,13 @@ class _SplashPageState extends State<SplashPage> {
     Future.delayed(new Duration(milliseconds: 500));
   }
 
-  Future<void> getCalendar(uid,passwd) async {
+  Future<void> getCalendar(uid, passwd) async {
     if (uid != null) {
       FormData formData = FormData.fromMap({
         "username": uid,
         "password": passwd,
       });
-      await Dio().post(Constant.CALENDAR,data: formData).then((res) {
+      await Dio().post(Constant.CALENDAR, data: formData).then((res) {
         List<String> temp = List<String>.from(res.data['info']['allYear']);
         SpUtil.putStringList(LocalShare.ALL_YEAR, temp);
         SpUtil.putInt(LocalShare.SERVER_WEEK, res.data['info']['weekNum']);
@@ -90,10 +88,22 @@ class _SplashPageState extends State<SplashPage> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 200,
-      width: 200,
-      color: Colors.white,
-      child: Text("test"),
-    );
+        height: 200,
+        width: 200,
+        color: Colors.white,
+        child: Container(
+            height: MediaQuery.of(context).size.height,
+            width: MediaQuery.of(context).size.width,
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                  begin: Alignment.bottomLeft,
+                  colors: [Colors.blue, Colors.lightBlueAccent]),
+            ),
+            child: Center(
+                child: Image(
+              image: AssetImage('assets/imgs/guohe_logo.jpg'),
+              width: 150,
+              height: 150,
+            ))));
   }
 }

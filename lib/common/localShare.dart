@@ -22,24 +22,28 @@ class LocalShare {
 
   //记录密码
   static final String STU_PASSWD = "stu_passwd";
+  //记录体育课密码
+  static final String PE_PASSWD = "pe_passwd";
 
   //记录课表的背景图片的base64
   static final String BG_COURSE_64 = "bg_course_64";
 
-  //记录服务器上的当前周次
-  static final String SERVER_WEEK = "server_week";
-
   //记录是否导入课程表,true表示已经导入过课表，false表示未导入课表，默认为false
   static final String IS_OPEN_KB = "is_open_kb";
 
-  //记录校历信息
-  static final String XIAO_LI = "xiao_li";
+  //保存的课表
+  static final String HANDLED_KB= "handled_kb";
+
+  //课表备注
+  static final String CLASS_MORE="class_more";
+  //记录学期信息
+  static final String SEMESTER = "semester";
+
+  //记录当前周次
+  static final String SERVER_WEEK = "server_week";
 
   //记录该学生的所有学年
   static final String ALL_YEAR = "all_year";
-
-  //记录体育课密码
-  static final String PE_PASSWD = "pe_passwd";
 
   //判断是否已经有校历信息，默认false表示没有导入校历信息
   static final String IS_HAVE_XIAOLI = "is_have_xiaoli";

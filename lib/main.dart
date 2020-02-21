@@ -30,11 +30,13 @@ class MyApp extends StatelessWidget {
           '/feedback':(context)=> FeedBack(),   //反馈
           '/jiaowuSys':(context)=> JiaowuSys(),  //教务系统
           '/aolanSys':(context)=> AolanSys(), //奥兰系统
+          '/peSys':(context)=>PeSys(),
           '/schoolBus':(context)=> SchoolBus(), //校车
           '/infoSys':(context)=> InfoSys(), //信息系统
           '/graduationProject':(context)=> GraduationProject(), //毕业设计
           '/gpa':(context)=> GPA(), //gpa
           '/classroom':(context)=> EmptyClassroom(),
+          '/schoolcalenderImg':(context)=>CalendarSys(),
         },
     );
   }

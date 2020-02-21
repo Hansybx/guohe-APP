@@ -122,7 +122,7 @@ class _LoginState extends State<Login> {
           decoration: new BoxDecoration(
             gradient: LinearGradient(
                 begin: Alignment.bottomCenter,
-                colors: [Colors.redAccent, Colors.orange]),
+                colors: [Colors.blue, Colors.lightBlueAccent]),
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -184,7 +184,7 @@ class _LoginState extends State<Login> {
                 decoration: BoxDecoration(
                     gradient: LinearGradient(
                         begin: Alignment.bottomLeft,
-                        colors: [Colors.redAccent, Colors.orange]),
+                        colors: [Colors.blue, Colors.lightBlueAccent]),
                     borderRadius: BorderRadius.circular(20.0)),
                 child: FlatButton(
                   child: Text("登录"),

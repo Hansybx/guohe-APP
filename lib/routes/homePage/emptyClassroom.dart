@@ -100,7 +100,7 @@ class _EmptyClassroomState extends State<EmptyClassroom> {
     showDialog(
         context: context,
         builder: (context) {
-          return LoadingDialog(content: "登录中，请稍后......");
+          return LoadingDialog(content: "查询中，请稍后......");
         });
     FormData formData = FormData.fromMap({
       "username": uid,

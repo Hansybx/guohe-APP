@@ -48,12 +48,12 @@ class _HomePageState extends State<HomePage> {
                 Expanded(
                   flex: 1,
                   child: InkWellButton(
-                      '/jiaowuSys', '教务系统', Icon(Feather.airplay)),
+                      '/peSys', '体育系统', Icon(Ionicons.md_american_football)),
                 ),
                 Expanded(
                   flex: 1,
                   child: InkWellButton(
-                      '/aolanSys', '奥兰系统', Icon(Feather.briefcase)),
+                      '/experimentSys', '实验系统', Icon(AntDesign.rocket1)),
                 ),
                 Expanded(
                   flex: 1,
@@ -94,7 +94,7 @@ class _HomePageState extends State<HomePage> {
                 Expanded(
                   flex: 1,
                   child: InkWellButton(
-                      '/jiaowuSys', '教务系统', Icon(Feather.airplay)),
+                      '/schoolcalenderImg', '校历', Icon(Feather.airplay)),
                 ),
                 Expanded(
                   flex: 1,

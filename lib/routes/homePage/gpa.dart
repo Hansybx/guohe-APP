@@ -38,7 +38,12 @@ class _GPAState extends State<GPA> {
 
     print('b');
     if (response.statusCode == 200) {
-      GPA_res.addAll(response.data['info']);
+//      response.data['code'] = 402;
+      if(response.data['code'] == 200){
+        GPA_res.addAll(response.data['info']);
+      }else if(response.data['code'] == 402){
+        print('pingjiao');
+      }
       print(GPA_res);
     } else {
       print(GPA_res);
@@ -54,7 +59,7 @@ class _GPAState extends State<GPA> {
     for (var item in GPA_res) {
       x++;
       info.add(Container(
-        color: x % 2 == 1 ? Colors.white : Colors.greenAccent,
+        color: x % 2 == 1 ? Colors.blue : Colors.lightBlueAccent,
         child: Row(children: <Widget>[
           Expanded(
             flex: 1,
@@ -82,7 +87,21 @@ class _GPAState extends State<GPA> {
     Response response = await Dio().post(Constant.SCORE, data: formData);
 
     if (response.statusCode == 200) {
-      ScoreRes.addAll(response.data['info']);
+      if(response.data['code'] == 200){
+        ScoreRes.addAll(response.data['info']);
+      }else if(response.data['code'] == 402){
+        showDialog(context: context,builder: (context){
+          return AlertDialog(
+            content: Text('强智系统未评教请在强智教务评教后在查询'),
+            actions: <Widget>[
+              FlatButton(
+                child: Text('确定'),
+                onPressed: () => Navigator.of(context).pop(),
+              )
+            ],
+          );
+        });
+      }
       print(ScoreRes);
     } else {
       print(ScoreRes);
@@ -96,7 +115,7 @@ class _GPAState extends State<GPA> {
     for (var item in ScoreRes) {
       x++;
       info.add(Container(
-        color: x % 2 == 1 ? Colors.white : Colors.greenAccent,
+        color: x % 2 == 1 ? Colors.blueAccent : Colors.lightBlueAccent,
         child: Row(children: <Widget>[
           Expanded(
             flex: 1,
@@ -183,24 +202,30 @@ class _GPAState extends State<GPA> {
                     );
                   } else {
                     // 请求成功，显示数据
-                    return Container(
-                      color: Colors.white,
-                      child: Column(
-                        children: <Widget>[
-                          Row(
-                            children: <Widget>[
-                              Expanded(
-                                flex: 1,
-                                child: Text('学期'),
-                              ),
-                              Expanded(
-                                flex: 1,
-                                child: Text('绩点'),
-                              ),
-                            ],
-                          ),
-                          GPABuild(),
-                        ],
+                    return Padding(
+                      padding: const EdgeInsets.only(top: 15.0),
+                      child: Container(
+                        width: MediaQuery.of(context).size.width/20*19,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                        ),
+                        child: Column(
+                          children: <Widget>[
+                            Row(
+                              children: <Widget>[
+                                Expanded(
+                                  flex: 1,
+                                  child: Text('学期'),
+                                ),
+                                Expanded(
+                                  flex: 1,
+                                  child: Text('绩点'),
+                                ),
+                              ],
+                            ),
+                            GPABuild(),
+                          ],
+                        ),
                       ),
                     );
                   }
@@ -227,7 +252,7 @@ class _GPAState extends State<GPA> {
                     return Column(
                       children: <Widget>[
                         Container(
-                          color: Colors.green,
+                          color: Colors.deepPurpleAccent,
                           child: Row(
                             children: <Widget>[
                               Expanded(

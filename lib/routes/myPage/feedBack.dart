@@ -58,6 +58,9 @@ class _FeedBackState extends State<FeedBack> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text('反馈'),
+      ),
       body: Column(
         children: <Widget>[
           Container(

@@ -8,7 +8,6 @@ class MyPage extends StatefulWidget {
 }
 
 class _MyPageState extends State<MyPage> {
-
 //  登出时清空本机缓存
   Future<void> clean() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
@@ -16,39 +15,51 @@ class _MyPageState extends State<MyPage> {
     print('cleared');
   }
 
-  void logout(){
-     clean();
-     Navigator.pushReplacementNamed(context, '/login');
+  void logout() {
+    clean();
+    Navigator.pushReplacementNamed(context, '/login');
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: Text(
-          "我",
+        appBar: AppBar(
+          centerTitle: true,
+          title: Text(
+            "我",
+          ),
         ),
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: <Widget>[
-            One(),
-            SizedBox(height: 20,),
-            InkWellContainer('/test', 'test'),
-            InkWellContainer('/experimentSys', 'expsys'),
-            InkWell(
-              onTap: () => logout(),
-              child: LogoutContainer(),
-            ),
-
-            InkWellContainer('/feedback', '反馈'),
-
-          ],
-        ),
-      )
-
-    );
+        body: SingleChildScrollView(
+          child: Column(
+            children: <Widget>[
+              One(),
+              SizedBox(
+                height: 20,
+              ),
+              Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10.0),
+                  boxShadow: [
+                    //阴影
+                    BoxShadow(
+                        color: Colors.black54,
+                        offset: Offset(2.0, 2.0),
+                        blurRadius: 4.0)
+                  ],
+                ),
+                child: Column(
+                  children: <Widget>[
+                    InkWell(
+                      onTap: () => logout(),
+                      child: LogoutContainer(),
+                    ),
+                    InkWellContainer('/feedback', '反馈'),
+                  ],
+                ),
+              )
+            ],
+          ),
+        ));
   }
 }
 
@@ -72,7 +83,7 @@ class _InkWellContainerState extends State<InkWellContainer> {
       },
       child: Container(
         height: 60,
-        color: Colors.blue,
+        color: Colors.white70,
         child: Row(
           children: <Widget>[
             Expanded(
@@ -98,7 +109,7 @@ class LogoutContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 60,
-      color: Colors.blue,
+      color: Colors.white70,
       child: Row(
         children: <Widget>[
           Expanded(
@@ -117,4 +128,3 @@ class LogoutContainer extends StatelessWidget {
     );
   }
 }
-

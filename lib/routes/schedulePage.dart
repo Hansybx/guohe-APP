@@ -45,14 +45,11 @@ class _SchedulePageState extends State<SchedulePage> {
   ];
 
   List colorArrays = [
-    "0xFF85B8CF",
-    "0xFF90C652",
-    "0xFFD8AA5A",
-    "0xFFFC9F9D",
-    "0xFF0A9A84",
-    "0xFF61BC69",
-    "0xFF12AEF3",
-    "0xFFE29AAD"
+    "0xff33CC33", // 绿
+    "0xff3399ff", // 蓝
+    "0xffff6666", // 红-粉
+    "0xffCC9933", // 褐
+    "0xff99CCFF", // 青
   ];
 
   var monday, tuesday, wednesday, thursday, friday, saturday, sunday;

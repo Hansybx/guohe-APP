@@ -2,16 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/common/localShare.dart';
 import 'package:flutter_app/widgets/customViews.dart';
 
-class One extends StatefulWidget {
-  @override
-  _OneState createState() => _OneState();
-}
-
-class _OneState extends State<One> {
-
+class One extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-
     return new Padding(
       padding: new EdgeInsets.all(18.0),
       child: new Column(
@@ -19,13 +12,14 @@ class _OneState extends State<One> {
           new Container(
             child: new Row(
               children: <Widget>[
-
                 new Icon(
                   Icons.email,
                   color: Colors.black26,
                   size: 17.0,
                 ),
-                SizedBox(width: 10,),
+                SizedBox(
+                  width: 10,
+                ),
                 new Container(
                   child: new Text(
                     '日知录',
@@ -51,7 +45,9 @@ class _OneState extends State<One> {
             child: new Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Image(image: NetworkImage(LocalShare.IMG_URL),),
+                Image(
+                  image: NetworkImage(LocalShare.IMG_URL),
+                ),
                 new Margin(indent: 6.0),
                 new Text(
                   LocalShare.WORD,

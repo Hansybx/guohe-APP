@@ -3,7 +3,7 @@ import 'package:flutter_app/routes/homePage/emptyClassroom.dart';
 import 'package:flutter_app/routes/homePage/gpa.dart';
 import 'package:flutter_app/routes/homePage/schoolBus.dart';
 import 'package:flutter_app/routes/homePage/shoolSystem.dart';
-import 'package:flutter_app/routes/myPage/feedBack.dart';
+import 'package:flutter_app/routes/myPage/feedback.dart';
 
 import 'routes/login.dart';
 import 'routes/splashPage.dart';

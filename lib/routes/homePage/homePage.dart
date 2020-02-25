@@ -10,7 +10,11 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  bool isLargeScreen; //是否是大屏幕
+
   List<Widget> imageList = List();
+
+  Widget selectWidget = null;
 
   @override
   void initState() {
@@ -31,39 +35,49 @@ class _HomePageState extends State<HomePage> {
         appBar: AppBar(
           title: Text("果核"),
         ),
-        body: new SingleChildScrollView(
-          child: Column(
-            children: <Widget>[
-              swiper(),
-              ListTile(
-                title: Text("教务服务"),
-              ),
-              GridView.count(
-                shrinkWrap: true,
-                physics: new NeverScrollableScrollPhysics(),
-                crossAxisCount: 4,
-                padding: EdgeInsets.symmetric(vertical: 0),
-                children: eduServiceList
-                    .map((item) => ServiceItem(widget: item))
-                    .toList(),
-              ),
-              new Divider(),
-              ListTile(
-                title: Text("校园系统"),
-              ),
-              GridView.count(
-                shrinkWrap: true,
-                physics: new NeverScrollableScrollPhysics(),
-                crossAxisCount: 4,
-                padding: EdgeInsets.symmetric(vertical: 0),
-                children: eduSystemList
-                    .map((item) => ServiceItem(widget: item))
-                    .toList(),
-              ),
-              new Divider(),
-            ],
-          ),
-        ));
+        body: new OrientationBuilder(builder: (context, ori) {
+          print("width:${MediaQuery.of(context).size.width}");
+          //判断屏幕宽度
+          if (MediaQuery.of(context).size.width > 600) {
+            isLargeScreen = true;
+          } else {
+            isLargeScreen = false;
+          }
+          print(isLargeScreen);
+          return SingleChildScrollView(
+            child: Column(
+              children: <Widget>[
+                swiper(),
+                ListTile(
+                  title: Text("教务服务"),
+                ),
+                GridView.count(
+                  shrinkWrap: true,
+                  physics: new NeverScrollableScrollPhysics(),
+                  crossAxisCount: 4,
+                  padding: EdgeInsets.symmetric(vertical: 0),
+                  children: eduServiceList
+                      .map((item) => ServiceItem(widget: item))
+                      .toList(),
+                ),
+                new Divider(),
+                ListTile(
+                  title: Text("校园系统"),
+                ),
+                GridView.count(
+                  shrinkWrap: true,
+                  physics: new NeverScrollableScrollPhysics(),
+                  crossAxisCount: 4,
+                  padding: EdgeInsets.symmetric(vertical: 0),
+                  children: eduSystemList
+                      .map((item) => ServiceItem(widget: item))
+                      .toList(),
+                ),
+                new Divider(),
+              ],
+            ),
+          );
+        }));
   }
 
   // 轮播图

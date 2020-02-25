@@ -57,10 +57,6 @@ class LocalShare {
   static String WORD_FROM = "wordFrom";
 
 
-  // 图片的根存放路径
-  static String imgBase = "assets/imgs/";
 
-  // 反馈图标
-  static String feedbackImg = imgBase + "feedback.png";
 
 }

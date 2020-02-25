@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/common/constUrl.dart';
-import 'package:flutter_app/common/localShare.dart';
+import 'package:flutter_app/common/string_file.dart';
 import 'package:flutter_app/utils/utils.dart';
 import 'package:toast/toast.dart';
 
@@ -68,11 +68,11 @@ class FeedBackState extends State<FeedBack> {
               ));
         }
       } catch (e) {
-        CommonUtils.showToast(context, "反馈异常，稍后重试", gravity: Toast.BOTTOM);
+        CommonUtils.showToast(context, "反馈异常，稍后重试");
         print(e);
       }
     } else {
-      CommonUtils.showToast(context, "请将反馈内容/联系方式填写完整", gravity: Toast.BOTTOM);
+      CommonUtils.showToast(context, "请将反馈内容/联系方式填写完整");
     }
   }
 
@@ -203,7 +203,7 @@ class FeedBackState extends State<FeedBack> {
                 children: <Widget>[
                   new Container(height: 20.0),
                   Image.asset(
-                    LocalShare.feedbackImg,
+                    StringFile.feedbackImg,
                     width: 60.0,
                     height: 60.0,
                   ),

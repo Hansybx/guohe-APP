@@ -6,7 +6,7 @@ import 'package:toast/toast.dart';
 class CommonUtils {
   // 弹出toast
   static showToast(BuildContext context, String msg,
-      {int duration, int gravity}) {
+      {int duration, int gravity = 0}) {
     Toast.show(msg, context, duration: duration, gravity: gravity);
   }
 

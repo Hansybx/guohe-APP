@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/utils/utils.dart';
 
 class ServiceItem extends StatelessWidget {
   final ServiceItemViewModel widget;
@@ -8,10 +9,7 @@ class ServiceItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {
-        Navigator.pushNamed(context, (this.widget.route));
-      },
+    return new GestureDetector(
       child: Container(
         height: 80,
         color: Colors.white,
@@ -31,6 +29,13 @@ class ServiceItem extends StatelessWidget {
           ],
         ),
       ),
+      onTap: () {
+        if (this.widget.canBeClick) {
+          Navigator.pushNamed(context, (this.widget.route));
+        } else {
+          CommonUtils.showToast(context, "当前服务暂未开启");
+        }
+      },
     );
   }
 }
@@ -44,9 +49,8 @@ class ServiceItemViewModel {
 
   final String route;
 
-  const ServiceItemViewModel({
-    this.route,
-    this.title,
-    this.icon,
-  });
+  bool canBeClick;
+
+  ServiceItemViewModel(
+      {this.route, this.title, this.icon, this.canBeClick = true});
 }

@@ -1,34 +1,44 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/common/route_str.dart';
 import 'package:flutter_app/viewModel/itemVM.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 
 // 校园服务的item
-const List<ServiceItemViewModel> eduServiceList = [
+List<ServiceItemViewModel> eduServiceList = [
   ServiceItemViewModel(
-      route: '/gpa',
-      title: '成绩绩点',
+      route: RouteStr.GPA,
+      title: RouteTitle.GPA,
       icon: Icon(
         AntDesign.gift,
         color: Colors.purple,
       )),
   ServiceItemViewModel(
-      route: '/schoolBus',
-      title: '校车',
+      route: RouteStr.BUS,
+      title: RouteTitle.BUS,
       icon: Icon(
         Ionicons.md_bus,
         color: Colors.orangeAccent,
       )),
   ServiceItemViewModel(
-      route: '/classroom',
-      title: '空教室',
+      route: RouteStr.CLASSROOM,
+      title: RouteTitle.CLASSROOM,
       icon: Icon(
         Feather.clipboard,
         color: Colors.blue,
       )),
+  // 早操俱乐部暂未开启，所以canBeClick设置成false
   ServiceItemViewModel(
-      route: '/schoolcalenderImg',
-      title: '校历',
+      route: RouteStr.PE,
+      title: RouteTitle.PE,
+      canBeClick: false,
+      icon: Icon(
+        Feather.star,
+        color: Colors.redAccent,
+      )),
+  ServiceItemViewModel(
+      route: RouteStr.CALENDAR,
+      title: RouteTitle.CALENDAR,
       icon: Icon(
         Feather.airplay,
         color: Colors.deepOrange,
@@ -36,52 +46,52 @@ const List<ServiceItemViewModel> eduServiceList = [
 ];
 
 // 校园系统的item
-const List<ServiceItemViewModel> eduSystemList = [
+List<ServiceItemViewModel> eduSystemList = [
   ServiceItemViewModel(
-      route: '/vpn',
-      title: '校园VPN',
+      route: RouteStr.VPN,
+      title: RouteTitle.VPN,
       icon: Icon(
         Ionicons.md_paper_plane,
         color: Colors.lightGreen,
       )),
   ServiceItemViewModel(
-      route: '/jiaowuSys',
-      title: '教务系统',
+      route: RouteStr.JIAOWU,
+      title: RouteTitle.JIAOWU,
       icon: Icon(
         Feather.airplay,
         color: Colors.pinkAccent,
       )),
   ServiceItemViewModel(
-      route: '/infoSys',
-      title: '信息门户',
+      route: RouteStr.INFOSYS,
+      title: RouteTitle.INFOSYS,
       icon: Icon(
         AntDesign.cloudo,
         color: Colors.lightBlue,
       )),
   ServiceItemViewModel(
-      route: '/aolanSys',
-      title: '奥兰系统',
+      route: RouteStr.AOLANSYS,
+      title: RouteTitle.AOLANSYS,
       icon: Icon(
         Feather.briefcase,
         color: Colors.brown,
       )),
   ServiceItemViewModel(
-      route: '/peSys',
-      title: '体育系统',
+      route: RouteStr.PESYS,
+      title: RouteTitle.PESYS,
       icon: Icon(
         Ionicons.md_american_football,
         color: Colors.pinkAccent,
       )),
   ServiceItemViewModel(
-      route: '/experimentSys',
-      title: '实验系统',
+      route: RouteStr.LABSYS,
+      title: RouteTitle.LABSYS,
       icon: Icon(
         AntDesign.rocket1,
         color: Colors.lightGreen,
       )),
   ServiceItemViewModel(
-      route: '/graduationProject',
-      title: '毕业设计',
+      route: RouteStr.GRADSYS,
+      title: RouteTitle.GRADSYS,
       icon: Icon(
         AntDesign.antdesign,
         color: Colors.orange,

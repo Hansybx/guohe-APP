@@ -24,8 +24,10 @@ class _LoginState extends State<Login> {
     var _form = _formKey.currentState;
     if (_form.validate()) {
       _form.save();
-      login(context, _account.trim(), _password.trim());
-      getCalendarInLogin(_account.trim(), _password.trim());
+
+      getCalendarInLogin(_account.trim(), _password.trim()).then((val){
+        login(context, _account.trim(), _password.trim());
+      });
     } else {
       AlertDialog(
         content: Text("账号密码错误"),

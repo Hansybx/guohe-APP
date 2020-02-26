@@ -29,7 +29,7 @@ class _EmptyClassroomState extends State<EmptyClassroom> {
   var westBuildingArray = ["西综", "图书馆"];
   var zhangBuildingArray = ["教学楼E", "教学楼F"];
   var suBuildingArray = ["教学楼A", "教学楼B", "教学楼C", "教学楼D", "外语楼", "经管数理", "船海土木"];
-  var orderArray = ['第一大节','第二大节','第三大节','第四大节','第五大节'];
+  var orderArray = ['第一大节', '第二大节', '第三大节', '第四大节', '第五大节'];
   var zcArray = [
     '第1周',
     '第2周',
@@ -130,28 +130,33 @@ class _EmptyClassroomState extends State<EmptyClassroom> {
   Widget ClassRoomBuild() {
     List<Widget> info = [];
     Widget content;
-    int x = -1;
+//    int x = -1;
     for (var item in ClsEmptyRes) {
-
-      if(weekArray.indexOf(weekValue)+1 == item['weekday']){
-        x++;
+      if (weekArray.indexOf(weekValue) + 1 == item['weekday']) {
+//        x++;
         info.add(Container(
-          color: x % 2 == 1 ? Colors.white : Colors.greenAccent,
-          child: Row(children: <Widget>[
-            Expanded(
-              flex: 1,
-              child: Text(
-                item['place'],
-              ),
-            ),
-            Expanded(
-              flex: 1,
-              child: Text(orderArray[item['time']-1]),
-            ),
-          ]),
+//          color: x % 2 == 1 ? Colors.white : Colors.blueGrey,
+          child: Column(
+            children: <Widget>[
+              Divider(height: 1.0,indent: 6.0,color: Colors.black),
+              SizedBox(height: 3,),
+              Row(children: <Widget>[
+                Expanded(
+                  flex: 1,
+                  child: Text(
+                    item['place'],
+                  ),
+                ),
+                Expanded(
+                  flex: 1,
+                  child: Text(orderArray[item['time'] - 1]),
+                ),
+              ]),
+
+            ],
+          ),
         ));
       }
-
     }
     content = Column(
       children: info,
@@ -187,61 +192,30 @@ class _EmptyClassroomState extends State<EmptyClassroom> {
             children: <Widget>[
               Row(
                 children: <Widget>[
-                  Expanded(
-                    flex: 1,
-                    child: Row(
-                      children: <Widget>[
-                        Text('校区:'),
-                        SizedBox(
-                          width: 15,
-                        ),
-                        //校区
-                        DropdownButton(
-                          value: areaValue,
-                          hint: Text('请选择校区'),
-                          onChanged: (String newValue) {
-                            setState(() {
-                              areaValue = newValue;
-                              buildValue = chooseBuildingArray[areaValue][0];
-                            });
-                          },
-                          items: <String>['东校区', '南校区', '西校区', '张家港', '苏州理工']
-                              .map<DropdownMenuItem<String>>((String value) {
-                            return DropdownMenuItem<String>(
-                              value: value,
-                              child: Text(value),
-                            );
-                          }).toList(),
-                        ),
-                      ],
-                    ),
+                  Text('校区:'),
+                  SizedBox(
+                    width: 15,
                   ),
+                  //校区
                   Expanded(
                     flex: 1,
-                    child: Row(
-                      children: <Widget>[
-                        Text('教学楼:'),
-                        SizedBox(
-                          width: 15,
-                        ),
-                        // 教学楼
-                        DropdownButton(
-                          value: buildValue,
-                          hint: Text('请选择教学楼'),
-                          onChanged: (String newValue) {
-                            setState(() {
-                              buildValue = newValue;
-                            });
-                          },
-                          items: chooseBuildingArray[areaValue]
-                              .map<DropdownMenuItem<String>>((String value) {
-                            return DropdownMenuItem<String>(
-                              value: value,
-                              child: Text(value),
-                            );
-                          }).toList(),
-                        ),
-                      ],
+                    child: DropdownButton(
+                      isExpanded: true,
+                      value: areaValue,
+                      hint: Text('请选择校区',),
+                      onChanged: (String newValue) {
+                        setState(() {
+                          areaValue = newValue;
+                          buildValue = chooseBuildingArray[areaValue][0];
+                        });
+                      },
+                      items: <String>['东校区', '南校区', '西校区', '张家港', '苏州理工']
+                          .map<DropdownMenuItem<String>>((String value) {
+                        return DropdownMenuItem<String>(
+                          value: value,
+                          child: Text(value,),
+                        );
+                      }).toList(),
                     ),
                   ),
                 ],
@@ -251,64 +225,98 @@ class _EmptyClassroomState extends State<EmptyClassroom> {
               ),
               Row(
                 children: <Widget>[
-                  Expanded(
-                    flex: 1,
-                    child: Row(
-                      children: <Widget>[
-                        Text('周次:'),
-                        SizedBox(
-                          width: 15,
-                        ),
-                        // 周次
-                        DropdownButton(
-                          value: zcValue,
-                          hint: Text('周次'),
-                          onChanged: (String newValue) {
-                            setState(() {
-                              zcValue = newValue;
-                            });
-                          },
-                          items: zcArray
-                              .map<DropdownMenuItem<String>>((String value) {
-                            return DropdownMenuItem<String>(
-                              value: value,
-                              child: Text(value),
-                            );
-                          }).toList(),
-                        ),
-                      ],
-                    ),
+                  Text('教学楼:'),
+                  SizedBox(
+                    width: 15,
                   ),
+                  // 教学楼
                   Expanded(
                     flex: 1,
-                    child: Row(
-                      children: <Widget>[
-                        Text('星期:'),
-                        SizedBox(
-                          width: 15,
-                        ),
-                        //星期几
-                        DropdownButton(
-                          value: weekValue,
-                          hint: Text('星期'),
-                          onChanged: (String newValue) {
-                            setState(() {
-                              weekValue = newValue;
-                            });
-                          },
-                          items: weekArray
-                              .map<DropdownMenuItem<String>>((String value) {
-                            return DropdownMenuItem<String>(
-                              value: value,
-                              child: Text(value),
-                            );
-                          }).toList(),
-                        ),
-                      ],
+                    child: DropdownButton(
+                      isExpanded: true,
+                      value: buildValue,
+                      hint: Text('请选择教学楼'),
+                      onChanged: (String newValue) {
+                        setState(() {
+                          buildValue = newValue;
+                        });
+                      },
+                      items: chooseBuildingArray[areaValue]
+                          .map<DropdownMenuItem<String>>((String value) {
+                        return DropdownMenuItem<String>(
+                          value: value,
+                          child: Text(value),
+                        );
+                      }).toList(),
                     ),
                   ),
                 ],
               ),
+              SizedBox(
+                height: 15,
+              ),
+              Row(
+                children: <Widget>[
+                  Text('周次:'),
+                  SizedBox(
+                    width: 15,
+                  ),
+                  // 周次
+                  Expanded(
+                    flex: 1,
+                    child: DropdownButton(
+                      isExpanded: true,
+                      value: zcValue,
+                      hint: Text('周次'),
+                      onChanged: (String newValue) {
+                        setState(() {
+                          zcValue = newValue;
+                        });
+                      },
+                      items:
+                          zcArray.map<DropdownMenuItem<String>>((String value) {
+                        return DropdownMenuItem<String>(
+                          value: value,
+                          child: Text(value),
+                        );
+                      }).toList(),
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 15,
+              ),
+              Row(
+                children: <Widget>[
+                  Text('星期:'),
+                  SizedBox(
+                    width: 15,
+                  ),
+                  //星期几
+                  Expanded(
+                    flex: 1,
+                    child: DropdownButton(
+                      isExpanded: true,
+                      value: weekValue,
+                      hint: Text('星期'),
+                      onChanged: (String newValue) {
+                        setState(() {
+                          weekValue = newValue;
+                        });
+                      },
+                      items:
+                          weekArray.map<DropdownMenuItem<String>>((String value) {
+                        return DropdownMenuItem<String>(
+                          value: value,
+                          child: Text(value),
+                        );
+                      }).toList(),
+                    ),
+                  ),
+                ],
+              ),
+
               SizedBox(
                 height: 15,
               ),
@@ -336,7 +344,7 @@ class _EmptyClassroomState extends State<EmptyClassroom> {
                 ],
               ),
 
-                  ClassRoomBuild(),
+              ClassRoomBuild(),
             ],
           )),
         ),

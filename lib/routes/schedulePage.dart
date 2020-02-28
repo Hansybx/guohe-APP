@@ -6,6 +6,8 @@ import 'package:flustars/flustars.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/common/constUrl.dart';
 import 'package:flutter_app/common/localShare.dart';
+import 'package:flutter_beautiful_popup/main.dart';
+import 'package:flutter_swiper/flutter_swiper.dart';
 //import 'package:flutter_app/widgets/customViews.dart';
 
 class SchedulePage extends StatefulWidget {
@@ -45,14 +47,16 @@ class _SchedulePageState extends State<SchedulePage> {
   ];
 
   List colorArrays = [
-    "0xFF85B8CF",
-    "0xFF90C652",
-    "0xFFD8AA5A",
-    "0xFFFC9F9D",
-    "0xFF0A9A84",
-    "0xFF61BC69",
-    "0xFF12AEF3",
-    "0xFFE29AAD"
+    "0xfff56a79",
+    "0xff86e3ce",
+    "0xffccabd8",
+    "0xff00af54",
+    "0xffa7c957",
+//    "0xff33CC33", // 绿
+//    "0xff3399ff", // 蓝
+//    "0xffff6666", // 红-粉
+//    "0xffCC9933", // 褐
+//    "0xff99CCFF", // 青
   ];
 
   var monday, tuesday, wednesday, thursday, friday, saturday, sunday;
@@ -100,19 +104,20 @@ class _SchedulePageState extends State<SchedulePage> {
   void initValue() {
     semesters = SpUtil.getStringList(LocalShare.ALL_YEAR);
     print(semesters);
-    semesterValue = semesters[0];
+    semesterValue = semesters[0] ??
+        (today.year - 1).toString() + '-' + (today.year).toString() + '-2';
     weekNum = SpUtil.getInt(LocalShare.SERVER_WEEK);
-    if (weekNum > 20) {
+    if (weekNum > 20 || weekNum == null) {
       weekNum = 1;
     }
     weekValue = zcArray[weekNum - 1];
   }
 
-  void localGet(){
-    kbHas = SpUtil.getBool(LocalShare.IS_OPEN_KB);
+  void localGet() {
     classMore = SpUtil.getString(LocalShare.CLASS_MORE);
     var temp = SpUtil.getObjectList(LocalShare.HANDLED_KB);
-    if(temp!= null){
+    kbHas = SpUtil.getBool(LocalShare.IS_OPEN_KB);
+    if (temp != null) {
       handledClassInfo = temp;
     }
   }
@@ -126,7 +131,7 @@ class _SchedulePageState extends State<SchedulePage> {
   // 课表数据获取
   Future<void> getSchedule() async {
     futureReady();
-    if(kbHas!=null &&kbHas == true){
+    if (kbHas != null && kbHas == true) {
 //      SpUtil.putObjectList(LocalShare.HANDLED_KB,[]);
       handledClassInfo = [];
       kb = [];
@@ -170,8 +175,9 @@ class _SchedulePageState extends State<SchedulePage> {
               }
             }
           }
-          var temp =handledClassInfo;
+          var temp = handledClassInfo;
           SpUtil.putBool(LocalShare.IS_OPEN_KB, true);
+          kbHas = true;
           SpUtil.putObjectList(LocalShare.HANDLED_KB, temp);
 //          SpUtil.putObjectList(LocalShare.HANDLED_KB, handledClassInfo);
           classInWeek(handledClassInfo);
@@ -283,7 +289,10 @@ class _SchedulePageState extends State<SchedulePage> {
     info.add(Container(
       height: 120,
       width: 40,
-      child: Text(jieciArray[jieci - 1],textAlign: TextAlign.center,),
+      child: Text(
+        jieciArray[jieci - 1],
+        textAlign: TextAlign.center,
+      ),
     ));
 //    for (var item in wlist) {
     for (var i = 0; i < wlist.length; i++) {
@@ -308,76 +317,7 @@ class _SchedulePageState extends State<SchedulePage> {
           child: Padding(
             padding: const EdgeInsets.fromLTRB(1, 0, 1, 1),
             child: InkWell(
-              // 点击事件处理
-              onTap: () async {
-                Map wListInfo = await showDialog( //pop出的item类型
-                    context: context,
-                    builder: (context) {
-                      if (wlist[i]['otherClasses'] == null) {
-                        return SimpleDialog(
-                          children: <Widget>[
-                            Text('课程名:    '+wlist[i]['courseName']),
-                            Text('课程号:    '+wlist[i]['courseNum']),
-                            Text('教室:    '+wlist[i]['classroom']),
-                            Text('周数:    '+wlist[i]['classWeek']),
-                            Text('任课教师:    '+wlist[i]['teacher']),
-                          ],
-                        );
-                      } else {
-                        List<Widget> course = [];
-                        Widget temp;
-                        course.add(
-                          SimpleDialogOption(
-                            child: Text(wlist[i]['courseName']),
-                            onPressed: () {
-                              Navigator.pop(context, wlist[i]);
-                            },
-                          ),
-                        );
-//                      course.add(SimpleDialog(
-//                        children: <Widget>[
-//                          Text(wlist[i]['des']),
-//                          Text('1'),
-//                        ],
-//                      ),);
-                        // 当前节次同时有课
-                        for (var item in wlist[i]['otherClasses']) {
-                          course.add(SimpleDialogOption(
-                            child: Text(item['courseName']),
-                            onPressed: (){
-                              Navigator.pop(context, item);
-                            },
-                          ));
-                        }
-
-                        temp = Column(
-                          children: course,
-                        );
-
-                        return SimpleDialog(
-                          children: <Widget>[
-                            temp,
-                          ],
-                        );
-                      }
-                    });
-                // 课程冗余信息显示
-                if (wListInfo != null) {
-                  showDialog(
-                      context: context,
-                      builder: (context) {
-                        return SimpleDialog(
-                          children: <Widget>[
-                            Text('课程名:    '+wListInfo['courseName']),
-                            Text('课程号:    '+wListInfo['courseNum']),
-                            Text('教室:    '+wListInfo['classroom']),
-                            Text('周数:    '+wListInfo['classWeek']),
-                            Text('任课教师:    '+wListInfo['teacher']),
-                          ],
-                        );
-                      });
-                }
-              },
+              // 未点击显示
               child: DefaultTextStyle(
                 textAlign: TextAlign.center,
                 style: TextStyle(
@@ -399,6 +339,119 @@ class _SchedulePageState extends State<SchedulePage> {
                   ),
                 ),
               ),
+              onTap: () {
+                final popup = BeautifulPopup(
+                  context: context,
+                  template: TemplateSuccess,
+                );
+                // 只有一节课
+                if (wlist[i]['otherClasses'] == null) {
+                  popup.show(
+                    title: '课程详情',
+                    content: Column(
+                      children: <Widget>[
+                        Text('课程名:    ' + wlist[i]['courseName']),
+                        Text('课程号:    ' + wlist[i]['courseNum']),
+                        Text('教室:    ' + wlist[i]['classroom']),
+                        Text('周数:    ' + wlist[i]['classWeek']),
+                        Text('任课教师:    ' + wlist[i]['teacher']),
+                      ],
+                    ),
+                    actions: [
+                      popup.button(
+                        label: 'Close',
+                        onPressed: Navigator.of(context).pop,
+                      ),
+                    ],
+                  );
+                } else {
+                  // 多节课同一位置
+                  List temp = [];
+                  temp.add(wlist[i]);
+                  for (var item in wlist[i]['otherClasses']) {
+                    temp.add(item);
+                  }
+                  showDialog(
+                    context: context,
+                    child: Swiper(
+                      index: 0,
+//                      pagination: SwiperPagination(),
+                      itemCount: temp.length,
+                      itemWidth: 350.0,
+                      itemHeight: 500.0,
+                      layout: SwiperLayout.STACK,
+                      itemBuilder: (BuildContext context, int index) {
+                        return Card(
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(13.0)),
+                          child: Stack(
+                            alignment: Alignment.center,
+                            children: <Widget>[
+                              Image.asset(
+                                'assets/imgs/plane.png',
+                                fit: BoxFit.cover,
+                              ),
+                              Positioned(
+                                top: 200.0,
+                                child: DefaultTextStyle(
+                                  softWrap: true,
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    decoration: TextDecoration.none,
+                                  ),
+                                  child: Column(
+                                    children: <Widget>[
+                                      Text(
+                                        '课程详情',
+                                        style: TextStyle(
+                                          color: Colors.blue.withOpacity(0.85),
+                                          fontSize: 35,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: 10,
+                                      ),
+                                      Text(
+                                        '课程名:    ' + temp[index]['courseName'],
+                                      ),
+                                      Text('课程号:    ' +
+                                          temp[index]['courseNum']),
+                                      Text(
+                                          '教室:    ' + temp[index]['classroom']),
+                                      Text(
+                                          '周数:    ' + temp[index]['classWeek']),
+                                      Text(
+                                          '任课教师:    ' + temp[index]['teacher']),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              Positioned(
+                                bottom: 20.0,
+                                child: SizedBox(
+                                  width: 260,
+                                  child: RaisedButton(
+                                    onPressed: () => Navigator.pop(context),
+                                    child: Text('close'),
+                                    color: Colors.blue.withOpacity(0.5),
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(20.0)),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        );
+                      },
+
+                    ),
+                  );
+                }
+                print('1');
+              },
             ),
           ),
         ));
@@ -444,9 +497,9 @@ class _SchedulePageState extends State<SchedulePage> {
     initValue();
     initTime();
     localGet();
-    if(kbHas!=null &&kbHas == true){
+    if (kbHas != null && kbHas == true) {
       classInWeek(handledClassInfo);
-    }else{
+    } else {
       getSchedule();
     }
   }
@@ -455,7 +508,22 @@ class _SchedulePageState extends State<SchedulePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("课表"),
+        title: Row(
+          children: <Widget>[
+            Expanded(flex: 1, child: Text('课表')),
+            Expanded(
+                flex: 1,
+                child: Text(
+                  today.month.toString() + '月' + today.day.toString() + '日',
+                  textAlign: TextAlign.end,
+                )),
+//            Expanded(flex: 1,child: Text(today.year.toString()+'年',textAlign: TextAlign.end,),)
+            Text(
+              today.year.toString() + '年',
+              textAlign: TextAlign.end,
+            )
+          ],
+        ),
       ),
       body: RefreshIndicator(
         onRefresh: getSchedule,
@@ -509,7 +577,8 @@ class _SchedulePageState extends State<SchedulePage> {
                         dateHandle(mondayInWeek, now);
                       });
                     },
-                    items: zcArray.map<DropdownMenuItem<String>>((String value) {
+                    items:
+                        zcArray.map<DropdownMenuItem<String>>((String value) {
                       return DropdownMenuItem<String>(
                         value: value,
                         child: Text(value),

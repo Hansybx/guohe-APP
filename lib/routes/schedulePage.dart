@@ -348,14 +348,16 @@ class _SchedulePageState extends State<SchedulePage> {
                 if (wlist[i]['otherClasses'] == null) {
                   popup.show(
                     title: '课程详情',
-                    content: Column(
-                      children: <Widget>[
-                        Text('课程名:    ' + wlist[i]['courseName']),
-                        Text('课程号:    ' + wlist[i]['courseNum']),
-                        Text('教室:    ' + wlist[i]['classroom']),
-                        Text('周数:    ' + wlist[i]['classWeek']),
-                        Text('任课教师:    ' + wlist[i]['teacher']),
-                      ],
+                    content: SingleChildScrollView(
+                      child: Column(
+                        children: <Widget>[
+                          Text('课程名:' + wlist[i]['courseName']),
+                          Text('课程号:' + wlist[i]['courseNum']),
+                          Text('教室:' + wlist[i]['classroom']),
+                          Text('周数:' + wlist[i]['classWeek']),
+                          Text('任课教师:' + wlist[i]['teacher']),
+                        ],
+                      ),
                     ),
                     actions: [
                       popup.button(
@@ -375,9 +377,8 @@ class _SchedulePageState extends State<SchedulePage> {
                     context: context,
                     child: Swiper(
                       index: 0,
-//                      pagination: SwiperPagination(),
                       itemCount: temp.length,
-                      itemWidth: 350.0,
+                      itemWidth: 300.0,
                       itemHeight: 500.0,
                       layout: SwiperLayout.STACK,
                       itemBuilder: (BuildContext context, int index) {
@@ -387,14 +388,17 @@ class _SchedulePageState extends State<SchedulePage> {
                           child: Stack(
                             alignment: Alignment.center,
                             children: <Widget>[
-                              Image.asset(
-                                'assets/imgs/plane.png',
-                                fit: BoxFit.cover,
+                              Align(
+                                alignment: Alignment.topCenter,
+                                child: Image.asset(
+                                  'assets/imgs/plane.png',
+                                  fit: BoxFit.cover,
+                                ),
                               ),
                               Positioned(
                                 top: 200.0,
                                 child: DefaultTextStyle(
-                                  softWrap: true,
+//                                  softWrap: true,
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                     color: Colors.black,
@@ -413,17 +417,20 @@ class _SchedulePageState extends State<SchedulePage> {
                                       SizedBox(
                                         height: 10,
                                       ),
-                                      Text(
-                                        '课程名:    ' + temp[index]['courseName'],
+                                      SingleChildScrollView(
+                                        child: Column(
+                                          children: <Widget>[
+                                            Text(
+                                              '课程名:' + temp[index]['courseName'].toString().length.toString(),
+                                            ),
+                                            Text('课程号:' + temp[index]['courseNum']),
+                                            Text('教室:' + temp[index]['classroom']),
+                                            Text('周数:' + temp[index]['classWeek']),
+                                            Text('任课教师:' + temp[index]['teacher']),
+                                          ],
+                                        ),
                                       ),
-                                      Text('课程号:    ' +
-                                          temp[index]['courseNum']),
-                                      Text(
-                                          '教室:    ' + temp[index]['classroom']),
-                                      Text(
-                                          '周数:    ' + temp[index]['classWeek']),
-                                      Text(
-                                          '任课教师:    ' + temp[index]['teacher']),
+                                      
                                     ],
                                   ),
                                 ),
@@ -446,7 +453,6 @@ class _SchedulePageState extends State<SchedulePage> {
                           ),
                         );
                       },
-
                     ),
                   );
                 }

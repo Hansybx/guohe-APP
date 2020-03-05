@@ -226,6 +226,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "1.1.8"
+  package_info:
+    dependency: "direct main"
+    description:
+      name: package_info
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.4.0+14"
   path:
     dependency: transitive
     description:
@@ -268,6 +275,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "0.3.8"
+  share:
+    dependency: "direct main"
+    description:
+      name: share
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.6.3+6"
   shared_preferences:
     dependency: "direct main"
     description:

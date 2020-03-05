@@ -57,6 +57,5 @@ class LocalShare {
   static String WORD_FROM = "wordFrom";
 
 
-
-
+  static String VERSION = 'version';
 }

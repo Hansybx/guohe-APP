@@ -39,9 +39,9 @@ class _GPAState extends State<GPA> {
     print('b');
     if (response.statusCode == 200) {
 //      response.data['code'] = 402;
-      if(response.data['code'] == 200){
+      if (response.data['code'] == 200) {
         GPA_res.addAll(response.data['info']);
-      }else if(response.data['code'] == 402){
+      } else if (response.data['code'] == 402) {
         print('pingjiao');
       }
       print(GPA_res);
@@ -50,28 +50,34 @@ class _GPAState extends State<GPA> {
     }
   }
 
-
 //绩点组件渲染
   Widget GPABuild() {
     List<Widget> info = [];
     Widget content;
-    int x = -1;
+//    int x = -1;
     for (var item in GPA_res) {
-      x++;
+//      x++;
       info.add(Container(
-        color: x % 2 == 1 ? Colors.blue : Colors.lightBlueAccent,
-        child: Row(children: <Widget>[
-          Expanded(
-            flex: 1,
-            child: Text(
-              item['year'],
-            ),
-          ),
-          Expanded(
-            flex: 1,
-            child: Text(item['point'].toString()),
-          )
-        ]),
+//        color: x % 2 == 1 ? Colors.blue : Colors.lightBlueAccent,
+        color: Colors.white70,
+        child: Column(
+          children: <Widget>[
+            Divider(height: 1.0,indent: 6.0,color: Colors.black),
+            SizedBox(height: 3,),
+            Row(children: <Widget>[
+              Expanded(
+                flex: 1,
+                child: Text(
+                  item['year'],
+                ),
+              ),
+              Expanded(
+                flex: 1,
+                child: Text(item['point'].toString()),
+              )
+            ]),
+          ],
+        ),
       ));
     }
     content = Column(
@@ -87,20 +93,22 @@ class _GPAState extends State<GPA> {
     Response response = await Dio().post(Constant.SCORE, data: formData);
 
     if (response.statusCode == 200) {
-      if(response.data['code'] == 200){
+      if (response.data['code'] == 200) {
         ScoreRes.addAll(response.data['info']);
-      }else if(response.data['code'] == 402){
-        showDialog(context: context,builder: (context){
-          return AlertDialog(
-            content: Text('强智系统未评教请在强智教务评教后在查询'),
-            actions: <Widget>[
-              FlatButton(
-                child: Text('确定'),
-                onPressed: () => Navigator.of(context).pop(),
-              )
-            ],
-          );
-        });
+      } else if (response.data['code'] == 402) {
+        showDialog(
+            context: context,
+            builder: (context) {
+              return AlertDialog(
+                content: Text('强智系统未评教请在强智教务评教后在查询'),
+                actions: <Widget>[
+                  FlatButton(
+                    child: Text('确定'),
+                    onPressed: () => Navigator.of(context).pop(),
+                  )
+                ],
+              );
+            });
       }
       print(ScoreRes);
     } else {
@@ -115,25 +123,32 @@ class _GPAState extends State<GPA> {
     for (var item in ScoreRes) {
       x++;
       info.add(Container(
-        color: x % 2 == 1 ? Colors.blueAccent : Colors.lightBlueAccent,
-        child: Row(children: <Widget>[
-          Expanded(
-            flex: 1,
-            child: Text(
-              item['courseName'],
-            ),
-          ),
-          Expanded(
-            flex: 1,
-            child: Text(item['credit'].toString()),
-          ),
-          Expanded(
-            flex: 1,
-            child: Text(
-              item['score'],
-            ),
-          ),
-        ]),
+        color: x % 2 == 1 ? Color(int.parse("0xffe6f3f9")): Colors.white70,
+//        color: x % 2 == 1 ? Colors.blueAccent.withOpacity(0.8) : Colors.lightBlueAccent,
+        child: Column(
+          children: <Widget>[
+            Divider(height: 1.0,indent: 6.0,color: Colors.black),
+            SizedBox(height: 3,),
+            Row(children: <Widget>[
+              Expanded(
+                flex: 1,
+                child: Text(
+                  item['courseName'],
+                ),
+              ),
+              Expanded(
+                flex: 1,
+                child: Text(item['credit'].toString()),
+              ),
+              Expanded(
+                flex: 1,
+                child: Text(
+                  item['score'],
+                ),
+              ),
+            ]),
+          ],
+        ),
       ));
     }
     content = Column(
@@ -152,7 +167,8 @@ class _GPAState extends State<GPA> {
           textAlign: TextAlign.center,
         ),
       ),
-      body: DefaultTextStyle(   //字体style默认继承设置
+      body: DefaultTextStyle(
+        //字体style默认继承设置
         textAlign: TextAlign.center,
         style: TextStyle(
           fontSize: 20,
@@ -162,34 +178,15 @@ class _GPAState extends State<GPA> {
         child: SingleChildScrollView(
             child: Column(
           children: <Widget>[
-            FutureBuilder(    //异步等待组件
+            FutureBuilder(
+              //异步等待组件
               future: getGPA(context, _uid, _passwd),
               builder: (BuildContext context, AsyncSnapshot snapshot) {
                 // 等待
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return Container(
-                      alignment: Alignment.center,
-                      color: Colors.white,
-                      child: Row(
-                        children: <Widget>[
-                          SizedBox(
-                            width: MediaQuery.of(context).size.width / 7,
-                          ),
-                          Expanded(
-                            flex: 1,
-                            child: Icon(Feather.loader),
-                          ),
-                          Expanded(
-                            flex: 5,
-                            child: Text(
-                              '查询中,请稍后.......',
-                              style: TextStyle(
-                                  fontSize: 18.0,
-                                  decoration: TextDecoration.none),
-                            ),
-                          )
-                        ],
-                      ));
+                    height: MediaQuery.of(context).size.height,
+                      child: Center(child: CircularProgressIndicator()));
                 }
                 // 异步结束
                 else if (snapshot.connectionState == ConnectionState.done) {
@@ -202,42 +199,40 @@ class _GPAState extends State<GPA> {
                     );
                   } else {
                     // 请求成功，显示数据
-                    return Padding(
-                      padding: const EdgeInsets.only(top: 15.0),
-                      child: Container(
-                        width: MediaQuery.of(context).size.width/20*19,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                        ),
-                        child: Column(
-                          children: <Widget>[
-                            Row(
-                              children: <Widget>[
-                                Expanded(
-                                  flex: 1,
-                                  child: Text('学期'),
-                                ),
-                                Expanded(
-                                  flex: 1,
-                                  child: Text('绩点'),
-                                ),
-                              ],
-                            ),
-                            GPABuild(),
-                          ],
-                        ),
+                    return Container(
+                      decoration: BoxDecoration(
+                        color: Color(int.parse("0xffe6f3f9")),
+                      ),
+                      child: Column(
+                        children: <Widget>[
+                          Row(
+                            children: <Widget>[
+                              Expanded(
+                                flex: 1,
+                                child: Text('学期'),
+                              ),
+                              Expanded(
+                                flex: 1,
+                                child: Text('绩点'),
+                              ),
+                            ],
+                          ),
+                          GPABuild(),
+                        ],
                       ),
                     );
                   }
                 } else {
+                  // 加载动画
                   return Container(
                       color: Colors.white, child: CircularProgressIndicator());
                 }
               },
             ),
-            SizedBox(
-              height: 15,
-            ),
+            Divider(height: 15,indent: 10,endIndent: 10,thickness: 10.0,color: Colors.black,),
+//            SizedBox(
+//              height: 15,
+//            ),
             FutureBuilder(
               future: getScore(context, _uid, _passwd),
               builder: (BuildContext context, AsyncSnapshot snapshot) {
@@ -252,7 +247,7 @@ class _GPAState extends State<GPA> {
                     return Column(
                       children: <Widget>[
                         Container(
-                          color: Colors.deepPurpleAccent,
+                          color: Color(int.parse("0xffe6f3f9")),
                           child: Row(
                             children: <Widget>[
                               Expanded(

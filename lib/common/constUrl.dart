@@ -19,7 +19,10 @@ class Constant {
   static final String CALENDAR='https://guohe3.cn/api/v1/stu/school/calendar';
 
   // 课表
-  static final String KB= 'https://guohe3.cn/api/v1/stu/class/schedule';
+  static final String KB= 'https://guohe3.cn/api/v1/stu/class/schedule/update';
+
+  //版本
+  static final String VERSION = 'https://guohe3.cn/api/v1/mobile/version/get';
 
 //  天气
 //  static final String WEATHER = 'https://free-api.heweather.net/s6/weather/now?location=auto_ip&key=';

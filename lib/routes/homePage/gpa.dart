@@ -1,9 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:flustars/flustars.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/common/constUrl.dart';
 import 'package:flutter_app/common/localShare.dart';
-import 'package:flutter_icons/flutter_icons.dart';
 
 class GPA extends StatefulWidget {
   @override
@@ -62,8 +62,10 @@ class _GPAState extends State<GPA> {
         color: Colors.white70,
         child: Column(
           children: <Widget>[
-            Divider(height: 1.0,indent: 6.0,color: Colors.black),
-            SizedBox(height: 3,),
+            Divider(height: 1.0, indent: 6.0, color: Colors.black),
+            SizedBox(
+              height: 3,
+            ),
             Row(children: <Widget>[
               Expanded(
                 flex: 1,
@@ -123,27 +125,59 @@ class _GPAState extends State<GPA> {
     for (var item in ScoreRes) {
       x++;
       info.add(Container(
-        color: x % 2 == 1 ? Color(int.parse("0xffe6f3f9")): Colors.white70,
+        color: x % 2 == 1 ? Color(int.parse("0xffe6f3f9")) : Colors.white70,
 //        color: x % 2 == 1 ? Colors.blueAccent.withOpacity(0.8) : Colors.lightBlueAccent,
         child: Column(
           children: <Widget>[
-            Divider(height: 1.0,indent: 6.0,color: Colors.black),
-            SizedBox(height: 3,),
+            SizedBox(
+              height: 3,
+            ),
             Row(children: <Widget>[
               Expanded(
-                flex: 1,
-                child: Text(
-                  item['courseName'],
+                flex: 4,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Container(
+                      child: Text(
+                        item['courseName'],
+                        textAlign: TextAlign.left,
+                        overflow: TextOverflow.clip,
+                      ),
+                    ),
+                    Text(
+                      "学分: " + item['credit'].toString(),
+                      textAlign: TextAlign.left,
+                    ),
+                  ],
                 ),
               ),
+//              Expanded(
+//                flex: 1,
+//                child: Text(
+//                  item['courseName'],
+//                ),
+//              ),
+//              Expanded(
+//                flex: 1,
+//                child: Text(item['credit'].toString()),
+//              ),
               Expanded(
                 flex: 1,
-                child: Text(item['credit'].toString()),
-              ),
-              Expanded(
-                flex: 1,
-                child: Text(
-                  item['score'],
+                child: Center(
+                  child: ClipOval(
+                    child: Container(
+                      width: 40,
+                      height: 40,
+                      color: Colors.blue,
+                      child: Center(
+                        child: Text(
+                          item['score'],
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ),
+                    ),
+                  ),
                 ),
               ),
             ]),
@@ -185,7 +219,7 @@ class _GPAState extends State<GPA> {
                 // 等待
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return Container(
-                    height: MediaQuery.of(context).size.height,
+                      height: MediaQuery.of(context).size.height,
                       child: Center(child: CircularProgressIndicator()));
                 }
                 // 异步结束
@@ -229,10 +263,16 @@ class _GPAState extends State<GPA> {
                 }
               },
             ),
-            Divider(height: 15,indent: 10,endIndent: 10,thickness: 10.0,color: Colors.black,),
-//            SizedBox(
+//            Divider(
 //              height: 15,
+//              indent: 10,
+//              endIndent: 10,
+//              thickness: 10.0,
+//              color: Colors.black,
 //            ),
+            SizedBox(
+              height: 20,
+            ),
             FutureBuilder(
               future: getScore(context, _uid, _passwd),
               builder: (BuildContext context, AsyncSnapshot snapshot) {

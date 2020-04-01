@@ -138,8 +138,10 @@ class _EmptyClassroomState extends State<EmptyClassroom> {
 //          color: x % 2 == 1 ? Colors.white : Colors.blueGrey,
           child: Column(
             children: <Widget>[
-              Divider(height: 1.0,indent: 6.0,color: Colors.black),
-              SizedBox(height: 3,),
+              Divider(height: 1.0, indent: 6.0, color: Colors.black),
+              SizedBox(
+                height: 3,
+              ),
               Row(children: <Widget>[
                 Expanded(
                   flex: 1,
@@ -152,7 +154,6 @@ class _EmptyClassroomState extends State<EmptyClassroom> {
                   child: Text(orderArray[item['time'] - 1]),
                 ),
               ]),
-
             ],
           ),
         ));
@@ -188,165 +189,168 @@ class _EmptyClassroomState extends State<EmptyClassroom> {
         ),
         child: SingleChildScrollView(
           child: Container(
+              margin: EdgeInsets.only(left: 10, right: 15),
               child: Column(
-            children: <Widget>[
-              Row(
                 children: <Widget>[
-                  Text('校区:'),
+                  Row(
+                    children: <Widget>[
+                      Text('校区:'),
+                      SizedBox(
+                        width: 15,
+                      ),
+                      //校区
+                      Expanded(
+                        flex: 1,
+                        child: DropdownButton(
+                          isExpanded: true,
+                          value: areaValue,
+                          hint: Text(
+                            '请选择校区',
+                          ),
+                          onChanged: (String newValue) {
+                            setState(() {
+                              areaValue = newValue;
+                              buildValue = chooseBuildingArray[areaValue][0];
+                            });
+                          },
+                          items: <String>['东校区', '南校区', '西校区', '张家港', '苏州理工']
+                              .map<DropdownMenuItem<String>>((String value) {
+                            return DropdownMenuItem<String>(
+                              value: value,
+                              child: Text(
+                                value,
+                              ),
+                            );
+                          }).toList(),
+                        ),
+                      ),
+                    ],
+                  ),
                   SizedBox(
-                    width: 15,
+                    height: 15,
                   ),
-                  //校区
-                  Expanded(
-                    flex: 1,
-                    child: DropdownButton(
-                      isExpanded: true,
-                      value: areaValue,
-                      hint: Text('请选择校区',),
-                      onChanged: (String newValue) {
-                        setState(() {
-                          areaValue = newValue;
-                          buildValue = chooseBuildingArray[areaValue][0];
-                        });
-                      },
-                      items: <String>['东校区', '南校区', '西校区', '张家港', '苏州理工']
-                          .map<DropdownMenuItem<String>>((String value) {
-                        return DropdownMenuItem<String>(
-                          value: value,
-                          child: Text(value,),
-                        );
-                      }).toList(),
-                    ),
+                  Row(
+                    children: <Widget>[
+                      Text('教学楼:'),
+                      SizedBox(
+                        width: 15,
+                      ),
+                      // 教学楼
+                      Expanded(
+                        flex: 1,
+                        child: DropdownButton(
+                          isExpanded: true,
+                          value: buildValue,
+                          hint: Text('请选择教学楼'),
+                          onChanged: (String newValue) {
+                            setState(() {
+                              buildValue = newValue;
+                            });
+                          },
+                          items: chooseBuildingArray[areaValue]
+                              .map<DropdownMenuItem<String>>((String value) {
+                            return DropdownMenuItem<String>(
+                              value: value,
+                              child: Text(value),
+                            );
+                          }).toList(),
+                        ),
+                      ),
+                    ],
                   ),
-                ],
-              ),
-              SizedBox(
-                height: 15,
-              ),
-              Row(
-                children: <Widget>[
-                  Text('教学楼:'),
                   SizedBox(
-                    width: 15,
+                    height: 15,
                   ),
-                  // 教学楼
-                  Expanded(
-                    flex: 1,
-                    child: DropdownButton(
-                      isExpanded: true,
-                      value: buildValue,
-                      hint: Text('请选择教学楼'),
-                      onChanged: (String newValue) {
-                        setState(() {
-                          buildValue = newValue;
-                        });
-                      },
-                      items: chooseBuildingArray[areaValue]
-                          .map<DropdownMenuItem<String>>((String value) {
-                        return DropdownMenuItem<String>(
-                          value: value,
-                          child: Text(value),
-                        );
-                      }).toList(),
-                    ),
+                  Row(
+                    children: <Widget>[
+                      Text('周次:'),
+                      SizedBox(
+                        width: 15,
+                      ),
+                      // 周次
+                      Expanded(
+                        flex: 1,
+                        child: DropdownButton(
+                          isExpanded: true,
+                          value: zcValue,
+                          hint: Text('周次'),
+                          onChanged: (String newValue) {
+                            setState(() {
+                              zcValue = newValue;
+                            });
+                          },
+                          items: zcArray
+                              .map<DropdownMenuItem<String>>((String value) {
+                            return DropdownMenuItem<String>(
+                              value: value,
+                              child: Text(value),
+                            );
+                          }).toList(),
+                        ),
+                      ),
+                    ],
                   ),
-                ],
-              ),
-              SizedBox(
-                height: 15,
-              ),
-              Row(
-                children: <Widget>[
-                  Text('周次:'),
                   SizedBox(
-                    width: 15,
+                    height: 15,
                   ),
-                  // 周次
-                  Expanded(
-                    flex: 1,
-                    child: DropdownButton(
-                      isExpanded: true,
-                      value: zcValue,
-                      hint: Text('周次'),
-                      onChanged: (String newValue) {
-                        setState(() {
-                          zcValue = newValue;
-                        });
-                      },
-                      items:
-                          zcArray.map<DropdownMenuItem<String>>((String value) {
-                        return DropdownMenuItem<String>(
-                          value: value,
-                          child: Text(value),
-                        );
-                      }).toList(),
-                    ),
+                  Row(
+                    children: <Widget>[
+                      Text('星期:'),
+                      SizedBox(
+                        width: 15,
+                      ),
+                      //星期几
+                      Expanded(
+                        flex: 1,
+                        child: DropdownButton(
+                          isExpanded: true,
+                          value: weekValue,
+                          hint: Text('星期'),
+                          onChanged: (String newValue) {
+                            setState(() {
+                              weekValue = newValue;
+                            });
+                          },
+                          items: weekArray
+                              .map<DropdownMenuItem<String>>((String value) {
+                            return DropdownMenuItem<String>(
+                              value: value,
+                              child: Text(value),
+                            );
+                          }).toList(),
+                        ),
+                      ),
+                    ],
                   ),
-                ],
-              ),
-              SizedBox(
-                height: 15,
-              ),
-              Row(
-                children: <Widget>[
-                  Text('星期:'),
                   SizedBox(
-                    width: 15,
+                    height: 15,
                   ),
-                  //星期几
-                  Expanded(
-                    flex: 1,
-                    child: DropdownButton(
-                      isExpanded: true,
-                      value: weekValue,
-                      hint: Text('星期'),
-                      onChanged: (String newValue) {
-                        setState(() {
-                          weekValue = newValue;
-                        });
-                      },
-                      items:
-                          weekArray.map<DropdownMenuItem<String>>((String value) {
-                        return DropdownMenuItem<String>(
-                          value: value,
-                          child: Text(value),
-                        );
-                      }).toList(),
-                    ),
+                  RaisedButton(
+                    onPressed: () => getClassroom(
+                        context,
+                        _uid,
+                        _passwd,
+                        '2019-2020-1',
+                        areaParaList[areaValue],
+                        buildingParaList[buildValue].toString(),
+                        zcArray.indexOf(zcValue) + 1),
+                    child: Text('搜索'),
                   ),
+                  Row(
+                    children: <Widget>[
+                      Expanded(
+                        flex: 1,
+                        child: Text('教室'),
+                      ),
+                      Expanded(
+                        flex: 1,
+                        child: Text('课时'),
+                      )
+                    ],
+                  ),
+                  ClassRoomBuild(),
                 ],
-              ),
-
-              SizedBox(
-                height: 15,
-              ),
-              RaisedButton(
-                onPressed: () => getClassroom(
-                    context,
-                    _uid,
-                    _passwd,
-                    '2019-2020-1',
-                    areaParaList[areaValue],
-                    buildingParaList[buildValue].toString(),
-                    zcArray.indexOf(zcValue) + 1),
-                child: Text('搜索'),
-              ),
-              Row(
-                children: <Widget>[
-                  Expanded(
-                    flex: 1,
-                    child: Text('教室'),
-                  ),
-                  Expanded(
-                    flex: 1,
-                    child: Text('课时'),
-                  )
-                ],
-              ),
-
-              ClassRoomBuild(),
-            ],
-          )),
+              )),
         ),
       ),
     );

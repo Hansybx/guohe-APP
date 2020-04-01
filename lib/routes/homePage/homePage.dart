@@ -98,6 +98,7 @@ class _HomePageState extends State<HomePage> {
         scrollDirection: Axis.horizontal,
         autoplay: true,
         onTap: (index) {
+          //todo 完善轮播图逻辑
           print('点击了第$index');
         },
       ),

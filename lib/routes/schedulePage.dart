@@ -381,8 +381,8 @@ class _SchedulePageState extends State<SchedulePage> {
                     child: Swiper(
                       index: 0,
                       itemCount: temp.length,
-                      itemWidth: MediaQuery.of(context).size.width/9*7,
-                      itemHeight: MediaQuery.of(context).size.height/5*4,
+                      itemWidth: MediaQuery.of(context).size.width ,
+                      itemHeight: MediaQuery.of(context).size.height,
                       layout: SwiperLayout.STACK,
                       pagination: SwiperPagination(),
                       itemBuilder: (BuildContext context, int index) {
@@ -425,16 +425,21 @@ class _SchedulePageState extends State<SchedulePage> {
                                         child: Column(
                                           children: <Widget>[
                                             Text(
-                                              '课程名:' + temp[index]['courseName'].toString(),
+                                              '课程名:' +
+                                                  temp[index]['courseName']
+                                                      .toString(),
                                             ),
-                                            Text('课程号:' + temp[index]['courseNum']),
-                                            Text('教室:' + temp[index]['classroom']),
-                                            Text('周数:' + temp[index]['classWeek']),
-                                            Text('任课教师:' + temp[index]['teacher']),
+                                            Text('课程号:' +
+                                                temp[index]['courseNum']),
+                                            Text('教室:' +
+                                                temp[index]['classroom']),
+                                            Text('周数:' +
+                                                temp[index]['classWeek']),
+                                            Text('任课教师:' +
+                                                temp[index]['teacher']),
                                           ],
                                         ),
                                       ),
-                                      
                                     ],
                                   ),
                                 ),

@@ -193,7 +193,7 @@ class _SchedulePageState extends State<SchedulePage> {
     for (var i = 0; i < items.length; i++) {
       var temp = items[i].toString().split('@');
       if (temp.length < 5) {
-        temp.add('null');
+        temp.add(' ');
       }
       var day = {
         'weekday': weekday,
@@ -378,9 +378,10 @@ class _SchedulePageState extends State<SchedulePage> {
                     child: Swiper(
                       index: 0,
                       itemCount: temp.length,
-                      itemWidth: 300.0,
-                      itemHeight: 500.0,
+                      itemWidth: MediaQuery.of(context).size.width/9*7,
+                      itemHeight: MediaQuery.of(context).size.height/5*4,
                       layout: SwiperLayout.STACK,
+                      pagination: SwiperPagination(),
                       itemBuilder: (BuildContext context, int index) {
                         return Card(
                           shape: RoundedRectangleBorder(
@@ -421,7 +422,7 @@ class _SchedulePageState extends State<SchedulePage> {
                                         child: Column(
                                           children: <Widget>[
                                             Text(
-                                              '课程名:' + temp[index]['courseName'].toString().length.toString(),
+                                              '课程名:' + temp[index]['courseName'].toString(),
                                             ),
                                             Text('课程号:' + temp[index]['courseNum']),
                                             Text('教室:' + temp[index]['classroom']),

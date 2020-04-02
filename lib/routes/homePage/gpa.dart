@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/common/constUrl.dart';
 import 'package:flutter_app/common/localShare.dart';
+import 'package:flutter_app/widgets/gpaLinear.dart';
 
 class GPA extends StatefulWidget {
   @override
@@ -15,6 +16,8 @@ class _GPAState extends State<GPA> {
   List GPA_res = [];
   List ScoreRes = [];
 
+  String semester = "全部学期";
+
   @override
   void initState() {
     super.initState();
@@ -25,18 +28,13 @@ class _GPAState extends State<GPA> {
   void futureReady(BuildContext context) {
     _uid = SpUtil.getString(LocalShare.STU_ID);
     _passwd = SpUtil.getString(LocalShare.STU_PASSWD);
-    print(_uid);
-    print('c');
   }
 
 //  获取绩点
   Future<void> getGPA(BuildContext context, String uid, String passwd) async {
-    print('a');
-
     FormData formData = FormData.fromMap({"username": uid, "password": passwd});
     Response response = await Dio().post(Constant.GPA, data: formData);
 
-    print('b');
     if (response.statusCode == 200) {
 //      response.data['code'] = 402;
       if (response.data['code'] == 200) {
@@ -44,7 +42,6 @@ class _GPAState extends State<GPA> {
       } else if (response.data['code'] == 402) {
         print('pingjiao');
       }
-      print(GPA_res);
     } else {
       print(GPA_res);
     }
@@ -112,7 +109,6 @@ class _GPAState extends State<GPA> {
               );
             });
       }
-      print(ScoreRes);
     } else {
       print(ScoreRes);
     }
@@ -134,34 +130,30 @@ class _GPAState extends State<GPA> {
             ),
             Row(children: <Widget>[
               Expanded(
-                flex: 4,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Container(
-                      child: Text(
-                        item['courseName'],
-                        textAlign: TextAlign.left,
-                        overflow: TextOverflow.clip,
-                      ),
+                  flex: 4,
+                  child: new Container(
+                    margin: EdgeInsets.only(left: 15, top: 5, bottom: 5),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Container(
+                          margin: EdgeInsets.only(top: 5, bottom: 5),
+                          child: Text(
+                            item['courseName'],
+                            textAlign: TextAlign.left,
+                            overflow: TextOverflow.clip,
+                            style: new TextStyle(fontSize: 18),
+                          ),
+                        ),
+                        Text(
+                          "学分: " + item['credit'].toString() + "分",
+                          textAlign: TextAlign.left,
+                          style: new TextStyle(
+                              color: Colors.black54, fontSize: 16),
+                        ),
+                      ],
                     ),
-                    Text(
-                      "学分: " + item['credit'].toString(),
-                      textAlign: TextAlign.left,
-                    ),
-                  ],
-                ),
-              ),
-//              Expanded(
-//                flex: 1,
-//                child: Text(
-//                  item['courseName'],
-//                ),
-//              ),
-//              Expanded(
-//                flex: 1,
-//                child: Text(item['credit'].toString()),
-//              ),
+                  )),
               Expanded(
                 flex: 1,
                 child: Center(
@@ -169,11 +161,13 @@ class _GPAState extends State<GPA> {
                     child: Container(
                       width: 40,
                       height: 40,
-                      color: Colors.blue,
+                      color: isFailedExam(item['score'])
+                          ? Colors.blue
+                          : Colors.red,
                       child: Center(
                         child: Text(
                           item['score'],
-                          style: TextStyle(color: Colors.white),
+                          style: TextStyle(color: Colors.white, fontSize: 16),
                         ),
                       ),
                     ),
@@ -224,7 +218,6 @@ class _GPAState extends State<GPA> {
                 }
                 // 异步结束
                 else if (snapshot.connectionState == ConnectionState.done) {
-                  print('d');
                   if (snapshot.hasError) {
                     // 请求失败，显示错误
                     return Container(
@@ -234,27 +227,11 @@ class _GPAState extends State<GPA> {
                   } else {
                     // 请求成功，显示数据
                     return Container(
-                      decoration: BoxDecoration(
-                        color: Color(int.parse("0xffe6f3f9")),
-                      ),
-                      child: Column(
-                        children: <Widget>[
-                          Row(
-                            children: <Widget>[
-                              Expanded(
-                                flex: 1,
-                                child: Text('学期'),
-                              ),
-                              Expanded(
-                                flex: 1,
-                                child: Text('绩点'),
-                              ),
-                            ],
-                          ),
-                          GPABuild(),
-                        ],
-                      ),
-                    );
+                        width: double.infinity,
+                        height: 250,
+                        child: GPALinear(
+                          data: GPA_res,
+                        ));
                   }
                 } else {
                   // 加载动画
@@ -262,16 +239,6 @@ class _GPAState extends State<GPA> {
                       color: Colors.white, child: CircularProgressIndicator());
                 }
               },
-            ),
-//            Divider(
-//              height: 15,
-//              indent: 10,
-//              endIndent: 10,
-//              thickness: 10.0,
-//              color: Colors.black,
-//            ),
-            SizedBox(
-              height: 20,
             ),
             FutureBuilder(
               future: getScore(context, _uid, _passwd),
@@ -286,24 +253,11 @@ class _GPAState extends State<GPA> {
                   } else {
                     return Column(
                       children: <Widget>[
-                        Container(
-                          color: Color(int.parse("0xffe6f3f9")),
-                          child: Row(
-                            children: <Widget>[
-                              Expanded(
-                                flex: 1,
-                                child: Text('科目'),
-                              ),
-                              Expanded(
-                                flex: 1,
-                                child: Text('学分'),
-                              ),
-                              Expanded(
-                                flex: 1,
-                                child: Text('分数'),
-                              ),
-                            ],
-                          ),
+                        ListTile(
+                          title: Text('学期'),
+                          subtitle: Text(semester),
+                          trailing: Icon(Icons.keyboard_arrow_right),
+                          onTap: changeSemester,
                         ),
                         ScoreBuild(),
                       ],
@@ -318,5 +272,54 @@ class _GPAState extends State<GPA> {
         )),
       ),
     );
+  }
+
+  // 更改学期触发的事件
+  void changeSemester() {
+    //todo 完善更改学期的方法
+    showDialog<int>(
+      context: context,
+      builder: (BuildContext context) {
+        return new AlertDialog(
+            content: new Container(
+          width: MediaQuery.of(context).size.width * 0.7,
+          height: MediaQuery.of(context).size.height * 0.4,
+          child: Column(
+            children: <Widget>[
+              ListTile(title: Text("请选择学期")),
+              Expanded(
+                  child: ListView.builder(
+                itemCount: GPA_res.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return ListTile(
+                      title: Text(GPA_res[index]['year'].toString()),
+                      onTap: () {
+                        Navigator.of(context).pop(index);
+                        if (index != null) {
+                          print("点击了：$index");
+                        }
+                        this.semester = GPA_res[index]['year'];
+//                        setState(() {
+//                          this.semester = GPA_res[index]['year'];
+//                        });
+                      });
+                },
+              )),
+            ],
+          ),
+        ));
+      },
+    );
+  }
+
+  // 判断是否挂科
+  bool isFailedExam(var item) {
+    //todo 完善挂科的逻辑判断
+    String str = item.toString();
+    if (str == '未通过') return false;
+    try {
+      if (int.parse(str) < 60) return false;
+    } on Exception {}
+    return true;
   }
 }

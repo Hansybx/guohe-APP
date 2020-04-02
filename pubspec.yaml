@@ -42,7 +42,9 @@ dependencies:
   flutter_swiper: ^1.1.6
   package_info: ^0.4.0+14
   share: ^0.6.3+6
-  url_launcher: ^5.2.7
+  fl_chart: ^0.8.7
+
+#  url_launcher: ^5.4.2
 
 dev_dependencies:
   flutter_test:

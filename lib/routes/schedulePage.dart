@@ -47,11 +47,14 @@ class _SchedulePageState extends State<SchedulePage> {
   ];
 
   List colorArrays = [
-    "0xfff56a79",
-    "0xff86e3ce",
     "0xffccabd8",
-    "0xff00af54",
-    "0xffa7c957",
+    "0xff86e3ce",
+    "0xff97d1c0",
+    "0xffd76350",
+    "0xffdbdfc2",
+    "0xff92b6c7",
+    "0xffb9b4a8",
+//    "0xffb46a7f"
 //    "0xff33CC33", // 绿
 //    "0xff3399ff", // 蓝
 //    "0xffff6666", // 红-粉
@@ -321,19 +324,19 @@ class _SchedulePageState extends State<SchedulePage> {
               child: DefaultTextStyle(
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  fontSize: 16,
-                  color: Colors.black,
+                  fontSize: 14,
+                  color: Colors.white,
                   decoration: TextDecoration.none,
                 ),
                 child: Container(
+                  padding: EdgeInsets.all(5),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                     color: Color(int.parse(colorArrays[int.parse(
                         Random().nextInt(colorArrays.length).toString())])),
                   ),
 //                  width: MediaQuery.of(context).size.width / 8,
-                  height: 120,
-
+                  height: 117,
                   child: Text(
                     wlist[i]['des'],
                   ),
@@ -378,8 +381,8 @@ class _SchedulePageState extends State<SchedulePage> {
                     child: Swiper(
                       index: 0,
                       itemCount: temp.length,
-                      itemWidth: MediaQuery.of(context).size.width/9*7,
-                      itemHeight: MediaQuery.of(context).size.height/5*4,
+                      itemWidth: MediaQuery.of(context).size.width ,
+                      itemHeight: MediaQuery.of(context).size.height,
                       layout: SwiperLayout.STACK,
                       pagination: SwiperPagination(),
                       itemBuilder: (BuildContext context, int index) {
@@ -422,16 +425,21 @@ class _SchedulePageState extends State<SchedulePage> {
                                         child: Column(
                                           children: <Widget>[
                                             Text(
-                                              '课程名:' + temp[index]['courseName'].toString(),
+                                              '课程名:' +
+                                                  temp[index]['courseName']
+                                                      .toString(),
                                             ),
-                                            Text('课程号:' + temp[index]['courseNum']),
-                                            Text('教室:' + temp[index]['classroom']),
-                                            Text('周数:' + temp[index]['classWeek']),
-                                            Text('任课教师:' + temp[index]['teacher']),
+                                            Text('课程号:' +
+                                                temp[index]['courseNum']),
+                                            Text('教室:' +
+                                                temp[index]['classroom']),
+                                            Text('周数:' +
+                                                temp[index]['classWeek']),
+                                            Text('任课教师:' +
+                                                temp[index]['teacher']),
                                           ],
                                         ),
                                       ),
-                                      
                                     ],
                                   ),
                                 ),
@@ -515,91 +523,98 @@ class _SchedulePageState extends State<SchedulePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.white,
+        centerTitle: true,
         title: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Expanded(flex: 1, child: Text('课表')),
-            Expanded(
-                flex: 1,
-                child: Text(
-                  today.month.toString() + '月' + today.day.toString() + '日',
-                  textAlign: TextAlign.end,
-                )),
-//            Expanded(flex: 1,child: Text(today.year.toString()+'年',textAlign: TextAlign.end,),)
-            Text(
-              today.year.toString() + '年',
-              textAlign: TextAlign.end,
-            )
+            // 下拉筛选框
+            //学期
+            DropdownButton(
+              value: semesterValue,
+              onChanged: (val) {
+                setState(() {
+                  semesterValue = val;
+                  print(semesterValue);
+                });
+                getSchedule();
+              },
+              items: semesters.map<DropdownMenuItem<String>>((String value) {
+                return DropdownMenuItem<String>(
+                  value: value,
+                  child: Text(value),
+                );
+              }).toList(),
+            ),
+            SizedBox(
+              width: 10,
+            ),
+            Text('|'),
+            SizedBox(
+              width: 20,
+            ),
+            //周次
+            DropdownButton(
+              isDense: true,
+              value: weekValue,
+              onChanged: (newValue) {
+                setState(() {
+                  gapWeek =
+                      zcArray.indexOf(newValue) - zcArray.indexOf(weekValue);
+                  weekValue = newValue;
+                  weekNum = zcArray.indexOf(weekValue) + 1;
+                  wlist.clear();
+                  classInWeek(handledClassInfo);
+
+//                      var temp = today;
+                  now = now.add(Duration(days: gapWeek * 7));
+                  mondayJudge(now);
+                  dateHandle(mondayInWeek, now);
+                });
+              },
+              items: zcArray.map<DropdownMenuItem<String>>((String value) {
+                return DropdownMenuItem<String>(
+                  value: value,
+                  child: Text(value),
+                );
+              }).toList(),
+            ),
           ],
         ),
       ),
+//      appBar: AppBar(
+//        title: Row(
+//          children: <Widget>[
+//            Expanded(flex: 1, child: Text('课表')),
+//            Expanded(
+//                flex: 1,
+//                child: Text(
+//                  today.month.toString() + '月' + today.day.toString() + '日',
+//                  textAlign: TextAlign.end,
+//                )),
+////            Expanded(flex: 1,child: Text(today.year.toString()+'年',textAlign: TextAlign.end,),)
+//            Text(
+//              today.year.toString() + '年',
+//              textAlign: TextAlign.end,
+//            )
+//          ],
+//        ),
+//      ),
       body: RefreshIndicator(
         onRefresh: getSchedule,
         child: SingleChildScrollView(
           child: Column(
             children: <Widget>[
-              // 下拉筛选框
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  //学期
-                  DropdownButton(
-                    value: semesterValue,
-                    onChanged: (val) {
-                      setState(() {
-                        semesterValue = val;
-                        print(semesterValue);
-                      });
-                      getSchedule();
-                    },
-                    items:
-                        semesters.map<DropdownMenuItem<String>>((String value) {
-                      return DropdownMenuItem<String>(
-                        value: value,
-                        child: Text(value),
-                      );
-                    }).toList(),
-                  ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  Text('|'),
-                  SizedBox(
-                    width: 20,
-                  ),
-                  //周次
-                  DropdownButton(
-                    value: weekValue,
-                    onChanged: (newValue) {
-                      setState(() {
-                        gapWeek = zcArray.indexOf(newValue) -
-                            zcArray.indexOf(weekValue);
-                        weekValue = newValue;
-                        weekNum = zcArray.indexOf(weekValue) + 1;
-                        wlist.clear();
-                        classInWeek(handledClassInfo);
-
-//                      var temp = today;
-                        now = now.add(Duration(days: gapWeek * 7));
-                        mondayJudge(now);
-                        dateHandle(mondayInWeek, now);
-                      });
-                    },
-                    items:
-                        zcArray.map<DropdownMenuItem<String>>((String value) {
-                      return DropdownMenuItem<String>(
-                        value: value,
-                        child: Text(value),
-                      );
-                    }).toList(),
-                  ),
-                ],
+              new Container(
+                height: 10,
               ),
+
               // 月份 日期
               DefaultTextStyle(
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 16,
-                  color: Colors.black,
+                  color: Colors.black87,
                   decoration: TextDecoration.none,
                 ),
                 child: Row(
@@ -678,6 +693,9 @@ class _SchedulePageState extends State<SchedulePage> {
                     ),
                   ],
                 ),
+              ),
+              new Container(
+                height: 10,
               ),
               // 当前节次对应课程
               kbBuild(1),

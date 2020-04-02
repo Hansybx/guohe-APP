@@ -20,7 +20,7 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     imageList
       ..add(Image.network(
-        'https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=2726034926,4129010873&fm=26&gp=0.jpg',
+        'https://pic.downk.cc/item/5e849a81504f4bcb0437649f.jpg',
         fit: BoxFit.fill,
       ))
       ..add(Image.asset('assets/imgs/hw.jpg'));

@@ -7,6 +7,31 @@ class Browser extends StatelessWidget {
   final String url;
   final String title;
 
+
+
+//  WebViewClient webViewClient = new WebViewClient() {
+//  @Override
+//  public boolean shouldOverrideUrlLoading(WebView view, String url) {
+//    super.shouldOverrideUrlLoading(view, url);
+//
+//    if (url == null) {
+//      return  false;
+//    }
+//    try {
+//      if (url.startsWith("weixin://")) {
+//        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+//        view.getContext().startActivity(intent);
+//        return true;
+//      }
+//    } catch (Exception e) {
+//      return false;
+//    }
+//    view.loadUrl(url);
+//    return true;
+//    }
+//  };
+//  appWebView.setWebViewClient(webViewClient);
+
   @override
   Widget build(BuildContext context) {
     return WebviewScaffold(
@@ -16,6 +41,9 @@ class Browser extends StatelessWidget {
       url: this.url,
       hidden: true,
       ignoreSSLErrors: true,
+      withJavascript: true,
+      withZoom: true,
+      invalidUrlRegex: '^weixin.*',
     );
   }
 

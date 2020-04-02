@@ -25,7 +25,7 @@ class _LoginState extends State<Login> {
     if (_form.validate()) {
       _form.save();
 
-      getCalendarInLogin(_account.trim(), _password.trim()).then((val){
+      getCalendarInLogin(_account.trim(), _password.trim()).then((val) {
         login(context, _account.trim(), _password.trim());
       });
     } else {
@@ -118,11 +118,12 @@ class _LoginState extends State<Login> {
         child: Container(
           height: MediaQuery.of(context).size.height,
           width: MediaQuery.of(context).size.width,
-          decoration: new BoxDecoration(
-            gradient: LinearGradient(
-                begin: Alignment.bottomCenter,
-                colors: [Colors.blue, Colors.lightBlueAccent]),
-          ),
+          color: Color(int.parse("0xff65dbff")),
+//          decoration: new BoxDecoration(
+//            gradient: LinearGradient(
+//                begin: Alignment.bottomCenter,
+//                colors: [Colors.blue, Colors.lightBlueAccent]),
+//          ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
@@ -132,48 +133,66 @@ class _LoginState extends State<Login> {
                 height: 191,
                 image: AssetImage('assets/imgs/login_background.png'),
               ),
-              Form(
-                key: _formKey,
-                child: Column(
-                  children: <Widget>[
-                    Container(
-                      width: MediaQuery.of(context).size.width / 5 * 4,
-                      child: TextFormField(
-                        autofocus: false,
-                        keyboardType: TextInputType.number,
-                        initialValue: '',
-                        decoration: new InputDecoration(
-                            labelText: '学号', prefixIcon: Icon(Icons.person)),
-                        onChanged: (val) {
-                          _account = val;
-                        },
-                      ),
+              Container(
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(15)),
+                child: Theme(
+                  data: ThemeData(primaryColor: Colors.black,),
+                  child: Form(
+                    key: _formKey,
+                    child: Column(
+                      children: <Widget>[
+                        Container(
+                          width: MediaQuery.of(context).size.width / 5 * 4,
+                          child: TextFormField(
+                            autofocus: false,
+                            keyboardType: TextInputType.number,
+                            initialValue: '',
+
+                            decoration: new InputDecoration(
+                                focusedBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(color: Colors.grey),
+                                ),
+                                labelText: '学号',
+                                prefixIcon: Icon(
+                                  Icons.person,
+                                )),
+                            onChanged: (val) {
+                              _account = val;
+                            },
+                          ),
+                        ),
+                        SizedBox(height: 7),
+                        Container(
+                          width: MediaQuery.of(context).size.width / 5 * 4,
+                          child: TextFormField(
+                            initialValue: '',
+                            obscureText: !pwdShow,
+                            decoration: new InputDecoration(
+                                focusedBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(color: Colors.red),
+                                ),
+                                labelText: '密码',
+                                hintText: "强智教务系统密码",
+                                suffixIcon: IconButton(
+                                    icon: Icon(pwdShow
+                                        ? Icons.visibility_off
+                                        : Icons.visibility),
+                                    onPressed: () {
+                                      setState(() {
+                                        pwdShow = !pwdShow;
+                                      });
+                                    }),
+                                prefixIcon: Icon(Icons.lock_outline)),
+                            onChanged: (val) {
+                              _password = val;
+                            },
+                          ),
+                        ),
+                      ],
                     ),
-                    SizedBox(height: 7),
-                    Container(
-                      width: MediaQuery.of(context).size.width / 5 * 4,
-                      child: TextFormField(
-                        initialValue: '',
-                        obscureText: !pwdShow,
-                        decoration: new InputDecoration(
-                            labelText: '密码',
-                            hintText: "强智教务系统密码",
-                            suffixIcon: IconButton(
-                                icon: Icon(pwdShow
-                                    ? Icons.visibility_off
-                                    : Icons.visibility),
-                                onPressed: () {
-                                  setState(() {
-                                    pwdShow = !pwdShow;
-                                  });
-                                }),
-                            prefixIcon: Icon(Icons.lock_outline)),
-                        onChanged: (val) {
-                          _password = val;
-                        },
-                      ),
-                    ),
-                  ],
+                  ),
                 ),
               ),
               SizedBox(
@@ -181,9 +200,10 @@ class _LoginState extends State<Login> {
               ),
               Container(
                 decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                        begin: Alignment.bottomLeft,
-                        colors: [Colors.blue, Colors.lightBlueAccent]),
+                    color: Colors.white,
+//                    gradient: LinearGradient(
+//                        begin: Alignment.bottomLeft,
+//                        colors: [Colors.blue, Colors.lightBlueAccent]),
                     borderRadius: BorderRadius.circular(20.0)),
                 child: FlatButton(
                   child: Text("登录"),

@@ -75,8 +75,7 @@ class _MyPageState extends State<MyPage> {
                 trailing: Icon(Icons.keyboard_arrow_right),
                 onTap: () {
                   // do something
-//                  Navigator.pushNamed(context, '/feedback');
-
+                  Navigator.pushNamed(context, '/feedback');
                 },
               ),
               ListTile(

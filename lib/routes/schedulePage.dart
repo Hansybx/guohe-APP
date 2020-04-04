@@ -582,24 +582,7 @@ class _SchedulePageState extends State<SchedulePage> {
           ],
         ),
       ),
-//      appBar: AppBar(
-//        title: Row(
-//          children: <Widget>[
-//            Expanded(flex: 1, child: Text('课表')),
-//            Expanded(
-//                flex: 1,
-//                child: Text(
-//                  today.month.toString() + '月' + today.day.toString() + '日',
-//                  textAlign: TextAlign.end,
-//                )),
-////            Expanded(flex: 1,child: Text(today.year.toString()+'年',textAlign: TextAlign.end,),)
-//            Text(
-//              today.year.toString() + '年',
-//              textAlign: TextAlign.end,
-//            )
-//          ],
-//        ),
-//      ),
+
       body: RefreshIndicator(
         onRefresh: getSchedule,
         child: SingleChildScrollView(

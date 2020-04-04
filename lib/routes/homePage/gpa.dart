@@ -15,6 +15,8 @@ class _GPAState extends State<GPA> {
   var _passwd, _uid;
   List GPA_res = [];
   List ScoreRes = [];
+  Future<void> _getScore;
+  Future<void> _getGPA;
 
   String semester = "全部学期";
 
@@ -22,6 +24,9 @@ class _GPAState extends State<GPA> {
   void initState() {
     super.initState();
     futureReady(context);
+    // 防止futureBuilder重绘
+    _getGPA = getGPA(context, _uid, _passwd);
+    _getScore = getScore(context,_uid, _passwd);
   }
 
 //  获取学号密码
@@ -38,6 +43,7 @@ class _GPAState extends State<GPA> {
     if (response.statusCode == 200) {
 //      response.data['code'] = 402;
       if (response.data['code'] == 200) {
+        GPA_res.clear();
         GPA_res.addAll(response.data['info']);
       } else if (response.data['code'] == 402) {
         print('pingjiao');
@@ -93,6 +99,7 @@ class _GPAState extends State<GPA> {
 
     if (response.statusCode == 200) {
       if (response.data['code'] == 200) {
+        ScoreRes.clear();
         ScoreRes.addAll(response.data['info']);
       } else if (response.data['code'] == 402) {
         showDialog(
@@ -119,8 +126,9 @@ class _GPAState extends State<GPA> {
     Widget content;
     int x = -1;
     for (var item in ScoreRes) {
-      x++;
-      info.add(Container(
+      if(this.semester==item['startSemester']||this.semester=="all"||this.semester == "全部学期"){
+        x++;
+        info.add(Container(
         color: x % 2 == 1 ? Color(int.parse("0xffe6f3f9")) : Colors.white70,
 //        color: x % 2 == 1 ? Colors.blueAccent.withOpacity(0.8) : Colors.lightBlueAccent,
         child: Column(
@@ -178,6 +186,9 @@ class _GPAState extends State<GPA> {
           ],
         ),
       ));
+      }else{
+        continue;
+      }
     }
     content = Column(
       children: info,
@@ -208,7 +219,8 @@ class _GPAState extends State<GPA> {
           children: <Widget>[
             FutureBuilder(
               //异步等待组件
-              future: getGPA(context, _uid, _passwd),
+//              future: getGPA(context, _uid, _passwd),
+              future: _getGPA,
               builder: (BuildContext context, AsyncSnapshot snapshot) {
                 // 等待
                 if (snapshot.connectionState == ConnectionState.waiting) {
@@ -241,7 +253,8 @@ class _GPAState extends State<GPA> {
               },
             ),
             FutureBuilder(
-              future: getScore(context, _uid, _passwd),
+//              future: getScore(context, _uid, _passwd),
+              future: _getScore,
               builder: (BuildContext context, AsyncSnapshot snapshot) {
                 if (snapshot.connectionState == ConnectionState.done) {
                   if (snapshot.hasError) {
@@ -276,7 +289,6 @@ class _GPAState extends State<GPA> {
 
   // 更改学期触发的事件
   void changeSemester() {
-    //todo 完善更改学期的方法
     showDialog<int>(
       context: context,
       builder: (BuildContext context) {
@@ -298,10 +310,10 @@ class _GPAState extends State<GPA> {
                         if (index != null) {
                           print("点击了：$index");
                         }
-                        this.semester = GPA_res[index]['year'];
-//                        setState(() {
-//                          this.semester = GPA_res[index]['year'];
-//                        });
+//                        this.semester = GPA_res[index]['year'];
+                        setState(() {
+                          this.semester = GPA_res[index]['year'];
+                        });
                       });
                 },
               )),

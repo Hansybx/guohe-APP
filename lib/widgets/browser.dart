@@ -1,50 +1,46 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
+import 'package:url_launcher/url_launcher.dart';
 
-class Browser extends StatelessWidget {
+class Browser extends StatefulWidget {
   const Browser({Key key, this.url, this.title}) : super(key: key);
 
   final String url;
   final String title;
 
+  @override
+  _BrowserState createState() => _BrowserState();
+}
 
+class _BrowserState extends State<Browser> {
+  final flutterWebviewPlugin = new FlutterWebviewPlugin();
 
-//  WebViewClient webViewClient = new WebViewClient() {
-//  @Override
-//  public boolean shouldOverrideUrlLoading(WebView view, String url) {
-//    super.shouldOverrideUrlLoading(view, url);
-//
-//    if (url == null) {
-//      return  false;
-//    }
-//    try {
-//      if (url.startsWith("weixin://")) {
-//        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-//        view.getContext().startActivity(intent);
-//        return true;
-//      }
-//    } catch (Exception e) {
-//      return false;
-//    }
-//    view.loadUrl(url);
-//    return true;
-//    }
-//  };
-//  appWebView.setWebViewClient(webViewClient);
+  @override
+  void initState() {
+    super.initState();
+    //监听页面状态改变
+    flutterWebviewPlugin.onUrlChanged.listen((String url) {
+      print(url);
+      if(url.startsWith("weixin://")){
+        flutterWebviewPlugin.close();
+        launch(url);
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return WebviewScaffold(
       appBar: AppBar(
-        title: Text(title),
+        title: Text(widget.title),
       ),
-      url: this.url,
+      url: this.widget.url,
       hidden: true,
       ignoreSSLErrors: true,
       withJavascript: true,
       withZoom: true,
-      invalidUrlRegex: '^weixin.*',
+      displayZoomControls: true,
+      withOverviewMode: true,
     );
   }
-
 }

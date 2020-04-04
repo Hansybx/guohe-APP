@@ -22,6 +22,7 @@ class RouteStr {
   static const String PESYS = "/peSys";
   static const String LABSYS = "/labSys";
   static const String GRADSYS = "/gradSys";
+  static const String TXCSYS = "/TXCSys";
 
   static const String LOGIN = "/login";
   static const String HOME = "/main";
@@ -48,4 +49,5 @@ class RouteTitle {
   static const String PESYS = "体育系统";
   static const String LABSYS = "实验系统";
   static const String GRADSYS = "毕业系统";
+  static const String TXCSYS = "吐个槽";
 }

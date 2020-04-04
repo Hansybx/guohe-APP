@@ -89,3 +89,13 @@ class CalendarSys extends StatelessWidget {
     );
   }
 }
+
+class TXCSys extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Browser(
+      url: 'https://support.qq.com/products/140296',
+      title: '吐个槽',
+    );
+  }
+}

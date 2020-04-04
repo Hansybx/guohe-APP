@@ -35,7 +35,8 @@ class MyApp extends StatelessWidget {
         RouteStr.GPA: (context) => GPA(), //gpa
         RouteStr.CLASSROOM: (context) => EmptyClassroom(),
         RouteStr.CALENDAR: (context) => CalendarSys(),
-        RouteStr.PE: (context) => Pe()
+        RouteStr.PE: (context) => Pe(),
+        RouteStr.TXCSYS: (context) => TXCSys(),
       },
     );
   }

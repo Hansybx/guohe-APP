@@ -33,7 +33,12 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
-          title: Text("果核"),
+          elevation: 0,
+          backgroundColor: Colors.white,
+          title: Text(
+            "发现",
+            style: new TextStyle(color: Colors.black),
+          ),
         ),
         body: new OrientationBuilder(builder: (context, ori) {
           print("width:${MediaQuery.of(context).size.width}");

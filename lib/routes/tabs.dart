@@ -50,7 +50,7 @@ class _TabsState extends State<Tabs> {
             ),
             BottomNavigationBarItem(
                 icon: Icon(Icons.home),
-                title: Text("首页")
+                title: Text("发现")
             ),
             BottomNavigationBarItem(
                 icon: Icon(Icons.directions_run),

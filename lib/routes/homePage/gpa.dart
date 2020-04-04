@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/common/constUrl.dart';
 import 'package:flutter_app/common/localShare.dart';
 import 'package:flutter_app/widgets/gpaLinear.dart';
+import 'package:flutter_icons/flutter_icons.dart';
 
 class GPA extends StatefulWidget {
   @override
@@ -26,7 +27,7 @@ class _GPAState extends State<GPA> {
     futureReady(context);
     // 防止futureBuilder重绘
     _getGPA = getGPA(context, _uid, _passwd);
-    _getScore = getScore(context,_uid, _passwd);
+    _getScore = getScore(context, _uid, _passwd);
   }
 
 //  获取学号密码
@@ -126,67 +127,69 @@ class _GPAState extends State<GPA> {
     Widget content;
     int x = -1;
     for (var item in ScoreRes) {
-      if(this.semester==item['startSemester']||this.semester=="all"||this.semester == "全部学期"){
+      if (this.semester == item['startSemester'] ||
+          this.semester == "all" ||
+          this.semester == "全部学期") {
         x++;
         info.add(Container(
-        color: x % 2 == 1 ? Color(int.parse("0xffe6f3f9")) : Colors.white70,
+          color: x % 2 == 1 ? Color(int.parse("0xffe6f3f9")) : Colors.white70,
 //        color: x % 2 == 1 ? Colors.blueAccent.withOpacity(0.8) : Colors.lightBlueAccent,
-        child: Column(
-          children: <Widget>[
-            SizedBox(
-              height: 3,
-            ),
-            Row(children: <Widget>[
-              Expanded(
-                  flex: 4,
-                  child: new Container(
-                    margin: EdgeInsets.only(left: 15, top: 5, bottom: 5),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Container(
-                          margin: EdgeInsets.only(top: 5, bottom: 5),
-                          child: Text(
-                            item['courseName'],
-                            textAlign: TextAlign.left,
-                            overflow: TextOverflow.clip,
-                            style: new TextStyle(fontSize: 18),
+          child: Column(
+            children: <Widget>[
+              SizedBox(
+                height: 3,
+              ),
+              Row(children: <Widget>[
+                Expanded(
+                    flex: 4,
+                    child: new Container(
+                      margin: EdgeInsets.only(left: 15, top: 5, bottom: 5),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Container(
+                            margin: EdgeInsets.only(top: 5, bottom: 5),
+                            child: Text(
+                              item['courseName'],
+                              textAlign: TextAlign.left,
+                              overflow: TextOverflow.clip,
+                              style: new TextStyle(fontSize: 18),
+                            ),
                           ),
-                        ),
-                        Text(
-                          "学分: " + item['credit'].toString() + "分",
-                          textAlign: TextAlign.left,
-                          style: new TextStyle(
-                              color: Colors.black54, fontSize: 16),
-                        ),
-                      ],
-                    ),
-                  )),
-              Expanded(
-                flex: 1,
-                child: Center(
-                  child: ClipOval(
-                    child: Container(
-                      width: 40,
-                      height: 40,
-                      color: isFailedExam(item['score'])
-                          ? Colors.blue
-                          : Colors.red,
-                      child: Center(
-                        child: Text(
-                          item['score'],
-                          style: TextStyle(color: Colors.white, fontSize: 16),
+                          Text(
+                            "学分: " + item['credit'].toString() + "分",
+                            textAlign: TextAlign.left,
+                            style: new TextStyle(
+                                color: Colors.black54, fontSize: 16),
+                          ),
+                        ],
+                      ),
+                    )),
+                Expanded(
+                  flex: 1,
+                  child: Center(
+                    child: ClipOval(
+                      child: Container(
+                        width: 40,
+                        height: 40,
+                        color: isFailedExam(item['score'])
+                            ? Colors.blue
+                            : Colors.red,
+                        child: Center(
+                          child: Text(
+                            item['score'],
+                            style: TextStyle(color: Colors.white, fontSize: 16),
+                          ),
                         ),
                       ),
                     ),
                   ),
                 ),
-              ),
-            ]),
-          ],
-        ),
-      ));
-      }else{
+              ]),
+            ],
+          ),
+        ));
+      } else {
         continue;
       }
     }
@@ -201,10 +204,21 @@ class _GPAState extends State<GPA> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.white,
         title: Text(
           '成绩绩点',
+          style: new TextStyle(color: Colors.black),
           textAlign: TextAlign.center,
         ),
+        leading: IconButton(
+            icon: Icon(
+              AntDesign.back,
+              color: Colors.black,
+            ),
+            tooltip: "back",
+            onPressed: () {
+              Navigator.pop(context);
+            }),
       ),
       body: DefaultTextStyle(
         //字体style默认继承设置

@@ -21,7 +21,7 @@ class _BrowserState extends State<Browser> {
     //监听页面状态改变
     flutterWebviewPlugin.onUrlChanged.listen((String url) {
       print(url);
-      if(url.startsWith("weixin://")){
+      if (url.startsWith("weixin://")) {
         flutterWebviewPlugin.close();
         launch(url);
       }

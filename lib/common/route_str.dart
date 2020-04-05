@@ -1,4 +1,16 @@
 // 存放路由字符串
+import 'package:flutter/material.dart';
+import 'package:flutter_app/routes/login.dart';
+
+import 'package:flutter_app/routes/homePage/emptyClassroom.dart';
+import 'package:flutter_app/routes/homePage/gpa.dart';
+import 'package:flutter_app/routes/homePage/pe.dart';
+import 'package:flutter_app/routes/homePage/schoolBus.dart';
+import 'package:flutter_app/routes/homePage/shoolSystem.dart';
+import 'package:flutter_app/routes/myPage/feedback.dart';
+import 'package:flutter_app/routes/tabs.dart';
+import 'package:flutter_app/utils/AppAnalysis.dart';
+
 class RouteStr {
   // 早操俱乐部
   static const String PE = "/pe";
@@ -26,6 +38,108 @@ class RouteStr {
 
   static const String LOGIN = "/login";
   static const String HOME = "/main";
+}
+
+class Router {
+  static Route<dynamic> generateRoute(RouteSettings settings) {
+    switch (settings.name) {
+      case RouteStr.LOGIN:
+        return MaterialPageRoute(
+          settings: RouteSettings(name: RouteStr.LOGIN),
+          builder: (context) => Login(),
+        );
+
+      case RouteStr.HOME:
+        return MaterialPageRoute(
+          settings: RouteSettings(name: RouteStr.HOME),
+          builder: (context) => Tabs(),
+        );
+
+      case RouteStr.VPN:
+        return MaterialPageRoute(
+          settings: RouteSettings(name: RouteStr.VPN),
+          builder: (context) => VPN(),
+        ); //vpn
+
+      case RouteStr.LABSYS:
+        return MaterialPageRoute(
+          settings: RouteSettings(name: RouteStr.LABSYS),
+          builder: (context) => ExperimentSys(),
+        ); //实验系统
+
+      case RouteStr.FEEDBACK:
+        return MaterialPageRoute(
+          settings: RouteSettings(name: RouteStr.FEEDBACK),
+          builder: (context) => FeedBack(),
+        ); //反馈
+
+      case RouteStr.JIAOWU:
+        return MaterialPageRoute(
+          settings: RouteSettings(name: RouteStr.JIAOWU),
+          builder: (context) => JiaowuSys(),
+        ); //教务系统
+
+      case RouteStr.AOLANSYS:
+        return MaterialPageRoute(
+          settings: RouteSettings(name: RouteStr.AOLANSYS),
+          builder: (context) => AolanSys(),
+        ); //奥兰系统
+
+      case RouteStr.PESYS:
+        return MaterialPageRoute(
+          settings: RouteSettings(name: RouteStr.PESYS),
+          builder: (context) => PeSys(),
+        );
+
+      case RouteStr.BUS:
+        return MaterialPageRoute(
+          settings: RouteSettings(name: RouteStr.BUS),
+          builder: (context) => SchoolBus(),
+        ); //校车
+
+      case RouteStr.INFOSYS:
+        return MaterialPageRoute(
+          settings: RouteSettings(name: RouteStr.INFOSYS),
+          builder: (context) => InfoSys(),
+        ); //信息系统
+
+      case RouteStr.GRADSYS:
+        return MaterialPageRoute(
+          settings: RouteSettings(name: RouteStr.GRADSYS),
+          builder: (context) => GraduationProject(),
+        ); //毕业设计
+
+      case RouteStr.GPA:
+        return MaterialPageRoute(
+          settings: RouteSettings(name: RouteStr.GPA),
+          builder: (context) => GPA(),
+        ); //gpa
+
+      case RouteStr.CLASSROOM:
+        return MaterialPageRoute(
+          settings: RouteSettings(name: RouteStr.CLASSROOM),
+          builder: (context) => EmptyClassroom(),
+        );
+
+      case RouteStr.CALENDAR:
+        return MaterialPageRoute(
+          settings: RouteSettings(name: RouteStr.CALENDAR),
+          builder: (context) => CalendarSys(),
+        );
+
+      case RouteStr.PE:
+        return MaterialPageRoute(
+          settings: RouteSettings(name: RouteStr.PE),
+          builder: (context) => Pe(),
+        );
+
+      case RouteStr.TXCSYS:
+        return MaterialPageRoute(
+          settings: RouteSettings(name: RouteStr.TXCSYS),
+          builder: (context) => TXCSys(),
+        );
+    }
+  }
 }
 
 // 存放路由title

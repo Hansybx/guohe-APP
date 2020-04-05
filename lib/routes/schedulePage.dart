@@ -8,6 +8,7 @@ import 'package:flutter_app/common/constUrl.dart';
 import 'package:flutter_app/common/localShare.dart';
 import 'package:flutter_beautiful_popup/main.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
+import 'package:umeng_analytics_plugin/umeng_analytics_plugin.dart';
 //import 'package:flutter_app/widgets/customViews.dart';
 
 class SchedulePage extends StatefulWidget {
@@ -517,6 +518,7 @@ class _SchedulePageState extends State<SchedulePage> {
     } else {
       getSchedule();
     }
+    UmengAnalyticsPlugin.pageStart("schedulePage");
   }
 
   @override

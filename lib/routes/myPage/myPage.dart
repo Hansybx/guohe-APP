@@ -4,6 +4,7 @@ import 'package:flutter_app/common/localShare.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:share/share.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:umeng_analytics_plugin/umeng_analytics_plugin.dart';
 
 class MyPage extends StatefulWidget {
   @override
@@ -35,6 +36,7 @@ class _MyPageState extends State<MyPage> {
 //    print(LocalShare.VERSION);
 //    versionGet();
     localVersion();
+    UmengAnalyticsPlugin.pageStart("myPage");
     super.initState();
   }
 

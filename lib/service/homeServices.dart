@@ -100,7 +100,7 @@ List<ServiceItemViewModel> eduSystemList = [
       route: RouteStr.TXCSYS,
       title: RouteTitle.TXCSYS,
       icon: Icon(
-        AntDesign.antdesign,
-        color: Colors.orange,
+        AntDesign.message1,
+        color: Colors.purple,
       )),
 ];

@@ -9,4 +9,6 @@ class StringFile {
   // 反馈图标
   static String feedbackImg = imgBase + "feedback.png";
 
+  static String fakeAvatar = imgBase + "fake_avatar.jpg";
+
 }

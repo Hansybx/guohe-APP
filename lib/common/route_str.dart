@@ -1,14 +1,14 @@
 // 存放路由字符串
 import 'package:flutter/material.dart';
-import 'package:flutter_app/routes/login.dart';
-
 import 'package:flutter_app/routes/homePage/emptyClassroom.dart';
 import 'package:flutter_app/routes/homePage/gpa.dart';
 import 'package:flutter_app/routes/homePage/pe.dart';
 import 'package:flutter_app/routes/homePage/schoolBus.dart';
 import 'package:flutter_app/routes/homePage/shoolSystem.dart';
+import 'package:flutter_app/routes/login.dart';
 import 'package:flutter_app/routes/myPage/about.dart';
 import 'package:flutter_app/routes/myPage/feedback.dart';
+import 'package:flutter_app/routes/myPage/profile.dart';
 import 'package:flutter_app/routes/tabs.dart';
 
 class RouteStr {
@@ -39,6 +39,8 @@ class RouteStr {
 
   static const String LOGIN = "/login";
   static const String HOME = "/main";
+
+  static const String PROFILE = "/profile";
 }
 
 class Router {
@@ -145,6 +147,11 @@ class Router {
           settings: RouteSettings(name: RouteStr.TXCSYS),
           builder: (context) => TXCSys(),
         );
+      case RouteStr.PROFILE:
+        return MaterialPageRoute(
+          settings: RouteSettings(name: RouteStr.PROFILE),
+          builder: (context) => Profile(),
+        );
     }
   }
 }
@@ -160,7 +167,7 @@ class RouteTitle {
   static const String CLASSROOM = "空教室";
 
   static const String FEEDBACK = "反馈";
-  static const String ABOUT ="关于果核";
+  static const String ABOUT = "关于果核";
 
   static const String CALENDAR = "校历";
 
@@ -172,4 +179,6 @@ class RouteTitle {
   static const String LABSYS = "实验系统";
   static const String GRADSYS = "毕业系统";
   static const String TXCSYS = "吐个槽";
+
+  static const String PROFILE = "个人信息";
 }

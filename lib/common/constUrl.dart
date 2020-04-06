@@ -24,6 +24,8 @@ class Constant {
   //版本
   static final String VERSION = 'https://guohe3.cn/api/v1/mobile/version/get';
 
+  // 获取七牛云token
+  static final String QNTOKEN = 'https://www.ytools.xyz/api/v1/img/token/get';
 //  天气
 //  static final String WEATHER = 'https://free-api.heweather.net/s6/weather/now?location=auto_ip&key=';
 }

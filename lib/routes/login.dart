@@ -21,6 +21,11 @@ class _LoginState extends State<Login> {
 
   //表单验证方法
   void _forSubmitted(BuildContext context) {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return LoadingDialog(content: "登录中，请稍后......");
+        });
     var _form = _formKey.currentState;
     if (_form.validate()) {
       _form.save();
@@ -59,11 +64,7 @@ class _LoginState extends State<Login> {
 
   //登录
   void login(BuildContext context, String account, String password) async {
-    showDialog(
-        context: context,
-        builder: (context) {
-          return LoadingDialog(content: "登录中，请稍后......");
-        });
+
     FormData formData =
         FormData.fromMap({"username": account, "password": password});
     Response res = await Dio().post(Constant.LOGIN, data: formData);

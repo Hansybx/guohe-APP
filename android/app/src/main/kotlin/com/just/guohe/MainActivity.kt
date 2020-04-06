@@ -1,4 +1,4 @@
-package com.example.guohe
+package com.just.guohe
 
 import androidx.annotation.NonNull;
 import io.flutter.embedding.android.FlutterActivity

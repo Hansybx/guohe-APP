@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/service/homeServices.dart';
 import 'package:flutter_app/viewModel/itemVM.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
-import 'package:umeng_analytics_plugin/umeng_analytics_plugin.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -11,7 +10,9 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  bool isLargeScreen; //是否是大屏幕
+  //todo 后期做平板适配（优先级低）
+  // 判断是否是大屏幕
+  bool isLargeScreen;
 
   List<Widget> imageList = List();
 
@@ -27,7 +28,6 @@ class _HomePageState extends State<HomePage> {
       ..add(Image.asset('assets/imgs/hw.jpg'));
 
     super.initState();
-    UmengAnalyticsPlugin.pageStart("homePage");
   }
 
   @override
@@ -36,6 +36,7 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: Colors.white,
         appBar: AppBar(
           elevation: 0,
+          centerTitle: true,
           backgroundColor: Colors.white,
           title: Text(
             "发现",
@@ -43,20 +44,18 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
         body: new OrientationBuilder(builder: (context, ori) {
-          print("width:${MediaQuery.of(context).size.width}");
           //判断屏幕宽度
           if (MediaQuery.of(context).size.width > 600) {
             isLargeScreen = true;
           } else {
             isLargeScreen = false;
           }
-          print(isLargeScreen);
           return SingleChildScrollView(
             child: Column(
               children: <Widget>[
                 swiper(),
                 ListTile(
-                  title: Text("教务服务"),
+                  title: Text("校园"),
                 ),
                 GridView.count(
                   shrinkWrap: true,
@@ -69,7 +68,7 @@ class _HomePageState extends State<HomePage> {
                 ),
                 new Divider(),
                 ListTile(
-                  title: Text("校园系统"),
+                  title: Text("系统"),
                 ),
                 GridView.count(
                   shrinkWrap: true,

@@ -53,7 +53,7 @@ class _TabsState extends State<Tabs> {
                 title: Text("发现")
             ),
             BottomNavigationBarItem(
-                icon: Icon(Icons.directions_run),
+                icon: Icon(Icons.person),
                 title: Text("我")
             )
           ],

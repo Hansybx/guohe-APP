@@ -1,11 +1,12 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flustars/flustars.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/common/localShare.dart';
+import 'package:flutter_app/common/string_file.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:share/share.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:umeng_analytics_plugin/umeng_analytics_plugin.dart';
 
 class MyPage extends StatefulWidget {
   @override
@@ -13,6 +14,7 @@ class MyPage extends StatefulWidget {
 }
 
 class _MyPageState extends State<MyPage> {
+  String avatar = '';
   String version = '1.0.0';
   String name = "Unknown";
   String id = "Unknown";
@@ -34,9 +36,10 @@ class _MyPageState extends State<MyPage> {
     version = SpUtil.getString(LocalShare.VERSION);
   }
 
-  void getStuInfo(){
-    name=SpUtil.getStringList(LocalShare.STU_INFO)[0];
+  void getStuInfo() {
+    name = SpUtil.getStringList(LocalShare.STU_INFO)[0];
     id = SpUtil.getString(LocalShare.STU_ID);
+    avatar=SpUtil.getString(LocalShare.AVATAR);
   }
 
   @override
@@ -45,7 +48,6 @@ class _MyPageState extends State<MyPage> {
 //    versionGet();
     localVersion();
     getStuInfo();
-    UmengAnalyticsPlugin.pageStart("myPage");
     super.initState();
   }
 
@@ -55,6 +57,7 @@ class _MyPageState extends State<MyPage> {
         appBar: AppBar(
           backgroundColor: Colors.white,
           centerTitle: true,
+          elevation: 0,
           title: Text(
             "我的果核",
             style: new TextStyle(color: Colors.black87),
@@ -63,81 +66,140 @@ class _MyPageState extends State<MyPage> {
         body: SingleChildScrollView(
           child: Column(
             children: <Widget>[
-              Container(
-                height: 100,
-                child: Row(
-                  children: <Widget>[
-                    Text("  Hi!",style: TextStyle(fontSize: 60),),
-                    Expanded(
-                      flex: 2,
-                      child: Center(
-                        child: DefaultTextStyle(
-                          style: TextStyle(
-                            fontSize: 30,
-                            color: Colors.black
-                          ),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            textDirection: TextDirection.rtl,
-                            children: <Widget>[
-                              Text(id),
-                              Text(name)
-                            ],
-                          ),
-                        ),
-                      ),
-                    )
-                  ],
+              MyInfo(),
+              new SizedBox(height: 15),
+              new Container(
+                color: Colors.white,
+                child: ListTile(
+                  title: new Text("关于果核"),
+                  onTap: () {
+                    Navigator.pushNamed(context, '/about');
+                  },
+                  leading: Icon(AntDesign.notification, color: Colors.orange),
+                  trailing: Icon(Icons.keyboard_arrow_right),
                 ),
               ),
-//              One(),
-              ListTile(
-                title: new Text("关于果核"),
-                onTap: () {
-                  Navigator.pushNamed(context, '/about');
-                },
-                leading: Icon(AntDesign.notification),
-                trailing: Icon(Icons.keyboard_arrow_right),
-              ),
-
-              ListTile(
-                title: new Text("分享"),
-                onTap: () => Share.share('果核', subject: 'Look what I made!'),
-                leading: Icon(AntDesign.sharealt),
-                trailing: Icon(Icons.keyboard_arrow_right),
-              ),
-
-              ListTile(
-                title: new Text("反馈"),
-                leading: Icon(AntDesign.form),
-                trailing: Icon(Icons.keyboard_arrow_right),
-                onTap: () {
-                  // do something
-                  Navigator.pushNamed(context, '/feedback');
-                },
-              ),
-
-              ListTile(
-                title: new Text("切换账号"),
-                leading: Icon(AntDesign.reload1),
-                trailing: Icon(Icons.keyboard_arrow_right),
-                onTap: () => logout(),
-              ),
-
-              ListTile(
-                  title: new Text("设置"),
-                  leading: Icon(AntDesign.setting),
+              new SizedBox(height: 15),
+              new Container(
+                color: Colors.white,
+                child: ListTile(
+                  title: new Text("反馈"),
+                  leading: Icon(AntDesign.form, color: Colors.purple),
                   trailing: Icon(Icons.keyboard_arrow_right),
-                  onTap: () => {}),
-
-              ListTile(
-                title: new Text("检查更新"),
-                subtitle: Text("当前版本:" + version),
-                leading: Icon(AntDesign.info),
-                trailing: Icon(Icons.keyboard_arrow_right),
+                  onTap: () {
+                    // do something
+                    Navigator.pushNamed(context, '/feedback');
+                  },
+                ),
+              ),
+              new Container(
+                color: Colors.white,
+                child: ListTile(
+                  title: new Text("分享"),
+                  onTap: () => Share.share('果核', subject: 'Look what I made!'),
+                  leading: Icon(AntDesign.sharealt, color: Colors.green),
+                  trailing: Icon(Icons.keyboard_arrow_right),
+                ),
+              ),
+              new SizedBox(height: 15),
+              new Container(
+                color: Colors.white,
+                child: ListTile(
+                    title: new Text("设置"),
+                    leading: Icon(AntDesign.setting, color: Colors.blue),
+                    trailing: Icon(Icons.keyboard_arrow_right),
+                    onTap: () => {}),
+              ),
+              new Container(
+                color: Colors.white,
+                child: ListTile(
+                  title: new Text("检查更新"),
+                  subtitle: Text("当前版本:" + version),
+                  leading: Icon(AntDesign.info, color: Colors.blueAccent),
+                  trailing: Icon(Icons.keyboard_arrow_right),
+                ),
+              ),
+              new Container(
+                color: Colors.white,
+                child: ListTile(
+                  title: new Text("切换账号"),
+                  leading: Icon(AntDesign.reload1, color: Colors.black54),
+                  trailing: Icon(Icons.keyboard_arrow_right),
+                  onTap: () => logout(),
+                ),
               ),
             ],
           ),
         ));
+  }
+
+  // 首页组件
+  Widget MyInfo() {
+    return GestureDetector(
+      child: Container(
+        color: Colors.white,
+        height: 120,
+        child: Stack(
+          children: <Widget>[
+            new Align(
+              alignment: FractionalOffset.centerLeft,
+              child: new Container(
+                margin: EdgeInsets.only(left: 20, right: 20),
+                // 圆角图片
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(8),
+                  child: _buildAvatar(),
+                ),
+              ),
+            ),
+            new Align(
+              alignment: FractionalOffset.center,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Text(
+                    name,
+                    style: new TextStyle(color: Colors.black, fontSize: 24),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Text("学号：" + id)
+                ],
+              ),
+            ),
+            new Align(
+                alignment: FractionalOffset.centerRight,
+                child: new Container(
+                  margin: EdgeInsets.only(right: 20),
+                  child: Icon(Icons.keyboard_arrow_right),
+                )),
+          ],
+        ),
+      ),
+      onTap: () {
+        Navigator.pushNamed(context, '/profile');
+      },
+    );
+  }
+
+  // 构造头像
+  _buildAvatar() {
+    if (avatar == '' || avatar == null) {
+      return new Image.asset(
+        StringFile.fakeAvatar,
+        width: 80.0,
+        fit: BoxFit.cover,
+        height: 80.0,
+      );
+    } else {
+      return new CachedNetworkImage(
+          placeholder: (context, url) => new CircularProgressIndicator(),
+          imageUrl: avatar,
+          fit: BoxFit.cover,
+          width: 100.0,
+          height: 100.0);
+    }
   }
 }

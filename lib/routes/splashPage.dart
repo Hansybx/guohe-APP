@@ -31,20 +31,6 @@ class _SplashPageState extends State<SplashPage> {
     print('splash');
   }
 
-//  Future<void> getOneContent() async {
-//    await Dio().post(Constant.ONE).then((res) {
-//      LocalShare.DATE = res.data['data']['post_date']
-//          .toString()
-//          .split(" ")[0]
-//          .replaceAll("-", "/");
-//      LocalShare.IMG_URL = res.data['data']['img_url'];
-//      LocalShare.IMG_AUTHOR = res.data['data']['pic_info'];
-//      LocalShare.IMG_KIND = res.data['data']['title'];
-//      LocalShare.WORD = res.data['data']['forward'];
-//      LocalShare.WORD_FROM = res.data['data']['words_info'];
-//    });
-//  }
-
   // 延时跳转
   jumpPage() {
     return Timer(Duration(milliseconds: 500), () {
@@ -94,7 +80,6 @@ class _SplashPageState extends State<SplashPage> {
   void initState() {
     super.initState();
     jumpPage();
-//    getOneContent();
     _initAsync();
     localVersion();
   }

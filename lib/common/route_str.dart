@@ -7,9 +7,9 @@ import 'package:flutter_app/routes/homePage/gpa.dart';
 import 'package:flutter_app/routes/homePage/pe.dart';
 import 'package:flutter_app/routes/homePage/schoolBus.dart';
 import 'package:flutter_app/routes/homePage/shoolSystem.dart';
+import 'package:flutter_app/routes/myPage/about.dart';
 import 'package:flutter_app/routes/myPage/feedback.dart';
 import 'package:flutter_app/routes/tabs.dart';
-import 'package:flutter_app/utils/AppAnalysis.dart';
 
 class RouteStr {
   // 早操俱乐部
@@ -24,6 +24,7 @@ class RouteStr {
   static const String CLASSROOM = "/classroom";
 
   static const String FEEDBACK = "/feedback";
+  static const String ABOUT = "/about";
 
   static const String CALENDAR = "/calendar";
 
@@ -55,6 +56,18 @@ class Router {
           builder: (context) => Tabs(),
         );
 
+      case RouteStr.FEEDBACK:
+        return MaterialPageRoute(
+          settings: RouteSettings(name: RouteStr.FEEDBACK),
+          builder: (context) => FeedBack(),
+        ); //反馈
+
+      case RouteStr.ABOUT:
+        return MaterialPageRoute(
+          settings: RouteSettings(name: RouteStr.ABOUT),
+          builder: (context) => About(),
+        );
+
       case RouteStr.VPN:
         return MaterialPageRoute(
           settings: RouteSettings(name: RouteStr.VPN),
@@ -66,12 +79,6 @@ class Router {
           settings: RouteSettings(name: RouteStr.LABSYS),
           builder: (context) => ExperimentSys(),
         ); //实验系统
-
-      case RouteStr.FEEDBACK:
-        return MaterialPageRoute(
-          settings: RouteSettings(name: RouteStr.FEEDBACK),
-          builder: (context) => FeedBack(),
-        ); //反馈
 
       case RouteStr.JIAOWU:
         return MaterialPageRoute(
@@ -153,6 +160,7 @@ class RouteTitle {
   static const String CLASSROOM = "空教室";
 
   static const String FEEDBACK = "反馈";
+  static const String ABOUT ="关于果核";
 
   static const String CALENDAR = "校历";
 

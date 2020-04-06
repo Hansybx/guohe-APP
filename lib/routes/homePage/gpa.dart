@@ -309,7 +309,7 @@ class _GPAState extends State<GPA> {
         return new AlertDialog(
             content: new Container(
           width: MediaQuery.of(context).size.width * 0.7,
-          height: MediaQuery.of(context).size.height * 0.4,
+          height: 60.0*GPA_res.length,
           child: Column(
             children: <Widget>[
               ListTile(title: Text("请选择学期")),

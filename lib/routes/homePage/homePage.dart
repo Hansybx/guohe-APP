@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/service/homeServices.dart';
 import 'package:flutter_app/viewModel/itemVM.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
+import 'package:umeng_analytics_plugin/umeng_analytics_plugin.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -26,6 +27,7 @@ class _HomePageState extends State<HomePage> {
       ..add(Image.asset('assets/imgs/hw.jpg'));
 
     super.initState();
+    UmengAnalyticsPlugin.pageStart("homePage");
   }
 
   @override

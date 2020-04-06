@@ -1,9 +1,11 @@
 import 'package:flustars/flustars.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/common/localShare.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:share/share.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:umeng_analytics_plugin/umeng_analytics_plugin.dart';
 
 class MyPage extends StatefulWidget {
   @override
@@ -12,6 +14,8 @@ class MyPage extends StatefulWidget {
 
 class _MyPageState extends State<MyPage> {
   String version = '1.0.0';
+  String name = "Unknown";
+  String id = "Unknown";
 
 //  登出时清空本机缓存
   Future<void> clean() async {
@@ -30,11 +34,18 @@ class _MyPageState extends State<MyPage> {
     version = SpUtil.getString(LocalShare.VERSION);
   }
 
+  void getStuInfo(){
+    name=SpUtil.getStringList(LocalShare.STU_INFO)[0];
+    id = SpUtil.getString(LocalShare.STU_ID);
+  }
+
   @override
   void initState() {
 //    print(LocalShare.VERSION);
 //    versionGet();
     localVersion();
+    getStuInfo();
+    UmengAnalyticsPlugin.pageStart("myPage");
     super.initState();
   }
 
@@ -52,17 +63,46 @@ class _MyPageState extends State<MyPage> {
         body: SingleChildScrollView(
           child: Column(
             children: <Widget>[
+              Container(
+                height: 100,
+                child: Row(
+                  children: <Widget>[
+                    Text("  Hi!",style: TextStyle(fontSize: 60),),
+                    Expanded(
+                      flex: 2,
+                      child: Center(
+                        child: DefaultTextStyle(
+                          style: TextStyle(
+                            fontSize: 30,
+                            color: Colors.black
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            textDirection: TextDirection.rtl,
+                            children: <Widget>[
+                              Text(id),
+                              Text(name)
+                            ],
+                          ),
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              ),
 //              One(),
               ListTile(
                 title: new Text("关于果核"),
-                onTap: () => {},
+                onTap: () {
+                  Navigator.pushNamed(context, '/about');
+                },
                 leading: Icon(AntDesign.notification),
                 trailing: Icon(Icons.keyboard_arrow_right),
               ),
 
               ListTile(
                 title: new Text("分享"),
-                onTap: () => Share.share('test', subject: 'Look what I made!'),
+                onTap: () => Share.share('果核', subject: 'Look what I made!'),
                 leading: Icon(AntDesign.sharealt),
                 trailing: Icon(Icons.keyboard_arrow_right),
               ),

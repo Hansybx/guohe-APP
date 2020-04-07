@@ -30,6 +30,10 @@ PODS:
   - sy_flutter_qiniu_storage (0.0.1):
     - Flutter
     - Qiniu
+  - umeng_analytics_plugin (0.0.1):
+    - Flutter
+    - UMengAnalytics-NO-IDFA
+  - UMengAnalytics-NO-IDFA (4.2.5)
   - url_launcher (0.0.1):
     - Flutter
   - url_launcher_macos (0.0.1):
@@ -51,6 +55,7 @@ DEPENDENCIES:
   - shared_preferences_web (from `.symlinks/plugins/shared_preferences_web/ios`)
   - sqflite (from `.symlinks/plugins/sqflite/ios`)
   - sy_flutter_qiniu_storage (from `.symlinks/plugins/sy_flutter_qiniu_storage/ios`)
+  - umeng_analytics_plugin (from `.symlinks/plugins/umeng_analytics_plugin/ios`)
   - url_launcher (from `.symlinks/plugins/url_launcher/ios`)
   - url_launcher_macos (from `.symlinks/plugins/url_launcher_macos/ios`)
   - url_launcher_web (from `.symlinks/plugins/url_launcher_web/ios`)
@@ -59,6 +64,7 @@ SPEC REPOS:
   trunk:
     - FMDB
     - Qiniu
+    - UMengAnalytics-NO-IDFA
 
 EXTERNAL SOURCES:
   Flutter:
@@ -87,6 +93,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/sqflite/ios"
   sy_flutter_qiniu_storage:
     :path: ".symlinks/plugins/sy_flutter_qiniu_storage/ios"
+  umeng_analytics_plugin:
+    :path: ".symlinks/plugins/umeng_analytics_plugin/ios"
   url_launcher:
     :path: ".symlinks/plugins/url_launcher/ios"
   url_launcher_macos:
@@ -110,6 +118,8 @@ SPEC CHECKSUMS:
   shared_preferences_web: 141cce0c3ed1a1c5bf2a0e44f52d31eeb66e5ea9
   sqflite: 4001a31ff81d210346b500c55b17f4d6c7589dd0
   sy_flutter_qiniu_storage: 3a33fb552bb77f4777d261469111f52ad35307fb
+  umeng_analytics_plugin: 7035dfb8c5636e50429ab935125e5a3f0d23e72e
+  UMengAnalytics-NO-IDFA: 16666e32edce5be44ae5b14aaaa7f3582e09d6ab
   url_launcher: a1c0cc845906122c4784c542523d8cacbded5626
   url_launcher_macos: fd7894421cd39320dce5f292fc99ea9270b2a313
   url_launcher_web: e5527357f037c87560776e36436bf2b0288b965c

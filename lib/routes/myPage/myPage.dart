@@ -189,17 +189,17 @@ class _MyPageState extends State<MyPage> {
     if (avatar == '' || avatar == null) {
       return new Image.asset(
         StringFile.fakeAvatar,
-        width: 80.0,
+        width: 60.0,
         fit: BoxFit.cover,
-        height: 80.0,
+        height: 60.0,
       );
     } else {
       return new CachedNetworkImage(
           placeholder: (context, url) => new CircularProgressIndicator(),
           imageUrl: avatar,
           fit: BoxFit.cover,
-          width: 100.0,
-          height: 100.0);
+          width: 60.0,
+          height: 60.0);
     }
   }
 }

@@ -25,7 +25,8 @@ class _MyAppState extends State<MyApp> {
         androidKey: '5e8bde32167eddb52f000652',
         iosKey: '5e8b2789570df3bc8e0000a3',
         channel: "Umeng",
-        logEnabled: true);
+        logEnabled: true,
+        pageCollectionMode: "MANUAL");
 
     print('Umeng initialized.');
   }

@@ -38,6 +38,7 @@ class _GPAState extends State<GPA> {
     _passwd = SpUtil.getString(LocalShare.STU_PASSWD);
 
     // 记录有多少人查成绩
+    print("记录查成绩的人数");
     UmengAnalyticsPlugin.event(RouteStr.GPA, label: _uid);
   }
 

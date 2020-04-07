@@ -120,11 +120,6 @@ class _LoginState extends State<Login> {
           height: MediaQuery.of(context).size.height,
           width: MediaQuery.of(context).size.width,
           color: Color(int.parse("0xff65dbff")),
-//          decoration: new BoxDecoration(
-//            gradient: LinearGradient(
-//                begin: Alignment.bottomCenter,
-//                colors: [Colors.blue, Colors.lightBlueAccent]),
-//          ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
@@ -202,9 +197,6 @@ class _LoginState extends State<Login> {
               Container(
                 decoration: BoxDecoration(
                     color: Colors.white,
-//                    gradient: LinearGradient(
-//                        begin: Alignment.bottomLeft,
-//                        colors: [Colors.blue, Colors.lightBlueAccent]),
                     borderRadius: BorderRadius.circular(20.0)),
                 child: FlatButton(
                   child: Text("登录"),

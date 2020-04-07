@@ -8,7 +8,6 @@ import 'package:flutter_app/common/constUrl.dart';
 import 'package:flutter_app/common/localShare.dart';
 import 'package:flutter_beautiful_popup/main.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
-//import 'package:flutter_app/widgets/customViews.dart';
 
 class SchedulePage extends StatefulWidget {
   @override
@@ -134,7 +133,6 @@ class _SchedulePageState extends State<SchedulePage> {
   Future<void> getSchedule() async {
     futureReady();
     if (kbHas != null && kbHas == true) {
-//      SpUtil.putObjectList(LocalShare.HANDLED_KB,[]);
       handledClassInfo = [];
       kb = [];
       wlist = [];

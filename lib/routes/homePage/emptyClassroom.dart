@@ -3,7 +3,9 @@ import 'package:flustars/flustars.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/common/constUrl.dart';
 import 'package:flutter_app/common/localShare.dart';
+import 'package:flutter_app/common/route_str.dart';
 import 'package:flutter_app/widgets/customViews.dart';
+import 'package:umeng_analytics_plugin/umeng_analytics_plugin.dart';
 
 class EmptyClassroom extends StatefulWidget {
   @override
@@ -92,6 +94,8 @@ class _EmptyClassroomState extends State<EmptyClassroom> {
   void futureReady() {
     _uid = SpUtil.getString(LocalShare.STU_ID);
     _passwd = SpUtil.getString(LocalShare.STU_PASSWD);
+    // 记录有多少人查空教室
+    UmengAnalyticsPlugin.event(RouteStr.CLASSROOM, label: _uid);
   }
 
   //空教室获取

@@ -39,7 +39,7 @@ class _MyPageState extends State<MyPage> {
   void getStuInfo() {
     name = SpUtil.getStringList(LocalShare.STU_INFO)[0];
     id = SpUtil.getString(LocalShare.STU_ID);
-    avatar=SpUtil.getString(LocalShare.AVATAR);
+    avatar = SpUtil.getString(LocalShare.AVATAR);
   }
 
   @override

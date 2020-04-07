@@ -5,8 +5,6 @@ import 'package:flustars/flustars.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/common/constUrl.dart';
 import 'package:flutter_app/common/localShare.dart';
-import 'package:package_info/package_info.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashPage extends StatefulWidget {
@@ -65,12 +63,13 @@ class _SplashPageState extends State<SplashPage> {
   }
 
   //version info
-  void localVersion(){
-   var version = SpUtil.getString(LocalShare.VERSION);
-    if(version.length == 0){
-      Dio().get(Constant.VERSION).then((value){
-        if(value.statusCode == 200){
-          SpUtil.putString(LocalShare.VERSION, value.data['info'][0]['version']);
+  void localVersion() {
+    var version = SpUtil.getString(LocalShare.VERSION);
+    if (version.length == 0) {
+      Dio().get(Constant.VERSION).then((value) {
+        if (value.statusCode == 200) {
+          SpUtil.putString(
+              LocalShare.VERSION, value.data['info'][0]['version']);
         }
       });
     }

@@ -4,8 +4,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/common/constUrl.dart';
 import 'package:flutter_app/common/localShare.dart';
+import 'package:flutter_app/common/route_str.dart';
 import 'package:flutter_app/widgets/gpaLinear.dart';
 import 'package:flutter_icons/flutter_icons.dart';
+import 'package:umeng_analytics_plugin/umeng_analytics_plugin.dart';
 
 class GPA extends StatefulWidget {
   @override
@@ -13,7 +15,7 @@ class GPA extends StatefulWidget {
 }
 
 class _GPAState extends State<GPA> {
-  var _passwd, _uid;
+  String _passwd, _uid;
   List GPA_res = [];
   List ScoreRes = [];
   Future<void> _getScore;
@@ -34,6 +36,10 @@ class _GPAState extends State<GPA> {
   void futureReady(BuildContext context) {
     _uid = SpUtil.getString(LocalShare.STU_ID);
     _passwd = SpUtil.getString(LocalShare.STU_PASSWD);
+
+    // 记录有多少人查成绩
+    print("记录查成绩的人数");
+    UmengAnalyticsPlugin.event(RouteStr.GPA, label: _uid);
   }
 
 //  获取绩点
@@ -309,7 +315,7 @@ class _GPAState extends State<GPA> {
         return new AlertDialog(
             content: new Container(
           width: MediaQuery.of(context).size.width * 0.7,
-          height: 60.0*GPA_res.length,
+          height: 60.0 * GPA_res.length,
           child: Column(
             children: <Widget>[
               ListTile(title: Text("请选择学期")),

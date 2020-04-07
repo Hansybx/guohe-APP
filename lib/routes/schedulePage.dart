@@ -8,8 +8,6 @@ import 'package:flutter_app/common/constUrl.dart';
 import 'package:flutter_app/common/localShare.dart';
 import 'package:flutter_beautiful_popup/main.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
-import 'package:umeng_analytics_plugin/umeng_analytics_plugin.dart';
-//import 'package:flutter_app/widgets/customViews.dart';
 
 class SchedulePage extends StatefulWidget {
   @override
@@ -107,7 +105,6 @@ class _SchedulePageState extends State<SchedulePage> {
 
   void initValue() {
     semesters = SpUtil.getStringList(LocalShare.ALL_YEAR);
-    print(semesters);
     semesterValue = semesters[0] ??
         (today.year - 1).toString() + '-' + (today.year).toString() + '-2';
     weekNum = SpUtil.getInt(LocalShare.SERVER_WEEK);
@@ -136,7 +133,6 @@ class _SchedulePageState extends State<SchedulePage> {
   Future<void> getSchedule() async {
     futureReady();
     if (kbHas != null && kbHas == true) {
-//      SpUtil.putObjectList(LocalShare.HANDLED_KB,[]);
       handledClassInfo = [];
       kb = [];
       wlist = [];
@@ -148,13 +144,6 @@ class _SchedulePageState extends State<SchedulePage> {
       "semester": semesterValue,
     });
     await Dio().post(Constant.KB, data: formData).then((res) {
-      print('Dio');
-
-//      showDialog(
-//          context: context,
-//          builder: (context) {
-//            return LoadingDialog(content: "查询中，请稍后......");
-//          });
       if (res.statusCode == 200) {
 //        Navigator.of(context).pop();
         if (res.data['code'] == 200) {
@@ -213,7 +202,6 @@ class _SchedulePageState extends State<SchedulePage> {
         tempList.add(day);
         handledClassInfo[handledClassInfo.length - 1]['otherClasses'] =
             tempList;
-        print('a');
         continue;
       }
       handledClassInfo.add(day);
@@ -271,9 +259,7 @@ class _SchedulePageState extends State<SchedulePage> {
       }
     }
     if (other == false) {
-      print('a');
       // 第一周课程信息渲染
-//      if (weekNum == 1) {
       setState(() {
         kbBuild(1);
         kbBuild(2);
@@ -281,7 +267,6 @@ class _SchedulePageState extends State<SchedulePage> {
         kbBuild(4);
         kbBuild(5);
       });
-//      }
     }
   }
 
@@ -382,7 +367,7 @@ class _SchedulePageState extends State<SchedulePage> {
                     child: Swiper(
                       index: 0,
                       itemCount: temp.length,
-                      itemWidth: MediaQuery.of(context).size.width ,
+                      itemWidth: MediaQuery.of(context).size.width,
                       itemHeight: MediaQuery.of(context).size.height,
                       layout: SwiperLayout.STACK,
                       pagination: SwiperPagination(),
@@ -466,7 +451,6 @@ class _SchedulePageState extends State<SchedulePage> {
                     ),
                   );
                 }
-                print('1');
               },
             ),
           ),
@@ -482,11 +466,9 @@ class _SchedulePageState extends State<SchedulePage> {
   }
 
   void initTime() {
-    print('b');
     var temp = today;
     mondayJudge(temp);
     dateHandle(mondayInWeek, temp);
-    print(dayOfWeek);
   }
 
   //周一判断
@@ -518,7 +500,6 @@ class _SchedulePageState extends State<SchedulePage> {
     } else {
       getSchedule();
     }
-    UmengAnalyticsPlugin.pageStart("schedulePage");
   }
 
   @override
@@ -537,7 +518,6 @@ class _SchedulePageState extends State<SchedulePage> {
               onChanged: (val) {
                 setState(() {
                   semesterValue = val;
-                  print(semesterValue);
                 });
                 getSchedule();
               },
@@ -584,7 +564,6 @@ class _SchedulePageState extends State<SchedulePage> {
           ],
         ),
       ),
-
       body: RefreshIndicator(
         onRefresh: getSchedule,
         child: SingleChildScrollView(

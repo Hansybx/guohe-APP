@@ -58,4 +58,7 @@ class LocalShare {
 
 
   static String VERSION = 'version';
+
+  // 头像
+  static String AVATAR = 'avatar';
 }

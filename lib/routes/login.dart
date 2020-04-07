@@ -21,6 +21,11 @@ class _LoginState extends State<Login> {
 
   //表单验证方法
   void _forSubmitted(BuildContext context) {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return LoadingDialog(content: "登录中，请稍后......");
+        });
     var _form = _formKey.currentState;
     if (_form.validate()) {
       _form.save();
@@ -59,11 +64,7 @@ class _LoginState extends State<Login> {
 
   //登录
   void login(BuildContext context, String account, String password) async {
-    showDialog(
-        context: context,
-        builder: (context) {
-          return LoadingDialog(content: "登录中，请稍后......");
-        });
+
     FormData formData =
         FormData.fromMap({"username": account, "password": password});
     Response res = await Dio().post(Constant.LOGIN, data: formData);
@@ -119,11 +120,6 @@ class _LoginState extends State<Login> {
           height: MediaQuery.of(context).size.height,
           width: MediaQuery.of(context).size.width,
           color: Color(int.parse("0xff65dbff")),
-//          decoration: new BoxDecoration(
-//            gradient: LinearGradient(
-//                begin: Alignment.bottomCenter,
-//                colors: [Colors.blue, Colors.lightBlueAccent]),
-//          ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
@@ -201,9 +197,6 @@ class _LoginState extends State<Login> {
               Container(
                 decoration: BoxDecoration(
                     color: Colors.white,
-//                    gradient: LinearGradient(
-//                        begin: Alignment.bottomLeft,
-//                        colors: [Colors.blue, Colors.lightBlueAccent]),
                     borderRadius: BorderRadius.circular(20.0)),
                 child: FlatButton(
                   child: Text("登录"),

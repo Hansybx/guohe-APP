@@ -3,6 +3,7 @@ import 'package:flustars/flustars.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/common/localShare.dart';
+import 'package:flutter_app/common/route_str.dart';
 import 'package:flutter_app/common/string_file.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:share/share.dart';
@@ -73,7 +74,7 @@ class _MyPageState extends State<MyPage> {
                 child: ListTile(
                   title: new Text("关于果核"),
                   onTap: () {
-                    Navigator.pushNamed(context, '/about');
+                    Navigator.pushNamed(context, RouteStr.ABOUT);
                   },
                   leading: Icon(AntDesign.notification, color: Colors.orange),
                   trailing: Icon(Icons.keyboard_arrow_right),
@@ -88,7 +89,19 @@ class _MyPageState extends State<MyPage> {
                   trailing: Icon(Icons.keyboard_arrow_right),
                   onTap: () {
                     // do something
-                    Navigator.pushNamed(context, '/feedback');
+                    Navigator.pushNamed(context, RouteStr.FEEDBACK);
+                  },
+                ),
+              ),
+              new Container(
+                color: Colors.white,
+                child: ListTile(
+                  title: new Text("社群"),
+                  leading: Icon(AntDesign.addusergroup, color: Colors.deepOrangeAccent),
+                  trailing: Icon(Icons.keyboard_arrow_right),
+                  onTap: () {
+                    // do something
+                    Navigator.pushNamed(context, RouteStr.TXCSYS);
                   },
                 ),
               ),

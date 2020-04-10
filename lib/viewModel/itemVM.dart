@@ -42,7 +42,7 @@ class ServiceItem extends StatelessWidget {
 
 class ServiceItemViewModel {
   /// 图标
-  final Icon icon;
+  final Image icon;
 
   /// 标题
   final String title;

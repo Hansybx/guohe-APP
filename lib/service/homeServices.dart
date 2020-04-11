@@ -2,105 +2,78 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/common/route_str.dart';
 import 'package:flutter_app/viewModel/itemVM.dart';
-import 'package:flutter_icons/flutter_icons.dart';
+import 'package:fluwx/fluwx.dart';
 
 // 校园服务的item
 List<ServiceItemViewModel> eduServiceList = [
   ServiceItemViewModel(
       route: RouteStr.GPA,
       title: RouteTitle.GPA,
-      icon: Icon(
-        AntDesign.gift,
-        color: Colors.purple,
-      )),
+      icon:
+          new Image.asset("assets/imgs/core/score.png", width: 35, height: 35)),
   ServiceItemViewModel(
       route: RouteStr.BUS,
       title: RouteTitle.BUS,
-      icon: Icon(
-        Ionicons.md_bus,
-        color: Colors.orangeAccent,
-      )),
+      icon: new Image.asset("assets/imgs/core/bus.png", width: 35, height: 35)),
   ServiceItemViewModel(
       route: RouteStr.CLASSROOM,
       title: RouteTitle.CLASSROOM,
-      icon: Icon(
-        Feather.clipboard,
-        color: Colors.blue,
-      )),
+      icon: new Image.asset("assets/imgs/core/classroom.png",
+          width: 35, height: 35)),
   // 早操俱乐部暂未开启，所以canBeClick设置成false
   ServiceItemViewModel(
       route: RouteStr.PE,
       title: RouteTitle.PE,
       canBeClick: false,
-      icon: Icon(
-        Feather.star,
-        color: Colors.redAccent,
-      )),
+      icon:
+          new Image.asset("assets/imgs/core/sport.png", width: 35, height: 35)),
   ServiceItemViewModel(
       route: RouteStr.CALENDAR,
       title: RouteTitle.CALENDAR,
-      icon: Icon(
-        Feather.airplay,
-        color: Colors.deepOrange,
-      )),
+      icon: new Image.asset("assets/imgs/core/kb.png", width: 35, height: 35)),
+  new ServiceItemViewModel(
+      route: "",
+      title: "二手书交易",
+      icon: new Image.asset("assets/imgs/core/xs.png", width: 35, height: 35),
+      onTap: () {
+        launchWeChatMiniProgram(username: "gh_75a1ef8c0da5");
+      })
 ];
+
+//eduServiceList.add();
 
 // 校园系统的item
 List<ServiceItemViewModel> eduSystemList = [
   ServiceItemViewModel(
       route: RouteStr.VPN,
       title: RouteTitle.VPN,
-      icon: Icon(
-        Ionicons.md_paper_plane,
-        color: Colors.lightGreen,
-      )),
+      icon: new Image.asset("assets/imgs/core/vpn.png", width: 35, height: 35)),
   ServiceItemViewModel(
       route: RouteStr.JIAOWU,
       title: RouteTitle.JIAOWU,
-      icon: Icon(
-        Feather.airplay,
-        color: Colors.pinkAccent,
-      )),
+      icon: new Image.asset("assets/imgs/core/jiaowu.png",
+          width: 35, height: 35)),
   ServiceItemViewModel(
       route: RouteStr.INFOSYS,
       title: RouteTitle.INFOSYS,
-      icon: Icon(
-        AntDesign.cloudo,
-        color: Colors.lightBlue,
-      )),
+      icon:
+          new Image.asset("assets/imgs/core/info.png", width: 35, height: 35)),
   ServiceItemViewModel(
       route: RouteStr.AOLANSYS,
       title: RouteTitle.AOLANSYS,
-      icon: Icon(
-        Feather.briefcase,
-        color: Colors.brown,
-      )),
+      icon:
+          new Image.asset("assets/imgs/core/aolan.png", width: 35, height: 35)),
   ServiceItemViewModel(
       route: RouteStr.PESYS,
       title: RouteTitle.PESYS,
-      icon: Icon(
-        Ionicons.md_american_football,
-        color: Colors.pinkAccent,
-      )),
+      icon: new Image.asset("assets/imgs/core/pe.png", width: 35, height: 35)),
   ServiceItemViewModel(
       route: RouteStr.LABSYS,
       title: RouteTitle.LABSYS,
-      icon: Icon(
-        AntDesign.rocket1,
-        color: Colors.lightGreen,
-      )),
+      icon: new Image.asset("assets/imgs/core/lab.png", width: 35, height: 35)),
   ServiceItemViewModel(
       route: RouteStr.GRADSYS,
       title: RouteTitle.GRADSYS,
-      icon: Icon(
-        AntDesign.antdesign,
-        color: Colors.orange,
-      )),
-  ServiceItemViewModel(
-      route: RouteStr.TXCSYS,
-      title: RouteTitle.TXCSYS,
-      icon: Icon(
-        AntDesign.message1,
-        color: Colors.purple,
-      )),
+      icon:
+          new Image.asset("assets/imgs/core/grad.png", width: 35, height: 35)),
 ];

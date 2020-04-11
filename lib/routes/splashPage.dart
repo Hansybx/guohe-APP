@@ -99,7 +99,7 @@ class _SplashPageState extends State<SplashPage> {
             ),
             child: Center(
                 child: Image(
-              image: AssetImage('assets/imgs/guohe_logo.jpg'),
+              image: AssetImage('assets/imgs/logo.jpg'),
               width: 150,
               height: 150,
             ))));

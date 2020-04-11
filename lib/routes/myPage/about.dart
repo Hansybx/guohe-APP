@@ -30,7 +30,7 @@ class About extends StatelessWidget {
             Image(
                 width: 80,
                 height: 80,
-                image: AssetImage('assets/imgs/guohe_logo.jpg')),
+                image: AssetImage('assets/imgs/logo.jpg')),
             SizedBox(
               height: 15,
             ),

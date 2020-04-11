@@ -114,6 +114,12 @@ class _EmptyClassroomState extends State<EmptyClassroom> {
       "building_id": buildingId,
       "week": week.toString(),
     });
+
+    print(areaId);
+    print(semester);
+    print(buildingId);
+    print(week);
+
     Response response =
         await Dio().post(Constant.CLASSROOM_EMPTY, data: formData);
 
@@ -125,7 +131,6 @@ class _EmptyClassroomState extends State<EmptyClassroom> {
         setState(() {
           ClassRoomBuild();
         });
-
         print(ClsEmptyRes);
       }
     }
@@ -334,7 +339,7 @@ class _EmptyClassroomState extends State<EmptyClassroom> {
                         context,
                         _uid,
                         _passwd,
-                        '2019-2020-1',
+                        '2019-2020-2',
                         areaParaList[areaValue],
                         buildingParaList[buildValue].toString(),
                         zcArray.indexOf(zcValue) + 1),

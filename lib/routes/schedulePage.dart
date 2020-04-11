@@ -8,6 +8,7 @@ import 'package:flutter_app/common/constUrl.dart';
 import 'package:flutter_app/common/localShare.dart';
 import 'package:flutter_beautiful_popup/main.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
+import 'package:flutter_xupdate/flutter_xupdate.dart';
 
 class SchedulePage extends StatefulWidget {
   @override
@@ -499,6 +500,11 @@ class _SchedulePageState extends State<SchedulePage> {
       classInWeek(handledClassInfo);
     } else {
       getSchedule();
+    }
+
+    bool flag = SpUtil.getBool(LocalShare.AUTO_UPDATE, defValue: true);
+    if (flag) {
+      FlutterXUpdate.checkUpdate(url: Constant.UPDATE);
     }
   }
 

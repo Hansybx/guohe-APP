@@ -25,8 +25,6 @@ class _SplashPageState extends State<SplashPage> {
       passwd = pref.getString(LocalShare.STU_PASSWD);
       getCalendar(uid, passwd);
     }
-
-    print('splash');
   }
 
   // 延时跳转
@@ -99,7 +97,7 @@ class _SplashPageState extends State<SplashPage> {
             ),
             child: Center(
                 child: Image(
-              image: AssetImage('assets/imgs/logo.jpg'),
+              image: AssetImage('assets/imgs/logo.png'),
               width: 150,
               height: 150,
             ))));

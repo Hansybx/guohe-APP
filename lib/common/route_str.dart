@@ -9,6 +9,7 @@ import 'package:flutter_app/routes/login.dart';
 import 'package:flutter_app/routes/myPage/about.dart';
 import 'package:flutter_app/routes/myPage/feedback.dart';
 import 'package:flutter_app/routes/myPage/profile.dart';
+import 'package:flutter_app/routes/myPage/setting.dart';
 import 'package:flutter_app/routes/tabs.dart';
 
 class RouteStr {
@@ -41,6 +42,8 @@ class RouteStr {
   static const String HOME = "/main";
 
   static const String PROFILE = "/profile";
+
+  static const String SETTING = "/setting";
 }
 
 class Router {
@@ -152,6 +155,11 @@ class Router {
           settings: RouteSettings(name: RouteStr.PROFILE),
           builder: (context) => Profile(),
         );
+      case RouteStr.SETTING:
+        return MaterialPageRoute(
+          settings: RouteSettings(name: RouteStr.SETTING),
+          builder: (context) => SettingsPage(),
+        );
     }
   }
 }
@@ -181,4 +189,5 @@ class RouteTitle {
   static const String TXCSYS = "吐个槽";
 
   static const String PROFILE = "个人信息";
+  static const String SETTING = "设置";
 }

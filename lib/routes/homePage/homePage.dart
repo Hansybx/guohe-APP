@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/service/homeServices.dart';
 import 'package:flutter_app/viewModel/itemVM.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
-import 'package:fluwx/fluwx.dart';
 
 class HomePage extends StatefulWidget {
   @override

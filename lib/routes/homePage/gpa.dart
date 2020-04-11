@@ -211,6 +211,7 @@ class _GPAState extends State<GPA> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
+        centerTitle: true,
         title: Text(
           '成绩绩点',
           style: new TextStyle(color: Colors.black),

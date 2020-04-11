@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/service/homeServices.dart';
 import 'package:flutter_app/viewModel/itemVM.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
+import 'package:fluwx/fluwx.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -28,6 +29,16 @@ class _HomePageState extends State<HomePage> {
       ..add(Image.asset('assets/imgs/hw.jpg'));
 
     super.initState();
+
+//    weChatResponseEventHandler.listen((res) {
+//      if (res is WeChatLaunchMiniProgramResponse) {
+//        if (mounted) {
+//          setState(() {
+//            _result = "isSuccessful:${res.isSuccessful}";
+//          });
+//        }
+//      }
+//    });
   }
 
   @override
@@ -37,6 +48,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(

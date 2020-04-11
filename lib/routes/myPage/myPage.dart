@@ -6,6 +6,7 @@ import 'package:flutter_app/common/localShare.dart';
 import 'package:flutter_app/common/route_str.dart';
 import 'package:flutter_app/common/string_file.dart';
 import 'package:flutter_icons/flutter_icons.dart';
+import 'package:package_info/package_info.dart';
 import 'package:share/share.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -33,8 +34,15 @@ class _MyPageState extends State<MyPage> {
   }
 
   //版本信息
-  void localVersion() {
-    version = SpUtil.getString(LocalShare.VERSION);
+  void localVersion() async {
+    PackageInfo.fromPlatform().then((PackageInfo packageInfo) {
+      String appName = packageInfo.appName;
+      String packageName = packageInfo.packageName;
+      String buildNumber = packageInfo.buildNumber;
+      setState(() {
+        version = packageInfo.version;
+      });
+    });
   }
 
   void getStuInfo() {
@@ -45,8 +53,6 @@ class _MyPageState extends State<MyPage> {
 
   @override
   void initState() {
-//    print(LocalShare.VERSION);
-//    versionGet();
     localVersion();
     getStuInfo();
     super.initState();
@@ -97,7 +103,8 @@ class _MyPageState extends State<MyPage> {
                 color: Colors.white,
                 child: ListTile(
                   title: new Text("社群"),
-                  leading: Icon(AntDesign.addusergroup, color: Colors.deepOrangeAccent),
+                  leading: Icon(AntDesign.addusergroup,
+                      color: Colors.deepOrangeAccent),
                   trailing: Icon(Icons.keyboard_arrow_right),
                   onTap: () {
                     // do something

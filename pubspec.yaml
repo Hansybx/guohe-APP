@@ -1,7 +1,7 @@
 name: flutter_app
 description: A new Flutter application.
 
-version: 1.0.0+1
+version: 3.0.0+1
 
 environment:
   sdk: ">=2.1.0 <3.0.0"
@@ -33,11 +33,21 @@ dependencies:
   cached_network_image: ^2.0.0
   sy_flutter_qiniu_storage: ^0.1.4
   umeng_analytics_plugin: ^1.0.2
+  fluwx: ^2.0.2
+  flutter_launcher_icons: ^0.7.4
 
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+
+flutter_icons:
+  image_path: "assets/imgs/logo.jpg"
+  image_path_ios: "assets/imgs/logo.jpg"
+  android: true
+  ios: true # can specify file name here e.g. "My-Launcher-Icon"
+#  adaptive_icon_background: "assets/images/christmas-background.png" # only available for Android 8.0 devices and above
+#  adaptive_icon_foreground: "assets/images/icon-foreground-432x432.png" # only available for Android 8.0 devices and above
 
 
 # For information on the generic Dart part of this file, see the

@@ -30,10 +30,14 @@ class ServiceItem extends StatelessWidget {
         ),
       ),
       onTap: () {
-        if (this.widget.canBeClick) {
-          Navigator.pushNamed(context, (this.widget.route));
+        if (this.widget.route == '') {
+          this.widget.onTap();
         } else {
-          CommonUtils.showToast(context, "当前服务暂未开启");
+          if (this.widget.canBeClick) {
+            Navigator.pushNamed(context, (this.widget.route));
+          } else {
+            CommonUtils.showToast(context, "当前服务暂未开启");
+          }
         }
       },
     );
@@ -51,6 +55,8 @@ class ServiceItemViewModel {
 
   bool canBeClick;
 
+  final GestureTapCallback onTap;
+
   ServiceItemViewModel(
-      {this.route, this.title, this.icon, this.canBeClick = true});
+      {this.route, this.title, this.icon, this.canBeClick = true, this.onTap});
 }

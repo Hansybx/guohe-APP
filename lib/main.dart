@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/common/route_str.dart';
 import 'package:flutter_app/utils/AppAnalysis.dart';
+import 'package:fluwx/fluwx.dart';
 import 'package:umeng_analytics_plugin/umeng_analytics_plugin.dart';
 
 import 'routes/splashPage.dart';
@@ -18,6 +19,19 @@ class _MyAppState extends State<MyApp> {
     super.initState();
 
     initPlatformState();
+    _initFluwx();
+  }
+
+  // 加载微信SDK
+  // todo 先添加 android 端，ios端稍后做
+  _initFluwx() async {
+    await registerWxApi(
+        appId: "wx31c614cef0a3c2b1",
+        doOnAndroid: true,
+        doOnIOS: false,
+        universalLink: "https://your.univerallink.com/link/");
+    var result = await isWeChatInstalled;
+    print("WeChat SDK is installed $result");
   }
 
   Future<void> initPlatformState() async {

@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/common/constUrl.dart';
 import 'package:flutter_app/common/localShare.dart';
 import 'package:flutter_app/common/route_str.dart';
-import 'package:flutter_app/widgets/customViews.dart';
+import 'package:flutter_app/generated/l10n.dart';
+import 'package:flutter_app/widgets/dialog.dart';
 import 'package:umeng_analytics_plugin/umeng_analytics_plugin.dart';
 
 class EmptyClassroom extends StatefulWidget {
@@ -104,7 +105,7 @@ class _EmptyClassroomState extends State<EmptyClassroom> {
     showDialog(
         context: context,
         builder: (context) {
-          return LoadingDialog(content: "查询中，请稍后......");
+          return LoadingDialog(content: S.of(context).loading);
         });
     FormData formData = FormData.fromMap({
       "username": uid,
@@ -187,7 +188,7 @@ class _EmptyClassroomState extends State<EmptyClassroom> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('空教室'),
+        title: Text(S.of(context).classroom),
       ),
       body: DefaultTextStyle(
         textAlign: TextAlign.center,

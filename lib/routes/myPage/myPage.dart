@@ -5,8 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/common/localShare.dart';
 import 'package:flutter_app/common/route_str.dart';
 import 'package:flutter_app/common/string_file.dart';
+import 'package:flutter_app/generated/l10n.dart';
+import 'package:flutter_app/widgets/update_item.dart';
 import 'package:flutter_icons/flutter_icons.dart';
-import 'package:package_info/package_info.dart';
 import 'package:share/share.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -17,11 +18,11 @@ class MyPage extends StatefulWidget {
 
 class _MyPageState extends State<MyPage> {
   String avatar = '';
-  String version = '1.0.0';
+
   String name = "Unknown";
   String id = "Unknown";
 
-//  登出时清空本机缓存
+  // 登出时清空本机缓存
   Future<void> clean() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     sharedPreferences.clear();
@@ -30,19 +31,7 @@ class _MyPageState extends State<MyPage> {
 
   void logout() {
     clean();
-    Navigator.pushReplacementNamed(context, '/login');
-  }
-
-  //版本信息
-  void localVersion() async {
-    PackageInfo.fromPlatform().then((PackageInfo packageInfo) {
-      String appName = packageInfo.appName;
-      String packageName = packageInfo.packageName;
-      String buildNumber = packageInfo.buildNumber;
-      setState(() {
-        version = packageInfo.version;
-      });
-    });
+    Navigator.pushReplacementNamed(context, RouteStr.LOGIN);
   }
 
   void getStuInfo() {
@@ -53,7 +42,6 @@ class _MyPageState extends State<MyPage> {
 
   @override
   void initState() {
-    localVersion();
     getStuInfo();
     super.initState();
   }
@@ -66,7 +54,7 @@ class _MyPageState extends State<MyPage> {
           centerTitle: true,
           elevation: 0,
           title: Text(
-            "我的果核",
+            "",
             style: new TextStyle(color: Colors.black87),
           ),
         ),
@@ -78,7 +66,7 @@ class _MyPageState extends State<MyPage> {
               new Container(
                 color: Colors.white,
                 child: ListTile(
-                  title: new Text("关于果核"),
+                  title: new Text(S.of(context).about),
                   onTap: () {
                     Navigator.pushNamed(context, RouteStr.ABOUT);
                   },
@@ -90,7 +78,7 @@ class _MyPageState extends State<MyPage> {
               new Container(
                 color: Colors.white,
                 child: ListTile(
-                  title: new Text("反馈"),
+                  title: new Text(S.of(context).community),
                   leading: Icon(AntDesign.form, color: Colors.purple),
                   trailing: Icon(Icons.keyboard_arrow_right),
                   onTap: () {
@@ -102,7 +90,7 @@ class _MyPageState extends State<MyPage> {
               new Container(
                 color: Colors.white,
                 child: ListTile(
-                  title: new Text("社群"),
+                  title: new Text(S.of(context).community),
                   leading: Icon(AntDesign.addusergroup,
                       color: Colors.deepOrangeAccent),
                   trailing: Icon(Icons.keyboard_arrow_right),
@@ -115,7 +103,7 @@ class _MyPageState extends State<MyPage> {
               new Container(
                 color: Colors.white,
                 child: ListTile(
-                  title: new Text("分享"),
+                  title: new Text(S.of(context).share),
                   onTap: () => Share.share('果核', subject: 'Look what I made!'),
                   leading: Icon(AntDesign.sharealt, color: Colors.green),
                   trailing: Icon(Icons.keyboard_arrow_right),
@@ -125,24 +113,18 @@ class _MyPageState extends State<MyPage> {
               new Container(
                 color: Colors.white,
                 child: ListTile(
-                    title: new Text("设置"),
+                    title: new Text(S.of(context).setting),
                     leading: Icon(AntDesign.setting, color: Colors.blue),
                     trailing: Icon(Icons.keyboard_arrow_right),
-                    onTap: () => {}),
+                    onTap: () {
+                      Navigator.pushNamed(context, RouteStr.SETTING);
+                    }),
               ),
+              new Container(color: Colors.white, child: UpdateListTile()),
               new Container(
                 color: Colors.white,
                 child: ListTile(
-                  title: new Text("检查更新"),
-                  subtitle: Text("当前版本:" + version),
-                  leading: Icon(AntDesign.info, color: Colors.blueAccent),
-                  trailing: Icon(Icons.keyboard_arrow_right),
-                ),
-              ),
-              new Container(
-                color: Colors.white,
-                child: ListTile(
-                  title: new Text("切换账号"),
+                  title: new Text(S.of(context).account),
                   leading: Icon(AntDesign.reload1, color: Colors.black54),
                   trailing: Icon(Icons.keyboard_arrow_right),
                   onTap: () => logout(),
@@ -158,7 +140,7 @@ class _MyPageState extends State<MyPage> {
     return GestureDetector(
       child: Container(
         color: Colors.white,
-        height: 120,
+        height: 80,
         child: Stack(
           children: <Widget>[
             new Align(
@@ -199,7 +181,7 @@ class _MyPageState extends State<MyPage> {
         ),
       ),
       onTap: () {
-        Navigator.pushNamed(context, '/profile');
+        Navigator.pushNamed(context, RouteStr.PROFILE);
       },
     );
   }

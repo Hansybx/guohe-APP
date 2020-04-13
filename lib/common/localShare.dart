@@ -22,6 +22,7 @@ class LocalShare {
 
   //记录密码
   static final String STU_PASSWD = "stu_passwd";
+
   //记录体育课密码
   static final String PE_PASSWD = "pe_passwd";
 
@@ -32,10 +33,11 @@ class LocalShare {
   static final String IS_OPEN_KB = "is_open_kb";
 
   //保存的课表
-  static final String HANDLED_KB= "handled_kb";
+  static final String HANDLED_KB = "handled_kb";
 
   //课表备注
-  static final String CLASS_MORE="class_more";
+  static final String CLASS_MORE = "class_more";
+
   //记录学期信息
   static final String SEMESTER = "semester";
 
@@ -56,9 +58,14 @@ class LocalShare {
   static String WORD = "word";
   static String WORD_FROM = "wordFrom";
 
-
   static String VERSION = 'version';
 
   // 头像
   static String AVATAR = 'avatar';
+
+  // 是否开启启动时自动检查更新
+  static String AUTO_UPDATE = "auto_update";
+
+  // 设置语言
+  static String LANGUAGE = "language";
 }

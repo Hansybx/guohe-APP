@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/generated/l10n.dart';
 import 'package:flutter_app/routes/homePage/homePage.dart';
 import 'package:flutter_app/routes/myPage/myPage.dart';
 import 'package:flutter_app/routes/schedulePage.dart';
@@ -46,15 +47,15 @@ class _TabsState extends State<Tabs> {
           items: [
             BottomNavigationBarItem(
                 icon: Icon(Icons.event),
-                title: Text("课表")
+                title: Text(S.of(context).schedule)
             ),
             BottomNavigationBarItem(
                 icon: Icon(Icons.home),
-                title: Text("发现")
+                title: Text(S.of(context).discover)
             ),
             BottomNavigationBarItem(
                 icon: Icon(Icons.person),
-                title: Text("我")
+                title: Text(S.of(context).me)
             )
           ],
         ),

@@ -1,6 +1,8 @@
 import 'package:flustars/flustars.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/common/localShare.dart';
+import 'package:flutter_app/generated/l10n.dart';
+import 'package:flutter_app/widgets/dialog.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 
 class SettingsPage extends StatefulWidget {
@@ -22,12 +24,17 @@ class _SettingsPageState extends State<SettingsPage> {
   );
 
   bool flag;
+  String language;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     flag = SpUtil.getBool(LocalShare.AUTO_UPDATE, defValue: true);
+//    language = SpUtil.getString(LocalShare.LANGUAGE);
+//    if (language == "简体中文") S.load(Locale('zn', 'CN'));
+//    if (language == "English") S.load(Locale('en', 'US'));
+//    print(language);
   }
 
   @override
@@ -38,7 +45,7 @@ class _SettingsPageState extends State<SettingsPage> {
         centerTitle: true,
         backgroundColor: Colors.white,
         title: Text(
-          '设置',
+          S.of(context).setting,
           style: new TextStyle(color: Colors.black),
         ),
         leading: IconButton(
@@ -75,37 +82,43 @@ class _SettingsPageState extends State<SettingsPage> {
                 const SizedBox(height: 20.0),
                 ListTile(
                   title: Text(
-                    "设置语言",
+                    S.of(context).language,
                     style: whiteBoldText,
                   ),
                   subtitle: Text(
-                    "English US",
+                    language == '' ? "简体中文" : "English",
                     style: greyTExt,
                   ),
                   trailing: Icon(
                     Icons.keyboard_arrow_right,
                     color: Colors.grey.shade400,
                   ),
-                  onTap: () {},
+                  onTap: () {
+                    showDialog<String>(
+                        context: context,
+                        builder: (context) {
+                          String selectValue = '';
+                          List<String> valueList = ["简体中文", "English"];
+                          return RadioAlertDialog(
+                              showCancel: false,
+                              showConfirm: false,
+                              title: S.of(context).language,
+                              selectValue: selectValue,
+                              valueList: valueList);
+                        }).then((value) {
+                          print(value);
+//                      SpUtil.putString(LocalShare.LANGUAGE, value);
+//                      setState(() {
+//                        if (value == "简体中文") S.load(Locale('zn', 'CN'));
+//                        if (value == "English") S.load(Locale('en', 'US'));
+//                        language = value;
+//                      });
+                    });
+                  },
                 ),
-//                ListTile(
-//                  title: Text(
-//                    "Profile Settings",
-//                    style: whiteBoldText,
-//                  ),
-//                  subtitle: Text(
-//                    "Jane Doe",
-//                    style: greyTExt,
-//                  ),
-//                  trailing: Icon(
-//                    Icons.keyboard_arrow_right,
-//                    color: Colors.grey.shade400,
-//                  ),
-//                  onTap: () {},
-//                ),
                 SwitchListTile(
                   title: Text(
-                    "启动时检查更新",
+                    S.of(context).auto_update,
                     style: whiteBoldText,
                   ),
                   subtitle: Text(
@@ -120,25 +133,6 @@ class _SettingsPageState extends State<SettingsPage> {
                     SpUtil.putBool(LocalShare.AUTO_UPDATE, flag);
                   },
                 ),
-//                SwitchListTile(
-//                  title: Text(
-//                    "Push Notifications",
-//                    style: whiteBoldText,
-//                  ),
-//                  subtitle: Text(
-//                    "Off",
-//                    style: greyTExt,
-//                  ),
-//                  value: false,
-//                  onChanged: (val) {},
-//                ),
-//                ListTile(
-//                  title: Text(
-//                    "Logout",
-//                    style: whiteBoldText,
-//                  ),
-//                  onTap: () {},
-//                ),
               ],
             ),
           ),

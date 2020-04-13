@@ -1,12 +1,16 @@
 import 'dart:io';
 
+import 'package:flustars/flustars.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/common/route_str.dart';
+import 'package:flutter_app/generated/l10n.dart';
 import 'package:flutter_app/utils/AppAnalysis.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_xupdate/flutter_xupdate.dart';
 import 'package:fluwx/fluwx.dart';
 import 'package:umeng_analytics_plugin/umeng_analytics_plugin.dart';
 
+import 'common/localShare.dart';
 import 'routes/splashPage.dart';
 
 void main() => runApp(MyApp());
@@ -24,6 +28,7 @@ class _MyAppState extends State<MyApp> {
     _initPlatformState();
     _initFluwx();
     _initUpdate();
+
   }
 
   // 加载微信SDK
@@ -57,7 +62,7 @@ class _MyAppState extends State<MyApp> {
       FlutterXUpdate.init(
 
               ///是否输出日志
-              debug: true,
+              debug: false,
 
               ///是否使用post请求
               isPost: false,
@@ -88,6 +93,8 @@ class _MyAppState extends State<MyApp> {
     } else {}
   }
 
+
+
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
@@ -96,6 +103,14 @@ class _MyAppState extends State<MyApp> {
       navigatorObservers: [AppAnalysis()],
       home: SplashPage(),
       initialRoute: '/',
+      localizationsDelegates: const [
+        GlobalMaterialLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        S.delegate,
+      ],
+      // 讲en设置为第一项,没有适配语言时,英语为首选项
+      supportedLocales: S.delegate.supportedLocales,
     );
   }
 }

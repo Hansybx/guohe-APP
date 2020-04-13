@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'dart:math';
 import 'dart:ui';
 
@@ -6,6 +7,7 @@ import 'package:flustars/flustars.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/common/constUrl.dart';
 import 'package:flutter_app/common/localShare.dart';
+import 'package:flutter_app/generated/l10n.dart';
 import 'package:flutter_beautiful_popup/main.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:flutter_xupdate/flutter_xupdate.dart';
@@ -504,7 +506,7 @@ class _SchedulePageState extends State<SchedulePage> {
 
     bool flag = SpUtil.getBool(LocalShare.AUTO_UPDATE, defValue: true);
     if (flag) {
-      FlutterXUpdate.checkUpdate(url: Constant.UPDATE);
+      if (Platform.isAndroid) FlutterXUpdate.checkUpdate(url: Constant.UPDATE);
     }
   }
 
@@ -602,7 +604,7 @@ class _SchedulePageState extends State<SchedulePage> {
                       flex: 1,
                       child: Column(
                         children: <Widget>[
-                          Text('周一'),
+                          Text(S.of(context).mon),
                           Text(dayOfWeek[day7[0]].toString()),
                         ],
                       ),
@@ -611,7 +613,7 @@ class _SchedulePageState extends State<SchedulePage> {
                       flex: 1,
                       child: Column(
                         children: <Widget>[
-                          Text('周二'),
+                          Text(S.of(context).tue),
                           Text(dayOfWeek[day7[1]].toString()),
                         ],
                       ),
@@ -620,7 +622,7 @@ class _SchedulePageState extends State<SchedulePage> {
                       flex: 1,
                       child: Column(
                         children: <Widget>[
-                          Text('周三'),
+                          Text(S.of(context).wen),
                           Text(dayOfWeek[day7[2]].toString()),
                         ],
                       ),
@@ -629,7 +631,7 @@ class _SchedulePageState extends State<SchedulePage> {
                       flex: 1,
                       child: Column(
                         children: <Widget>[
-                          Text('周四'),
+                          Text(S.of(context).thus),
                           Text(dayOfWeek[day7[3]].toString()),
                         ],
                       ),
@@ -638,7 +640,7 @@ class _SchedulePageState extends State<SchedulePage> {
                       flex: 1,
                       child: Column(
                         children: <Widget>[
-                          Text('周五'),
+                          Text(S.of(context).fri),
                           Text(dayOfWeek[day7[4]].toString()),
                         ],
                       ),
@@ -647,7 +649,7 @@ class _SchedulePageState extends State<SchedulePage> {
                       flex: 1,
                       child: Column(
                         children: <Widget>[
-                          Text('周六'),
+                          Text(S.of(context).sat),
                           Text(dayOfWeek[day7[5]].toString()),
                         ],
                       ),
@@ -656,7 +658,7 @@ class _SchedulePageState extends State<SchedulePage> {
                       flex: 1,
                       child: Column(
                         children: <Widget>[
-                          Text('周日'),
+                          Text(S.of(context).sun),
                           Text(dayOfWeek[day7[6]].toString()),
                         ],
                       ),

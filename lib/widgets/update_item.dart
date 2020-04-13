@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/common/constUrl.dart';
+import 'package:flutter_app/generated/l10n.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:flutter_xupdate/flutter_xupdate.dart';
 import 'package:package_info/package_info.dart';
@@ -53,8 +54,8 @@ class UpdateListTileState extends State<UpdateListTile> {
   @override
   Widget build(BuildContext context) {
     return new ListTile(
-      title: new Text("检查更新"),
-      subtitle: Text("当前版本：" + version),
+      title: new Text(S.of(context).update),
+      subtitle: Text(S.of(context).version + version),
       leading: Icon(AntDesign.info, color: Colors.blueAccent),
       trailing: Icon(Icons.keyboard_arrow_right),
       onTap: () => updateApp(),

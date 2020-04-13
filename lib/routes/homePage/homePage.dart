@@ -1,5 +1,9 @@
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flustars/flustars.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/common/localShare.dart';
+import 'package:flutter_app/generated/l10n.dart';
 import 'package:flutter_app/service/homeServices.dart';
 import 'package:flutter_app/viewModel/itemVM.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
@@ -21,8 +25,9 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     imageList
-      ..add(Image.network(
-        'https://pic.downk.cc/item/5e849a81504f4bcb0437649f.jpg',
+      ..add(CachedNetworkImage(
+        placeholder: (context, url) => new CircularProgressIndicator(),
+        imageUrl: 'https://pic.downk.cc/item/5e849a81504f4bcb0437649f.jpg',
         fit: BoxFit.fill,
       ))
       ..add(Image.asset('assets/imgs/hw.jpg'));
@@ -47,7 +52,6 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
@@ -55,7 +59,7 @@ class _HomePageState extends State<HomePage> {
           centerTitle: true,
           backgroundColor: Colors.white,
           title: Text(
-            "发现",
+            S.of(context).discover,
             style: new TextStyle(color: Colors.black),
           ),
         ),
@@ -71,7 +75,7 @@ class _HomePageState extends State<HomePage> {
               children: <Widget>[
                 swiper(),
                 ListTile(
-                  title: Text("校园"),
+                  title: Text(S.of(context).campus),
                 ),
                 GridView.count(
                   shrinkWrap: true,
@@ -84,7 +88,7 @@ class _HomePageState extends State<HomePage> {
                 ),
                 new Divider(),
                 ListTile(
-                  title: Text("系统"),
+                  title: Text(S.of(context).system),
                 ),
                 GridView.count(
                   shrinkWrap: true,

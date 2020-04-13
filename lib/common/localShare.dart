@@ -65,4 +65,7 @@ class LocalShare {
 
   // 是否开启启动时自动检查更新
   static String AUTO_UPDATE = "auto_update";
+
+  // 设置语言
+  static String LANGUAGE = "language";
 }

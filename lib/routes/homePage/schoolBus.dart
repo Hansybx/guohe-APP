@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/generated/l10n.dart';
 
 class SchoolBus extends StatelessWidget {
 
@@ -6,7 +7,7 @@ class SchoolBus extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('校车时刻'),
+        title: Text(S.of(context).bus),
       ),
       body: SingleChildScrollView(
         child: Column(

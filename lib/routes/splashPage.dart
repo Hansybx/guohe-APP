@@ -5,6 +5,7 @@ import 'package:flustars/flustars.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/common/constUrl.dart';
 import 'package:flutter_app/common/localShare.dart';
+import 'package:flutter_app/generated/l10n.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashPage extends StatefulWidget {
@@ -79,6 +80,12 @@ class _SplashPageState extends State<SplashPage> {
     jumpPage();
     _initAsync();
     localVersion();
+    _initLanguage();
+  }
+
+  // 初始化语言
+  Future<void> _initLanguage() {
+    String value = SpUtil.getString(LocalShare.LANGUAGE);
   }
 
   @override

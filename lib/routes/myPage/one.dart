@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/common/localShare.dart';
-import 'package:flutter_app/widgets/customViews.dart';
+import 'package:flutter_app/widgets/common_widget.dart';
 
 class One extends StatelessWidget {
   @override

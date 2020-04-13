@@ -4,6 +4,8 @@ PODS:
     - Flutter
   - flutter_webview_plugin (0.0.1):
     - Flutter
+  - flutter_xupdate (0.0.1):
+    - Flutter
   - fluwx (0.0.1):
     - Flutter
     - WechatOpenSDK (= 1.8.6.2)
@@ -49,6 +51,7 @@ DEPENDENCIES:
   - Flutter (from `Flutter`)
   - flutter_plugin_android_lifecycle (from `.symlinks/plugins/flutter_plugin_android_lifecycle/ios`)
   - flutter_webview_plugin (from `.symlinks/plugins/flutter_webview_plugin/ios`)
+  - flutter_xupdate (from `.symlinks/plugins/flutter_xupdate/ios`)
   - fluwx (from `.symlinks/plugins/fluwx/ios`)
   - image_picker (from `.symlinks/plugins/image_picker/ios`)
   - package_info (from `.symlinks/plugins/package_info/ios`)
@@ -79,6 +82,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/flutter_plugin_android_lifecycle/ios"
   flutter_webview_plugin:
     :path: ".symlinks/plugins/flutter_webview_plugin/ios"
+  flutter_xupdate:
+    :path: ".symlinks/plugins/flutter_xupdate/ios"
   fluwx:
     :path: ".symlinks/plugins/fluwx/ios"
   image_picker:
@@ -114,6 +119,7 @@ SPEC CHECKSUMS:
   Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
   flutter_plugin_android_lifecycle: 47de533a02850f070f5696a623995e93eddcdb9b
   flutter_webview_plugin: ed9e8a6a96baf0c867e90e1bce2673913eeac694
+  flutter_xupdate: c7c62e59874a8d7dde645563cd3c458fdfa1830a
   fluwx: 03e098a7284c556d7b197e0b82984eb0b25183af
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
   image_picker: e3eacd46b94694dde7cf2705955cece853aa1a8f

@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/common/constUrl.dart';
 import 'package:flutter_app/common/localShare.dart';
 import 'package:flutter_app/common/route_str.dart';
+import 'package:flutter_app/generated/l10n.dart';
 import 'package:flutter_app/widgets/gpaLinear.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:umeng_analytics_plugin/umeng_analytics_plugin.dart';
@@ -38,7 +39,6 @@ class _GPAState extends State<GPA> {
     _passwd = SpUtil.getString(LocalShare.STU_PASSWD);
 
     // 记录有多少人查成绩
-    print("记录查成绩的人数");
     UmengAnalyticsPlugin.event(RouteStr.GPA, label: _uid);
   }
 
@@ -213,7 +213,7 @@ class _GPAState extends State<GPA> {
         backgroundColor: Colors.white,
         centerTitle: true,
         title: Text(
-          '成绩绩点',
+          S.of(context).gpa,
           style: new TextStyle(color: Colors.black),
           textAlign: TextAlign.center,
         ),
@@ -319,7 +319,7 @@ class _GPAState extends State<GPA> {
           height: 60.0 * GPA_res.length,
           child: Column(
             children: <Widget>[
-              ListTile(title: Text("请选择学期")),
+              ListTile(title: Text(S.of(context).semester)),
               Expanded(
                   child: ListView.builder(
                 itemCount: GPA_res.length,

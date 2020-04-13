@@ -5,6 +5,7 @@ import 'package:flustars/flustars.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/common/constUrl.dart';
 import 'package:flutter_app/common/localShare.dart';
+import 'package:flutter_app/common/route_str.dart';
 import 'package:flutter_app/generated/l10n.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -33,9 +34,9 @@ class _SplashPageState extends State<SplashPage> {
     return Timer(Duration(milliseconds: 500), () {
       get().then((value) {
         if (flag != null && flag == true) {
-          Navigator.pushReplacementNamed(context, '/main');
+          Navigator.pushReplacementNamed(context, RouteStr.HOME);
         } else {
-          Navigator.pushReplacementNamed(context, '/login');
+          Navigator.pushReplacementNamed(context, RouteStr.LOGIN);
         }
       });
     });
@@ -44,6 +45,7 @@ class _SplashPageState extends State<SplashPage> {
   _initAsync() async {
     /// App启动时读取Sp数据，需要异步等待Sp初始化完成。
     await SpUtil.getInstance();
+    _initLocale();
     Future.delayed(new Duration(milliseconds: 500));
   }
 
@@ -61,31 +63,22 @@ class _SplashPageState extends State<SplashPage> {
     }
   }
 
-  //version info
-  void localVersion() {
-    var version = SpUtil.getString(LocalShare.VERSION);
-    if (version.length == 0) {
-      Dio().get(Constant.VERSION).then((value) {
-        if (value.statusCode == 200) {
-          SpUtil.putString(
-              LocalShare.VERSION, value.data['info'][0]['version']);
-        }
-      });
-    }
-  }
-
   @override
   void initState() {
     super.initState();
     jumpPage();
     _initAsync();
-    localVersion();
-    _initLanguage();
   }
 
   // 初始化语言
-  Future<void> _initLanguage() {
-    String value = SpUtil.getString(LocalShare.LANGUAGE);
+  Future<void> _initLocale() {
+    String language = SpUtil.getString(LocalShare.LANGUAGE);
+    print("default language:" + language);
+//    print("default language:" + _locale.languageCode);
+    setState(() {
+      if (language == "简体中文") S.load(Locale('zn', 'CN'));
+      if (language == "English") S.load(Locale('en', 'US'));
+    });
   }
 
   @override
@@ -104,9 +97,10 @@ class _SplashPageState extends State<SplashPage> {
             ),
             child: Center(
                 child: Image(
-              image: AssetImage('assets/imgs/logo.png'),
-              width: 150,
-              height: 150,
-            ))));
+                  image: AssetImage('assets/imgs/logo.png'),
+                  width: 150,
+                  height: 150,
+                ))
+        ));
   }
 }

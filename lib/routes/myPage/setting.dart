@@ -1,7 +1,9 @@
 import 'package:flustars/flustars.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/common/localShare.dart';
+import 'package:flutter_app/common/string_file.dart';
 import 'package:flutter_app/generated/l10n.dart';
+import 'package:flutter_app/main.dart';
 import 'package:flutter_app/widgets/dialog.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 
@@ -31,7 +33,8 @@ class _SettingsPageState extends State<SettingsPage> {
     // TODO: implement initState
     super.initState();
     flag = SpUtil.getBool(LocalShare.AUTO_UPDATE, defValue: true);
-//    language = SpUtil.getString(LocalShare.LANGUAGE);
+    language = SpUtil.getString(LocalShare.LANGUAGE, defValue: "简体中文");
+
 //    if (language == "简体中文") S.load(Locale('zn', 'CN'));
 //    if (language == "English") S.load(Locale('en', 'US'));
 //    print(language);
@@ -76,7 +79,7 @@ class _SettingsPageState extends State<SettingsPage> {
                   child: Container(
                     width: 120,
                     height: 120,
-                    child: Image.asset("assets/imgs/core/settings.png"),
+                    child: Image.asset(StringFile.SETTING_PIC),
                   ),
                 ),
                 const SizedBox(height: 20.0),
@@ -86,7 +89,7 @@ class _SettingsPageState extends State<SettingsPage> {
                     style: whiteBoldText,
                   ),
                   subtitle: Text(
-                    language == '' ? "简体中文" : "English",
+                    language,
                     style: greyTExt,
                   ),
                   trailing: Icon(
@@ -106,13 +109,15 @@ class _SettingsPageState extends State<SettingsPage> {
                               selectValue: selectValue,
                               valueList: valueList);
                         }).then((value) {
-                          print(value);
-//                      SpUtil.putString(LocalShare.LANGUAGE, value);
-//                      setState(() {
-//                        if (value == "简体中文") S.load(Locale('zn', 'CN'));
-//                        if (value == "English") S.load(Locale('en', 'US'));
-//                        language = value;
-//                      });
+                      print(value);
+                      if (value != null) {
+                        SpUtil.putString(LocalShare.LANGUAGE, value);
+                        setState(() {
+                          if (value == "简体中文") S.load(Locale('zn', 'CN'));
+                          if (value == "English") S.load(Locale('en', 'US'));
+                          language = value;
+                        });
+                      }
                     });
                   },
                 ),

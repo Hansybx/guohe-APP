@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:flustars/flustars.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/common/route_str.dart';
 import 'package:flutter_app/generated/l10n.dart';
@@ -10,10 +9,11 @@ import 'package:flutter_xupdate/flutter_xupdate.dart';
 import 'package:fluwx/fluwx.dart';
 import 'package:umeng_analytics_plugin/umeng_analytics_plugin.dart';
 
-import 'common/localShare.dart';
 import 'routes/splashPage.dart';
 
 void main() => runApp(MyApp());
+
+ValueChanged<Locale> localeChange;
 
 class MyApp extends StatefulWidget {
   @override
@@ -21,14 +21,21 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  Locale _locale = const Locale('zn', 'CN');
+
   @override
   void initState() {
     super.initState();
 
+    localeChange = (locale) {
+      setState(() {
+        _locale = locale;
+      });
+    };
+
     _initPlatformState();
     _initFluwx();
     _initUpdate();
-
   }
 
   // 加载微信SDK
@@ -93,16 +100,12 @@ class _MyAppState extends State<MyApp> {
     } else {}
   }
 
-
-
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
-      title: '果核Lite',
-      onGenerateRoute: Router.generateRoute,
-      navigatorObservers: [AppAnalysis()],
-      home: SplashPage(),
-      initialRoute: '/',
+      // 去除右上角Debug标签
+      debugShowCheckedModeBanner: false,
+      // 设置语言
       localizationsDelegates: const [
         GlobalMaterialLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
@@ -111,6 +114,21 @@ class _MyAppState extends State<MyApp> {
       ],
       // 讲en设置为第一项,没有适配语言时,英语为首选项
       supportedLocales: S.delegate.supportedLocales,
+      // 设置页面相关信息
+      title: '果核Lite',
+      onGenerateRoute: Router.generateRoute,
+      navigatorObservers: [AppAnalysis()],
+      initialRoute: '/',
+      // 设置主页
+      home: Builder(
+        builder: (BuildContext context) {
+          return Localizations.override(
+            context: context,
+            locale: _locale,
+            child: SplashPage(),
+          );
+        },
+      ),
     );
   }
 }

@@ -26,7 +26,11 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     imageList
       ..add(CachedNetworkImage(
-        placeholder: (context, url) => new CircularProgressIndicator(),
+        placeholder: (context, url) => new Container(
+          width: 80,
+          height: 80,
+          child: new Center(child: new CircularProgressIndicator()),
+        ),
         imageUrl: 'https://pic.downk.cc/item/5e849a81504f4bcb0437649f.jpg',
         fit: BoxFit.fill,
       ))

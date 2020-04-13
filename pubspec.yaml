@@ -36,7 +36,7 @@ dependencies:
   share: ^0.6.3+6
   fl_chart: ^0.8.7
   url_launcher: ^5.4.2
-  cached_network_image: ^2.0.0
+  cached_network_image: ^2.1.0+1
   sy_flutter_qiniu_storage: ^0.1.4
   umeng_analytics_plugin: ^1.0.2
   fluwx: ^2.0.2

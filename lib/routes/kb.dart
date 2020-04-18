@@ -5,8 +5,8 @@ import 'dart:ui';
 import 'package:dio/dio.dart';
 import 'package:flustars/flustars.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app/common/constUrl.dart';
-import 'package:flutter_app/common/localShare.dart';
+import 'package:flutter_app/common/apis.dart';
+import 'package:flutter_app/common/sp_file.dart';
 import 'package:flutter_app/generated/l10n.dart';
 import 'package:flutter_beautiful_popup/main.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
@@ -504,10 +504,10 @@ class _SchedulePageState extends State<SchedulePage> {
       getSchedule();
     }
 
-    bool flag = SpUtil.getBool(LocalShare.AUTO_UPDATE, defValue: true);
-    if (flag) {
-      if (Platform.isAndroid) FlutterXUpdate.checkUpdate(url: Constant.UPDATE);
-    }
+//    bool flag = SpUtil.getBool(LocalShare.AUTO_UPDATE, defValue: true);
+//    if (flag) {
+//      if (Platform.isAndroid) FlutterXUpdate.checkUpdate(url: Constant.UPDATE);
+//    }
   }
 
   @override

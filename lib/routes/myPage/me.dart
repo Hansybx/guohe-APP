@@ -2,7 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flustars/flustars.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app/common/localShare.dart';
+import 'package:flutter_app/common/sp_file.dart';
 import 'package:flutter_app/common/route_str.dart';
 import 'package:flutter_app/common/string_file.dart';
 import 'package:flutter_app/generated/l10n.dart';

@@ -1,10 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flustars/flustars.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app/common/localShare.dart';
 import 'package:flutter_app/generated/l10n.dart';
-import 'package:flutter_app/service/homeServices.dart';
+import 'package:flutter_app/service/home_services.dart';
 import 'package:flutter_app/viewModel/itemVM.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 

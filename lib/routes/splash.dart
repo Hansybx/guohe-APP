@@ -3,8 +3,8 @@ import 'dart:async';
 import 'package:dio/dio.dart';
 import 'package:flustars/flustars.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app/common/constUrl.dart';
-import 'package:flutter_app/common/localShare.dart';
+import 'package:flutter_app/common/apis.dart';
+import 'package:flutter_app/common/sp_file.dart';
 import 'package:flutter_app/common/route_str.dart';
 import 'package:flutter_app/generated/l10n.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -84,23 +84,10 @@ class _SplashPageState extends State<SplashPage> {
   @override
   Widget build(BuildContext context) {
     return Container(
-        height: 200,
-        width: 200,
-        color: Colors.white,
-        child: Container(
-            height: MediaQuery.of(context).size.height,
-            width: MediaQuery.of(context).size.width,
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                  begin: Alignment.bottomLeft,
-                  colors: [Colors.blue, Colors.lightBlueAccent]),
-            ),
-            child: Center(
-                child: Image(
-                  image: AssetImage('assets/imgs/logo.png'),
-                  width: 150,
-                  height: 150,
-                ))
-        ));
+      child: Image(
+        image: AssetImage('assets/imgs/splash.png'),
+        fit: BoxFit.fill,
+      ),
+    );
   }
 }

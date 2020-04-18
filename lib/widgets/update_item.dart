@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app/common/constUrl.dart';
+import 'package:flutter_app/common/apis.dart';
 import 'package:flutter_app/generated/l10n.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:flutter_xupdate/flutter_xupdate.dart';

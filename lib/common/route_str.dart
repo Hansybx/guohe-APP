@@ -1,10 +1,10 @@
 // 存放路由字符串
 import 'package:flutter/material.dart';
-import 'package:flutter_app/routes/homePage/emptyClassroom.dart';
+import 'package:flutter_app/routes/homePage/classroom.dart';
 import 'package:flutter_app/routes/homePage/gpa.dart';
 import 'package:flutter_app/routes/homePage/pe.dart';
-import 'package:flutter_app/routes/homePage/schoolBus.dart';
-import 'package:flutter_app/routes/homePage/shoolSystem.dart';
+import 'package:flutter_app/routes/homePage/bus.dart';
+import 'package:flutter_app/routes/homePage/system.dart';
 import 'package:flutter_app/routes/login.dart';
 import 'package:flutter_app/routes/myPage/about.dart';
 import 'package:flutter_app/routes/myPage/feedback.dart';

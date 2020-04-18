@@ -1,6 +1,6 @@
 import 'package:flustars/flustars.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app/common/localShare.dart';
+import 'package:flutter_app/common/sp_file.dart';
 import 'package:flutter_app/common/string_file.dart';
 import 'package:flutter_app/generated/l10n.dart';
 import 'package:flutter_app/main.dart';

@@ -3,13 +3,13 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/common/route_str.dart';
 import 'package:flutter_app/generated/l10n.dart';
-import 'package:flutter_app/utils/AppAnalysis.dart';
+import 'package:flutter_app/service/AppAnalysis.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_xupdate/flutter_xupdate.dart';
 import 'package:fluwx/fluwx.dart';
 import 'package:umeng_analytics_plugin/umeng_analytics_plugin.dart';
 
-import 'routes/splashPage.dart';
+import 'routes/splash.dart';
 
 void main() => runApp(MyApp());
 
@@ -35,7 +35,7 @@ class _MyAppState extends State<MyApp> {
 
     _initPlatformState();
     _initFluwx();
-    _initUpdate();
+//    _initUpdate();
   }
 
   // 加载微信SDK

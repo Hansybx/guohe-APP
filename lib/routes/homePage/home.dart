@@ -56,15 +56,15 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Colors.white,
-        appBar: AppBar(
-          elevation: 0,
-          centerTitle: true,
-          backgroundColor: Colors.white,
-          title: Text(
-            S.of(context).discover,
-            style: new TextStyle(color: Colors.black),
-          ),
-        ),
+//        appBar: AppBar(
+//          elevation: 0,
+//          centerTitle: true,
+//          backgroundColor: Colors.white,
+//          title: Text(
+//            S.of(context).discover,
+//            style: new TextStyle(color: Colors.black),
+//          ),
+//        ),
         body: new OrientationBuilder(builder: (context, ori) {
           //判断屏幕宽度
           if (MediaQuery.of(context).size.width > 600) {
@@ -75,6 +75,7 @@ class _HomePageState extends State<HomePage> {
           return SingleChildScrollView(
             child: Column(
               children: <Widget>[
+                SizedBox(height: 50),
                 swiper(),
                 ListTile(
                   title: Text(S.of(context).campus),
@@ -84,7 +85,7 @@ class _HomePageState extends State<HomePage> {
                   physics: new NeverScrollableScrollPhysics(),
                   crossAxisCount: 4,
                   padding: EdgeInsets.symmetric(vertical: 0),
-                  children: eduServiceList
+                  children: getEduServiceList(context)
                       .map((item) => ServiceItem(widget: item))
                       .toList(),
                 ),
@@ -97,7 +98,7 @@ class _HomePageState extends State<HomePage> {
                   physics: new NeverScrollableScrollPhysics(),
                   crossAxisCount: 4,
                   padding: EdgeInsets.symmetric(vertical: 0),
-                  children: eduSystemList
+                  children: getSystemList(context)
                       .map((item) => ServiceItem(widget: item))
                       .toList(),
                 ),

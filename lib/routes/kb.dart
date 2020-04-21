@@ -504,10 +504,10 @@ class _SchedulePageState extends State<SchedulePage> {
       getSchedule();
     }
 
-//    bool flag = SpUtil.getBool(LocalShare.AUTO_UPDATE, defValue: true);
-//    if (flag) {
-//      if (Platform.isAndroid) FlutterXUpdate.checkUpdate(url: Constant.UPDATE);
-//    }
+    bool flag = SpUtil.getBool(LocalShare.AUTO_UPDATE, defValue: true);
+    if (flag) {
+      if (Platform.isAndroid) FlutterXUpdate.checkUpdate(url: Constant.UPDATE);
+    }
   }
 
   @override

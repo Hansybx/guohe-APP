@@ -78,7 +78,7 @@ class _MyPageState extends State<MyPage> {
               new Container(
                 color: Colors.white,
                 child: ListTile(
-                  title: new Text(S.of(context).community),
+                  title: new Text(S.of(context).feedback),
                   leading: Icon(AntDesign.form, color: Colors.purple),
                   trailing: Icon(Icons.keyboard_arrow_right),
                   onTap: () {

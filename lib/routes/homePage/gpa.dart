@@ -6,7 +6,7 @@ import 'package:flutter_app/common/apis.dart';
 import 'package:flutter_app/common/sp_file.dart';
 import 'package:flutter_app/common/route_str.dart';
 import 'package:flutter_app/generated/l10n.dart';
-import 'package:flutter_app/widgets/gpaLinear.dart';
+import 'package:flutter_app/widgets/gpa_linear.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:umeng_analytics_plugin/umeng_analytics_plugin.dart';
 

@@ -269,6 +269,87 @@ class S {
       args: [],
     );
   }
+
+  String get sport {
+    return Intl.message(
+      'Sport/Club',
+      name: 'sport',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get calendar {
+    return Intl.message(
+      'Calendar',
+      name: 'calendar',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get vpn {
+    return Intl.message(
+      'VPN',
+      name: 'vpn',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get education_system {
+    return Intl.message(
+      'Education',
+      name: 'education_system',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get info_system {
+    return Intl.message(
+      'Information',
+      name: 'info_system',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get aoLan_system {
+    return Intl.message(
+      'AoLan',
+      name: 'aoLan_system',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get sports_system {
+    return Intl.message(
+      'Sports',
+      name: 'sports_system',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get lab_system {
+    return Intl.message(
+      'Lab',
+      name: 'lab_system',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get graduation_system {
+    return Intl.message(
+      'Graduation',
+      name: 'graduation_system',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

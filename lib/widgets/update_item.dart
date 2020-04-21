@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +21,6 @@ class UpdateListTileState extends State<UpdateListTile> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     getVersion();
   }
@@ -30,10 +30,13 @@ class UpdateListTileState extends State<UpdateListTile> {
     Response response = await new Dio().get(Constant.UPDATE);
     int versionCode =
         int.parse(jsonDecode(response.data)['VersionCode'].toString());
-    print(versionCode);
-    print(int.parse(buildNumber));
     if (versionCode > int.parse(buildNumber)) {
-      FlutterXUpdate.checkUpdate(url: Constant.UPDATE);
+      //todo ios的升级判断，跳转至app store
+      if (Platform.isAndroid) {
+        FlutterXUpdate.checkUpdate(url: Constant.UPDATE);
+      }else if(Platform.isIOS){
+        print("跳转至app store");
+      }
     } else {
       Toast.show("当前已是最新版本" + buildNumber, context);
     }

@@ -35,7 +35,7 @@ class _MyAppState extends State<MyApp> {
 
     _initPlatformState();
     _initFluwx();
-//    _initUpdate();
+    _initUpdate();
   }
 
   // 加载微信SDK
@@ -88,9 +88,8 @@ class _MyAppState extends State<MyApp> {
 
               ///在下载过程中，如果点击了取消的话，是否弹出切换下载方式的重试提示弹窗
               enableRetry: false)
-          .then((value) {
-//        updateMessage("初始化成功: $value");
-      }).catchError((error) {
+          .then((value) {})
+          .catchError((error) {
         print(error);
       });
       FlutterXUpdate.setUpdateHandler(

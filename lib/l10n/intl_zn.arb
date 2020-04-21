@@ -25,5 +25,14 @@
   "auto_update": "启动时检查更新",
   "version": "当前版本",
   "account": "切换账号",
-  "language": "设置语言"
+  "language": "设置语言",
+  "sport": "早操俱乐部",
+  "calendar": "校历",
+  "vpn": "校园VPN",
+  "education_system": "教务系统",
+  "info_system": "信息门户",
+  "aoLan_system": "奥兰系统",
+  "sports_system": "体育系统",
+  "lab_system": "实验系统",
+  "graduation_system": "毕业系统"
 }

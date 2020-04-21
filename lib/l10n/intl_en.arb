@@ -25,5 +25,14 @@
   "auto_update": "Auto-Update Guohe",
   "version": "Version is :",
   "account": "Switch Account",
-  "language": "Language"
+  "language": "Language",
+  "sport": "Sport/Club",
+  "calendar": "Calendar",
+  "vpn": "VPN",
+  "education_system": "Education",
+  "info_system": "Information",
+  "aoLan_system": "AoLan",
+  "sports_system": "Sports",
+  "lab_system": "Lab",
+  "graduation_system": "Graduation"
 }

@@ -40,6 +40,8 @@ class _BrowserState extends State<Browser> {
       withJavascript: true,
       withZoom: true,
       displayZoomControls: true,
+      useWideViewPort: true,
+
       withOverviewMode: true,
     );
   }

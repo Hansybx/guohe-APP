@@ -53,6 +53,7 @@ class _GPAState extends State<GPA> {
         GPA_res.clear();
         GPA_res.addAll(response.data['info']);
       } else if (response.data['code'] == 402) {
+        GPA_res.addAll(response.data['info']);
         print('pingjiao');
       }
     } else {
@@ -109,6 +110,7 @@ class _GPAState extends State<GPA> {
         ScoreRes.clear();
         ScoreRes.addAll(response.data['info']);
       } else if (response.data['code'] == 402) {
+        ScoreRes.addAll(response.data['info']);
         showDialog(
             context: context,
             builder: (context) {

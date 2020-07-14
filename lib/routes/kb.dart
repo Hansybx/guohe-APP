@@ -370,8 +370,8 @@ class _SchedulePageState extends State<SchedulePage> {
                     child: Swiper(
                       index: 0,
                       itemCount: temp.length,
-                      itemWidth: MediaQuery.of(context).size.width,
-                      itemHeight: MediaQuery.of(context).size.height,
+                      itemWidth: MediaQuery.of(context).size.width/11*9,
+                      itemHeight: MediaQuery.of(context).size.height/7*5,
                       layout: SwiperLayout.STACK,
                       pagination: SwiperPagination(),
                       itemBuilder: (BuildContext context, int index) {

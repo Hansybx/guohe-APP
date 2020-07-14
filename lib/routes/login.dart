@@ -54,10 +54,26 @@ class _LoginState extends State<Login> {
         "password": passwd,
       });
       await Dio().post(Constant.CALENDAR, data: formData).then((res) {
-        print('calendar');
-        List<String> temp = List<String>.from(res.data['info']['allYear']);
-        SpUtil.putStringList(LocalShare.ALL_YEAR, temp);
-        SpUtil.putInt(LocalShare.SERVER_WEEK, res.data['info']['weekNum']);
+        print(res);
+        if(res.data["code"] == 200){
+          print('calendar');
+          List<String> temp = List<String>.from(res.data['info']['allYear']);
+          SpUtil.putStringList(LocalShare.ALL_YEAR, temp);
+          SpUtil.putInt(LocalShare.SERVER_WEEK, res.data['info']['weekNum']);
+        }else{
+          Navigator.of(context).pop();
+          showDialog(
+              context: context,
+              child: AlertDialog(
+                content: Text("账号密码错误"),
+                actions: <Widget>[
+                  FlatButton(
+                    child: Text("确定"),
+                    onPressed: () => Navigator.of(context).pop(),
+                  )
+                ],
+              ));
+        }
       });
     }
   }

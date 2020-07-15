@@ -15,42 +15,33 @@ dependencies:
   flutter_localizations:
     sdk: flutter
 
-  awesome_dialog: ^0.1.3
+  awesome_dialog: ^1.1.3
 
   cupertino_icons: ^0.1.3
-  cached_network_image: ^2.1.0+1
-
+  cached_network_image: ^2.2.0+1
   dio: 3.0.9
-
-  english_words: ^3.1.0
+  english_words: ^3.1.5
   extended_image: ^0.9.0
-
   flutter_beautiful_popup: ^1.5.0
-  flutter_launcher_icons: ^0.7.4
+  flutter_launcher_icons: ^0.7.5
   flutter_spinkit: ^4.1.2+1
-  flutter_webview_plugin: ^0.3.10+1
-  flutter_icons: ^1.0.0+1
+  flutter_webview_plugin: ^0.3.11
+  flutter_icons: ^1.1.0
   flutter_swiper: ^1.1.6
   flutter_xupdate: ^0.0.3
-  flustars: ^0.2.6+1
-  fluwx: ^2.0.2
-  fl_chart: ^0.8.7
-
-  image_picker: ^0.6.4
-
-  package_info: ^0.4.0+14
-  path_provider: ^1.6.5
-
-  shared_preferences: ^0.5.6+3
-  share: ^0.6.3+6
-  sqflite: ^1.3.0
-  sy_flutter_qiniu_storage: ^0.1.4
-
-
+  flustars: ^0.3.3
+  fluwx: ^2.2.0
+  fl_chart: ^0.10.1
+  image_picker: ^0.6.7+4
+  package_info: ^0.4.1
+  path_provider: ^1.6.11
+  shared_preferences: ^0.5.8
+  share: ^0.6.4+3
+  sqflite: ^1.3.1
+  sy_flutter_qiniu_storage: ^0.2.1
   toast: ^0.1.5
-
-  umeng_analytics_plugin: ^1.0.2
-  url_launcher: ^5.4.2
+  umeng_analytics_plugin: ^1.0.3
+  url_launcher: ^5.5.0
 
 dev_dependencies:
   flutter_test:

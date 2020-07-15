@@ -99,14 +99,9 @@ class _GPALinearState extends State<GPALinear> {
           colors: gradientColors,
           barWidth: 5,
           isStrokeCapRound: true,
-          dotData: const FlDotData(
+          dotData: FlDotData(
             show: true,
           ),
-//          belowBarData: BarAreaData(
-//            show: true,
-//            colors:
-//                gradientColors.map((color) => color.withOpacity(0.3)).toList(),
-//          ),
         ),
       ],
     );

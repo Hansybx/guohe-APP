@@ -33,7 +33,7 @@ class _MyAppState extends State<MyApp> {
       });
     };
 
-    _initPlatformState();
+    _initUmeng();
     _initFluwx();
     _initUpdate();
   }
@@ -51,8 +51,7 @@ class _MyAppState extends State<MyApp> {
   }
 
   // 初始化友盟统计
-  // todo 安卓端还有问题，之后完善
-  Future<void> _initPlatformState() async {
+  Future<void> _initUmeng() async {
     var result = await UmengAnalyticsPlugin.init(
         androidKey: '5e8bde32167eddb52f000652',
         iosKey: '5e8b2789570df3bc8e0000a3',

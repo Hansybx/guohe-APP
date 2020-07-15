@@ -1,33 +1,25 @@
 PODS:
   - Flutter (1.0.0)
-  - flutter_plugin_android_lifecycle (0.0.1):
-    - Flutter
   - flutter_webview_plugin (0.0.1):
-    - Flutter
-  - flutter_xupdate (0.0.1):
     - Flutter
   - fluwx (0.0.1):
     - Flutter
-    - WechatOpenSDK (= 1.8.6.2)
+    - WechatOpenSDK (= 1.8.7.1)
   - FMDB (2.7.5):
     - FMDB/standard (= 2.7.5)
   - FMDB/standard (2.7.5)
+  - HappyDNS (0.3.17)
   - image_picker (0.0.1):
     - Flutter
   - package_info (0.0.1):
     - Flutter
   - path_provider (0.0.1):
     - Flutter
-  - path_provider_macos (0.0.1):
-    - Flutter
-  - Qiniu (7.3.2)
-  - share (0.5.2):
+  - Qiniu (7.4.1):
+    - HappyDNS (~> 0.3.16)
+  - share (0.0.1):
     - Flutter
   - shared_preferences (0.0.1):
-    - Flutter
-  - shared_preferences_macos (0.0.1):
-    - Flutter
-  - shared_preferences_web (0.0.1):
     - Flutter
   - sqflite (0.0.1):
     - Flutter
@@ -41,36 +33,26 @@ PODS:
   - UMengAnalytics-NO-IDFA (4.2.5)
   - url_launcher (0.0.1):
     - Flutter
-  - url_launcher_macos (0.0.1):
-    - Flutter
-  - url_launcher_web (0.0.1):
-    - Flutter
-  - WechatOpenSDK (1.8.6.2)
+  - WechatOpenSDK (1.8.7.1)
 
 DEPENDENCIES:
   - Flutter (from `Flutter`)
-  - flutter_plugin_android_lifecycle (from `.symlinks/plugins/flutter_plugin_android_lifecycle/ios`)
   - flutter_webview_plugin (from `.symlinks/plugins/flutter_webview_plugin/ios`)
-  - flutter_xupdate (from `.symlinks/plugins/flutter_xupdate/ios`)
   - fluwx (from `.symlinks/plugins/fluwx/ios`)
   - image_picker (from `.symlinks/plugins/image_picker/ios`)
   - package_info (from `.symlinks/plugins/package_info/ios`)
   - path_provider (from `.symlinks/plugins/path_provider/ios`)
-  - path_provider_macos (from `.symlinks/plugins/path_provider_macos/ios`)
   - share (from `.symlinks/plugins/share/ios`)
   - shared_preferences (from `.symlinks/plugins/shared_preferences/ios`)
-  - shared_preferences_macos (from `.symlinks/plugins/shared_preferences_macos/ios`)
-  - shared_preferences_web (from `.symlinks/plugins/shared_preferences_web/ios`)
   - sqflite (from `.symlinks/plugins/sqflite/ios`)
   - sy_flutter_qiniu_storage (from `.symlinks/plugins/sy_flutter_qiniu_storage/ios`)
   - umeng_analytics_plugin (from `.symlinks/plugins/umeng_analytics_plugin/ios`)
   - url_launcher (from `.symlinks/plugins/url_launcher/ios`)
-  - url_launcher_macos (from `.symlinks/plugins/url_launcher_macos/ios`)
-  - url_launcher_web (from `.symlinks/plugins/url_launcher_web/ios`)
 
 SPEC REPOS:
   trunk:
     - FMDB
+    - HappyDNS
     - Qiniu
     - UMengAnalytics-NO-IDFA
     - WechatOpenSDK
@@ -78,12 +60,8 @@ SPEC REPOS:
 EXTERNAL SOURCES:
   Flutter:
     :path: Flutter
-  flutter_plugin_android_lifecycle:
-    :path: ".symlinks/plugins/flutter_plugin_android_lifecycle/ios"
   flutter_webview_plugin:
     :path: ".symlinks/plugins/flutter_webview_plugin/ios"
-  flutter_xupdate:
-    :path: ".symlinks/plugins/flutter_xupdate/ios"
   fluwx:
     :path: ".symlinks/plugins/fluwx/ios"
   image_picker:
@@ -92,16 +70,10 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/package_info/ios"
   path_provider:
     :path: ".symlinks/plugins/path_provider/ios"
-  path_provider_macos:
-    :path: ".symlinks/plugins/path_provider_macos/ios"
   share:
     :path: ".symlinks/plugins/share/ios"
   shared_preferences:
     :path: ".symlinks/plugins/shared_preferences/ios"
-  shared_preferences_macos:
-    :path: ".symlinks/plugins/shared_preferences_macos/ios"
-  shared_preferences_web:
-    :path: ".symlinks/plugins/shared_preferences_web/ios"
   sqflite:
     :path: ".symlinks/plugins/sqflite/ios"
   sy_flutter_qiniu_storage:
@@ -110,36 +82,26 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/umeng_analytics_plugin/ios"
   url_launcher:
     :path: ".symlinks/plugins/url_launcher/ios"
-  url_launcher_macos:
-    :path: ".symlinks/plugins/url_launcher_macos/ios"
-  url_launcher_web:
-    :path: ".symlinks/plugins/url_launcher_web/ios"
 
 SPEC CHECKSUMS:
   Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
-  flutter_plugin_android_lifecycle: 47de533a02850f070f5696a623995e93eddcdb9b
   flutter_webview_plugin: ed9e8a6a96baf0c867e90e1bce2673913eeac694
-  flutter_xupdate: c7c62e59874a8d7dde645563cd3c458fdfa1830a
-  fluwx: 03e098a7284c556d7b197e0b82984eb0b25183af
+  fluwx: 07a55ed66bf3a4961e836a2a411b02dcada32902
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
-  image_picker: e3eacd46b94694dde7cf2705955cece853aa1a8f
-  package_info: 48b108e75b8802c2d5e126f208ef540561c98aef
-  path_provider: fb74bd0465e96b594bb3b5088ee4a4e7bb1f2a9d
-  path_provider_macos: f760a3c5b04357c380e2fddb6f9db6f3015897e0
-  Qiniu: a248627a07bb8a39c6a11ae8059b7161c363539b
-  share: bae0a282aab4483288913fc4dc0b935d4b491f2e
-  shared_preferences: 430726339841afefe5142b9c1f50cb6bd7793e01
-  shared_preferences_macos: f3f29b71ccbb56bf40c9dd6396c9acf15e214087
-  shared_preferences_web: 141cce0c3ed1a1c5bf2a0e44f52d31eeb66e5ea9
+  HappyDNS: 848ef73e24f2b0e2752064223ce2dc0dd88900ea
+  image_picker: 9c3312491f862b28d21ecd8fdf0ee14e601b3f09
+  package_info: 873975fc26034f0b863a300ad47e7f1ac6c7ec62
+  path_provider: abfe2b5c733d04e238b0d8691db0cfd63a27a93c
+  Qiniu: eec0930c1e403ec22f0c472d31f7c4a9ed45a95b
+  share: 0b2c3e82132f5888bccca3351c504d0003b3b410
+  shared_preferences: af6bfa751691cdc24be3045c43ec037377ada40d
   sqflite: 4001a31ff81d210346b500c55b17f4d6c7589dd0
   sy_flutter_qiniu_storage: 3a33fb552bb77f4777d261469111f52ad35307fb
   umeng_analytics_plugin: 7035dfb8c5636e50429ab935125e5a3f0d23e72e
   UMengAnalytics-NO-IDFA: 16666e32edce5be44ae5b14aaaa7f3582e09d6ab
-  url_launcher: a1c0cc845906122c4784c542523d8cacbded5626
-  url_launcher_macos: fd7894421cd39320dce5f292fc99ea9270b2a313
-  url_launcher_web: e5527357f037c87560776e36436bf2b0288b965c
-  WechatOpenSDK: 8b3ba4239193d1112205c139c94e21934e8f369a
+  url_launcher: 6fef411d543ceb26efce54b05a0a40bfd74cbbef
+  WechatOpenSDK: 6a4d1436c15b3b5fe2a0bd383f3046010186da44
 
-PODFILE CHECKSUM: 083258d7f5e80b42ea9bfee905fe93049bc04c64
+PODFILE CHECKSUM: aafe91acc616949ddb318b77800a7f51bffa2a4c
 
-COCOAPODS: 1.8.3
+COCOAPODS: 1.9.3

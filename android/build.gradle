@@ -3,14 +3,12 @@ buildscript {
     repositories {
         google()
         jcenter()
-//        maven { url 'https://maven.aliyun.com/repository/jcenter' }
-//        maven { url 'http://maven.aliyun.com/nexus/content/groups/public' }
     }
 
     dependencies {
         classpath 'com.android.tools.build:gradle:4.0.0'
-        classpath 'com.google.gms:google-services:4.3.3'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+
     }
 }
 
@@ -18,8 +16,6 @@ allprojects {
     repositories {
         google()
         jcenter()
-//        maven { url 'https://maven.aliyun.com/repository/jcenter' }
-//        maven { url 'http://maven.aliyun.com/nexus/content/groups/public' }
     }
 }
 

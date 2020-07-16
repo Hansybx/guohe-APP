@@ -125,7 +125,7 @@ class ProfileState extends State<Profile> {
           '.' +
           image.path.split('.').last;
       //上传文件
-      bool result = await syStorage.upload(image.path, token, key);
+      var result = await syStorage.upload(image.path, token, key);
       //true 上传成功，false失败
       if (result == true) {
         setState(() {

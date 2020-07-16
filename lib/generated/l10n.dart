@@ -8,18 +8,24 @@ import 'intl/messages_all.dart';
 // Made by Localizely
 // **************************************************************************
 
+// ignore_for_file: non_constant_identifier_names, lines_longer_than_80_chars
+
 class S {
   S();
+  
+  static S current;
   
   static const AppLocalizationDelegate delegate =
     AppLocalizationDelegate();
 
   static Future<S> load(Locale locale) {
-    final String name = (locale.countryCode?.isEmpty ?? false) ? locale.languageCode : locale.toString();
-    final String localeName = Intl.canonicalizedLocale(name);
+    final name = (locale.countryCode?.isEmpty ?? false) ? locale.languageCode : locale.toString();
+    final localeName = Intl.canonicalizedLocale(name); 
     return initializeMessages(localeName).then((_) {
       Intl.defaultLocale = localeName;
-      return S();
+      S.current = S();
+      
+      return S.current;
     });
   } 
 
@@ -27,6 +33,7 @@ class S {
     return Localizations.of<S>(context, S);
   }
 
+  /// `Discover`
   String get discover {
     return Intl.message(
       'Discover',
@@ -36,6 +43,7 @@ class S {
     );
   }
 
+  /// `System`
   String get system {
     return Intl.message(
       'System',
@@ -45,6 +53,7 @@ class S {
     );
   }
 
+  /// `Campus`
   String get campus {
     return Intl.message(
       'Campus',
@@ -54,6 +63,7 @@ class S {
     );
   }
 
+  /// `Schedule`
   String get schedule {
     return Intl.message(
       'Schedule',
@@ -63,6 +73,7 @@ class S {
     );
   }
 
+  /// `Me`
   String get me {
     return Intl.message(
       'Me',
@@ -72,6 +83,7 @@ class S {
     );
   }
 
+  /// `Loading, please wait……`
   String get loading {
     return Intl.message(
       'Loading, please wait……',
@@ -81,6 +93,7 @@ class S {
     );
   }
 
+  /// `Classroom`
   String get classroom {
     return Intl.message(
       'Classroom',
@@ -90,6 +103,7 @@ class S {
     );
   }
 
+  /// `GPA`
   String get gpa {
     return Intl.message(
       'GPA',
@@ -99,6 +113,7 @@ class S {
     );
   }
 
+  /// `Select the semester`
   String get semester {
     return Intl.message(
       'Select the semester',
@@ -108,6 +123,7 @@ class S {
     );
   }
 
+  /// `Bus`
   String get bus {
     return Intl.message(
       'Bus',
@@ -117,6 +133,7 @@ class S {
     );
   }
 
+  /// `Mon`
   String get mon {
     return Intl.message(
       'Mon',
@@ -126,6 +143,7 @@ class S {
     );
   }
 
+  /// `Tue`
   String get tue {
     return Intl.message(
       'Tue',
@@ -135,6 +153,7 @@ class S {
     );
   }
 
+  /// `Wen`
   String get wen {
     return Intl.message(
       'Wen',
@@ -144,6 +163,7 @@ class S {
     );
   }
 
+  /// `Thus`
   String get thus {
     return Intl.message(
       'Thus',
@@ -153,6 +173,7 @@ class S {
     );
   }
 
+  /// `Fri`
   String get fri {
     return Intl.message(
       'Fri',
@@ -162,6 +183,7 @@ class S {
     );
   }
 
+  /// `Sat`
   String get sat {
     return Intl.message(
       'Sat',
@@ -171,6 +193,7 @@ class S {
     );
   }
 
+  /// `Sun`
   String get sun {
     return Intl.message(
       'Sun',
@@ -180,6 +203,7 @@ class S {
     );
   }
 
+  /// `About`
   String get about {
     return Intl.message(
       'About',
@@ -189,6 +213,7 @@ class S {
     );
   }
 
+  /// `Feedback`
   String get feedback {
     return Intl.message(
       'Feedback',
@@ -198,6 +223,7 @@ class S {
     );
   }
 
+  /// `Community`
   String get community {
     return Intl.message(
       'Community',
@@ -207,6 +233,7 @@ class S {
     );
   }
 
+  /// `Share`
   String get share {
     return Intl.message(
       'Share',
@@ -216,6 +243,7 @@ class S {
     );
   }
 
+  /// `Setting`
   String get setting {
     return Intl.message(
       'Setting',
@@ -225,6 +253,7 @@ class S {
     );
   }
 
+  /// `Check for Updates`
   String get update {
     return Intl.message(
       'Check for Updates',
@@ -234,6 +263,7 @@ class S {
     );
   }
 
+  /// `Auto-Update Guohe`
   String get auto_update {
     return Intl.message(
       'Auto-Update Guohe',
@@ -243,6 +273,7 @@ class S {
     );
   }
 
+  /// `Version is :`
   String get version {
     return Intl.message(
       'Version is :',
@@ -252,6 +283,7 @@ class S {
     );
   }
 
+  /// `Switch Account`
   String get account {
     return Intl.message(
       'Switch Account',
@@ -261,6 +293,7 @@ class S {
     );
   }
 
+  /// `Language`
   String get language {
     return Intl.message(
       'Language',
@@ -270,6 +303,7 @@ class S {
     );
   }
 
+  /// `Sport/Club`
   String get sport {
     return Intl.message(
       'Sport/Club',
@@ -279,6 +313,7 @@ class S {
     );
   }
 
+  /// `Calendar`
   String get calendar {
     return Intl.message(
       'Calendar',
@@ -288,6 +323,7 @@ class S {
     );
   }
 
+  /// `VPN`
   String get vpn {
     return Intl.message(
       'VPN',
@@ -297,6 +333,7 @@ class S {
     );
   }
 
+  /// `Education`
   String get education_system {
     return Intl.message(
       'Education',
@@ -306,6 +343,7 @@ class S {
     );
   }
 
+  /// `Information`
   String get info_system {
     return Intl.message(
       'Information',
@@ -315,6 +353,7 @@ class S {
     );
   }
 
+  /// `AoLan`
   String get aoLan_system {
     return Intl.message(
       'AoLan',
@@ -324,6 +363,7 @@ class S {
     );
   }
 
+  /// `Sports`
   String get sports_system {
     return Intl.message(
       'Sports',
@@ -333,6 +373,7 @@ class S {
     );
   }
 
+  /// `Lab`
   String get lab_system {
     return Intl.message(
       'Lab',
@@ -342,6 +383,7 @@ class S {
     );
   }
 
+  /// `Graduation`
   String get graduation_system {
     return Intl.message(
       'Graduation',
@@ -357,7 +399,8 @@ class AppLocalizationDelegate extends LocalizationsDelegate<S> {
 
   List<Locale> get supportedLocales {
     return const <Locale>[
-      Locale.fromSubtags(languageCode: 'en'), Locale.fromSubtags(languageCode: 'zn'),
+      Locale.fromSubtags(languageCode: 'en'),
+      Locale.fromSubtags(languageCode: 'zn'),
     ];
   }
 
@@ -370,7 +413,7 @@ class AppLocalizationDelegate extends LocalizationsDelegate<S> {
 
   bool _isSupported(Locale locale) {
     if (locale != null) {
-      for (Locale supportedLocale in supportedLocales) {
+      for (var supportedLocale in supportedLocales) {
         if (supportedLocale.languageCode == locale.languageCode) {
           return true;
         }

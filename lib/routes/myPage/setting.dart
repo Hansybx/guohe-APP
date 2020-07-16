@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/common/sp_file.dart';
 import 'package:flutter_app/common/string_file.dart';
 import 'package:flutter_app/generated/l10n.dart';
-import 'package:flutter_app/main.dart';
 import 'package:flutter_app/widgets/dialog.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 
@@ -109,7 +108,6 @@ class _SettingsPageState extends State<SettingsPage> {
                               selectValue: selectValue,
                               valueList: valueList);
                         }).then((value) {
-                      print(value);
                       if (value != null) {
                         SpUtil.putString(LocalShare.LANGUAGE, value);
                         setState(() {

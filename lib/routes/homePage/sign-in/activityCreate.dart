@@ -260,10 +260,9 @@ class _ActivityCreateState extends State<ActivityCreate> {
                           },
                           validator: (v) {
                             bool flag;
-                            double v_num;
                             try {
                               flag = true;
-                              v_num = double.parse(v);
+                              double v_num = double.parse(v);
                             } catch (e) {
                               flag = false;
                             }

@@ -33,6 +33,7 @@ dependencies:
   fluwx: ^2.2.0
   fl_chart: ^0.10.1
   image_picker: ^0.6.7+4
+  location: ^3.0.0
   package_info: ^0.4.1
   path_provider: ^1.6.11
   shared_preferences: ^0.5.8

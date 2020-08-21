@@ -34,5 +34,6 @@
   "aoLan_system": "奥兰系统",
   "sports_system": "体育系统",
   "lab_system": "实验系统",
-  "graduation_system": "毕业系统"
+  "graduation_system": "毕业系统",
+  "sign_in_system":"签到"
 }

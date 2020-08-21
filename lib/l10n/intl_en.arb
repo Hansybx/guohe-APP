@@ -34,5 +34,6 @@
   "aoLan_system": "AoLan",
   "sports_system": "Sports",
   "lab_system": "Lab",
-  "graduation_system": "Graduation"
+  "graduation_system": "Graduation",
+  "sign_in_system":"Sign In"
 }

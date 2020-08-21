@@ -392,6 +392,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Sign In`
+  String get sign_in_system {
+    return Intl.message(
+      'Sign In',
+      name: 'sign_in_system',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

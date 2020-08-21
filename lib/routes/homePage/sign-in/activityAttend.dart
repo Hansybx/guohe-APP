@@ -46,26 +46,28 @@ class _ActivityAttendState extends State<ActivityAttend> {
       _longitude = _locationData.longitude;
       _latitude = _locationData.latitude;
     });
-    print(_locationData.longitude);
-    print(_locationData.latitude);
+
     print('location get');
   }
 
   Future<void> attendCheck(BuildContext context) async {
     if (_checkboxInAttend) {
-      realPosition();
+      realPosition().then((value) => attend(context));
     } else {
       setState(() {
         _longitude = 0.0;
         _latitude = 0.0;
       });
+      attend(context);
     }
     showDialog(
         context: context,
         builder: (context) {
-          return LoadingDialog(content: "创建中，请稍后......");
+          return LoadingDialog(content: "发送中，请稍后......");
         });
+  }
 
+  Future<void> attend(BuildContext context) async {
     Map<String, dynamic> signMap = Map();
 
     signMap['studentId'] = SpUtil.getString(LocalShare.STU_ID);
@@ -91,6 +93,7 @@ class _ActivityAttendState extends State<ActivityAttend> {
           ),
         );
       } else {
+        Navigator.of(context).pop();
         showDialog(
           context: context,
           child: AlertDialog(
@@ -105,6 +108,7 @@ class _ActivityAttendState extends State<ActivityAttend> {
         );
       }
     } else {
+      Navigator.of(context).pop();
       showDialog(
         context: context,
         child: AlertDialog(
@@ -119,6 +123,7 @@ class _ActivityAttendState extends State<ActivityAttend> {
       );
     }
   }
+
   @override
   Widget build(BuildContext context) {
     return Column(

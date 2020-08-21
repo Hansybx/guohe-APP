@@ -20,7 +20,7 @@ class _ActivityCreateState extends State<ActivityCreate> {
   bool _checkboxInCreate = true;
 
   // get location on earth
-  static Future<void> realPosition() async {
+  Future<void> realPosition() async {
     Location location = new Location();
 
     bool _serviceEnabled;
@@ -43,8 +43,11 @@ class _ActivityCreateState extends State<ActivityCreate> {
       }
     }
     _locationData = await location.getLocation();
+    setState(() {
+      _longitude = _locationData.longitude;
+      _latitude = _locationData.latitude;
+    });
     print('location get');
-    return _locationData;
   }
 
   // 活动信息提交
@@ -68,26 +71,28 @@ class _ActivityCreateState extends State<ActivityCreate> {
           builder: (context) {
             return LoadingDialog(content: "创建中，请稍后......");
           });
-      submitActivity(context, _activityName, _classes, _intervalTime);
+      submitParams(context, _activityName, _classes, _intervalTime);
     }
-//    print(_activityName);
-//    print(_classes);
-//    print(_intervalTime);
   }
 
-  Future<void> submitActivity(BuildContext context, String activityName,
-      String classes, String intervalTime) async {
+  void submitParams(BuildContext context, String activityName, String classes,
+      String intervalTime) {
     List classList = classes.split("@").toList();
     String semester = SpUtil.getString(LocalShare.SEMESTER);
     if (_checkboxInCreate) {
-      realPosition();
+      realPosition().then((value) => submitActivity(
+          context, activityName, intervalTime, semester, classList));
     } else {
       setState(() {
         _longitude = 0.0;
         _latitude = 0.0;
       });
+      submitActivity(context, activityName, intervalTime, semester, classList);
     }
+  }
 
+  Future<void> submitActivity(BuildContext context, String activityName,
+      String intervalTime, String semester, List classList) async {
     Map<String, dynamic> map = Map();
     map['name'] = activityName;
     map['semester'] = semester;
@@ -97,7 +102,7 @@ class _ActivityCreateState extends State<ActivityCreate> {
     map['longitude'] = _longitude;
     map['latitude'] = _latitude;
 
-    Response res =  await Dio().post(Constant.ACTIVITY_CREATE,data: map);
+    Response res = await Dio().post(Constant.ACTIVITY_CREATE, data: map);
     if (res.statusCode == 200) {
       Navigator.pop(context);
 //      print(res);
@@ -110,7 +115,9 @@ class _ActivityCreateState extends State<ActivityCreate> {
               child: Column(
                 children: <Widget>[
                   Text("活动创建成功"),
-                  SizedBox(height: 15,),
+                  SizedBox(
+                    height: 15,
+                  ),
                   Text("活动签到码为: " + res.data['data'].toString())
                 ],
               ),
@@ -138,6 +145,7 @@ class _ActivityCreateState extends State<ActivityCreate> {
         );
       }
     } else {
+      Navigator.of(context).pop();
       showDialog(
         context: context,
         child: AlertDialog(

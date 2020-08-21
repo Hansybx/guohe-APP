@@ -4,6 +4,8 @@ import 'package:flutter_app/routes/homePage/classroom.dart';
 import 'package:flutter_app/routes/homePage/gpa.dart';
 import 'package:flutter_app/routes/homePage/pe.dart';
 import 'package:flutter_app/routes/homePage/bus.dart';
+import 'package:flutter_app/routes/homePage/sign-in/activityDetail.dart';
+import 'package:flutter_app/routes/homePage/sign-in/sign-in.dart';
 import 'package:flutter_app/routes/homePage/system.dart';
 import 'package:flutter_app/routes/login.dart';
 import 'package:flutter_app/routes/myPage/about.dart';
@@ -37,6 +39,8 @@ class RouteStr {
   static const String LABSYS = "/labSys";
   static const String GRADSYS = "/gradSys";
   static const String TXCSYS = "/TXCSys";
+  static const String SIGNINSYS = "/SignInSys";
+  static const String ACTIVITY_DETAIL = "/ActivityDetail";
 
   static const String LOGIN = "/login";
   static const String HOME = "/main";
@@ -159,6 +163,16 @@ class Router {
         return MaterialPageRoute(
           settings: RouteSettings(name: RouteStr.SETTING),
           builder: (context) => SettingsPage(),
+        );
+      case RouteStr.SIGNINSYS:
+        return MaterialPageRoute(
+          settings: RouteSettings(name: RouteStr.SIGNINSYS),
+          builder: (context) => SignInSystem(),
+        );
+      case RouteStr.ACTIVITY_DETAIL:
+        return MaterialPageRoute(
+          settings: RouteSettings(name: RouteStr.ACTIVITY_DETAIL),
+          builder: (context) => ActivityDetail(),
         );
     }
   }

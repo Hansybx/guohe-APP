@@ -3,11 +3,9 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/common/route_str.dart';
 import 'package:flutter_app/generated/l10n.dart';
-import 'package:flutter_app/service/AppAnalysis.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_xupdate/flutter_xupdate.dart';
 import 'package:fluwx/fluwx.dart';
-import 'package:umeng_analytics_plugin/umeng_analytics_plugin.dart';
 
 import 'routes/splash.dart';
 
@@ -33,7 +31,6 @@ class _MyAppState extends State<MyApp> {
       });
     };
 
-    _initUmeng();
     _initFluwx();
     _initUpdate();
   }
@@ -48,18 +45,6 @@ class _MyAppState extends State<MyApp> {
         universalLink: "https://your.univerallink.com/link/");
     var result = await isWeChatInstalled;
     print("WeChat SDK is installed $result");
-  }
-
-  // 初始化友盟统计
-  Future<void> _initUmeng() async {
-    var result = await UmengAnalyticsPlugin.init(
-        androidKey: '5e8bde32167eddb52f000652',
-        iosKey: '5e8b2789570df3bc8e0000a3',
-        channel: "Umeng",
-        logEnabled: false,
-        pageCollectionMode: "MANUAL");
-
-    print('Umeng initialized.' + result.toString());
   }
 
   // 初始化更新插件
@@ -115,7 +100,7 @@ class _MyAppState extends State<MyApp> {
       // 设置页面相关信息
       title: '果核Lite',
       onGenerateRoute: Router.generateRoute,
-      navigatorObservers: [AppAnalysis()],
+//      navigatorObservers: [AppAnalysis()],
       initialRoute: '/',
       // 设置主页
       home: Builder(

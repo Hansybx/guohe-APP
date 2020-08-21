@@ -27,6 +27,13 @@ class Constant {
   //版本
   static final String VERSION = 'https://guohe3.cn/api/v1/mobile/version/get';
 
+  //签到
+  static final String  ACTIVITY_CREATE='https://just.guohe3.cn/api/v1/initiate';
+  static final String  ACTIVITY_HISTORY='https://just.guohe3.cn/api/v1/signInHistory';
+  static final String  ACTIVITY_ATTEND ='https://just.guohe3.cn/api/v1/signIn';
+  static final String  ACTIVITY_DETAIL='https://just.guohe3.cn/api/v1/signInfo';
+  static final String  ACTIVITY_PERSON_STATE='https://just.guohe3.cn/api/v1/statusChange';
+
   // 获取七牛云token
   static final String QNTOKEN = 'https://www.ytools.xyz/api/v1/img/token/get';
 //  天气

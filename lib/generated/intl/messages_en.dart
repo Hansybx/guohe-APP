@@ -47,6 +47,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "semester" : MessageLookupByLibrary.simpleMessage("Select the semester"),
     "setting" : MessageLookupByLibrary.simpleMessage("Setting"),
     "share" : MessageLookupByLibrary.simpleMessage("Share"),
+    "sign_in_system" : MessageLookupByLibrary.simpleMessage("Sign In"),
     "sport" : MessageLookupByLibrary.simpleMessage("Sport/Club"),
     "sports_system" : MessageLookupByLibrary.simpleMessage("Sports"),
     "sun" : MessageLookupByLibrary.simpleMessage("Sun"),

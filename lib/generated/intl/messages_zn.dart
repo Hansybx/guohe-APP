@@ -47,6 +47,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "semester" : MessageLookupByLibrary.simpleMessage("请选择学期"),
     "setting" : MessageLookupByLibrary.simpleMessage("设置"),
     "share" : MessageLookupByLibrary.simpleMessage("分享"),
+    "sign_in_system" : MessageLookupByLibrary.simpleMessage("签到"),
     "sport" : MessageLookupByLibrary.simpleMessage("早操俱乐部"),
     "sports_system" : MessageLookupByLibrary.simpleMessage("体育系统"),
     "sun" : MessageLookupByLibrary.simpleMessage("周日"),

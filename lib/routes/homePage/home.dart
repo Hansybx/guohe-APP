@@ -20,7 +20,8 @@ class _HomePageState extends State<HomePage> {
   bool isLargeScreen;
 
   List<Widget> imageList = List();
-  static List refUrl  = [];
+  List refUrl  = [];
+  SwiperController _swiperController;
 
   Widget selectWidget = null;
 
@@ -28,7 +29,6 @@ class _HomePageState extends State<HomePage> {
     Response res = await Dio().get(Constant.SWIPERIMGS);
       if(res.statusCode == 200){
         if(res.data['code']==200) {
-          print( res.data['info']);
           return res.data['info'];
         }
       }
@@ -52,6 +52,9 @@ class _HomePageState extends State<HomePage> {
         }
       });
     });
+
+    _swiperController = new SwiperController();
+    _swiperController.startAutoplay();
 
 //    imageList
 //      ..add(CachedNetworkImage(
@@ -80,6 +83,8 @@ class _HomePageState extends State<HomePage> {
 
   @override
   dispose() {
+    _swiperController.stopAutoplay();
+    _swiperController.dispose();
     super.dispose();
   }
 
@@ -154,7 +159,9 @@ class _HomePageState extends State<HomePage> {
             margin: const EdgeInsets.fromLTRB(0, 0, 20, 10),
             builder: DotSwiperPaginationBuilder(
                 color: Colors.black54, activeColor: Colors.white)),
-        controller: SwiperController(),
+//        controller: SwiperController(),
+        loop: false,
+        controller: _swiperController,
         scrollDirection: Axis.horizontal,
         autoplay: true,
         onTap: (index) {

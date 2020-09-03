@@ -3,9 +3,9 @@ import 'package:flustars/flustars.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/common/apis.dart';
-import 'package:flutter_app/common/sp_file.dart';
+import 'package:flutter_app/common/spFile.dart';
 import 'package:flutter_app/generated/l10n.dart';
-import 'package:flutter_app/widgets/gpa_linear.dart';
+import 'package:flutter_app/widgets/gpaLinear.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 
 class GPA extends StatefulWidget {
@@ -237,7 +237,6 @@ class _GPAState extends State<GPA> {
           children: <Widget>[
             FutureBuilder(
               //异步等待组件
-//              future: getGPA(context, _uid, _passwd),
               future: _getGPA,
               builder: (BuildContext context, AsyncSnapshot snapshot) {
                 // 等待

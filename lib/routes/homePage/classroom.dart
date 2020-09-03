@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flustars/flustars.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/common/apis.dart';
-import 'package:flutter_app/common/sp_file.dart';
+import 'package:flutter_app/common/spFile.dart';
 import 'package:flutter_app/generated/l10n.dart';
 import 'package:flutter_app/widgets/dialog.dart';
 
@@ -111,11 +111,6 @@ class _EmptyClassroomState extends State<EmptyClassroom> {
       "building_id": buildingId,
       "week": week.toString(),
     });
-
-    print(areaId);
-    print(semester);
-    print(buildingId);
-    print(week);
 
     Response response =
         await Dio().post(Constant.CLASSROOM_EMPTY, data: formData);

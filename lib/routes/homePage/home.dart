@@ -1,9 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/common/apis.dart';
 import 'package:flutter_app/generated/l10n.dart';
-import 'package:flutter_app/service/home_services.dart';
+import 'package:flutter_app/service/homeServices.dart';
 import 'package:flutter_app/viewModel/itemVM.dart';
+import 'package:flutter_app/widgets/browser.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 
 class HomePage extends StatefulWidget {
@@ -17,22 +20,50 @@ class _HomePageState extends State<HomePage> {
   bool isLargeScreen;
 
   List<Widget> imageList = List();
+  static List refUrl  = [];
 
   Widget selectWidget = null;
 
+  Future<dynamic> swiperImgs () async {
+    Response res = await Dio().get(Constant.SWIPERIMGS);
+      if(res.statusCode == 200){
+        if(res.data['code']==200) {
+          print( res.data['info']);
+          return res.data['info'];
+        }
+      }
+  }
+
   @override
   void initState() {
-    imageList
-      ..add(CachedNetworkImage(
-        placeholder: (context, url) => new Container(
-          width: 80,
-          height: 80,
-          child: new Center(child: new CircularProgressIndicator()),
-        ),
-        imageUrl: 'https://pic.downk.cc/item/5e849a81504f4bcb0437649f.jpg',
-        fit: BoxFit.fill,
-      ))
-      ..add(Image.asset('assets/imgs/hw.jpg'));
+    swiperImgs().then((res) {
+      setState(() {
+        for(var item in res){
+          imageList.add(CachedNetworkImage(
+            placeholder: (context, url) => new Container(
+              width: 80,
+              height: 80,
+              child: new Center(child: new CircularProgressIndicator()),
+            ),
+            imageUrl: item['img'],
+            fit: BoxFit.fill,
+          ));
+          refUrl.add(item['url']);
+        }
+      });
+    });
+
+//    imageList
+//      ..add(CachedNetworkImage(
+//        placeholder: (context, url) => new Container(
+//          width: 80,
+//          height: 80,
+//          child: new Center(child: new CircularProgressIndicator()),
+//        ),
+//        imageUrl: 'https://stu.guohe3.cn/cp1.png',
+//        fit: BoxFit.fill,
+//      ))
+//      ..add(Image.asset('assets/imgs/cp2.png'));
 
     super.initState();
 
@@ -75,7 +106,7 @@ class _HomePageState extends State<HomePage> {
           return SingleChildScrollView(
             child: Column(
               children: <Widget>[
-                SizedBox(height: 50),
+                SizedBox(height: 10),
                 swiper(),
                 ListTile(
                   title: Text(S.of(context).campus),
@@ -129,6 +160,11 @@ class _HomePageState extends State<HomePage> {
         onTap: (index) {
           //todo 完善轮播图逻辑
           print('点击了第$index');
+          Navigator.push(context,MaterialPageRoute(builder: (_){
+            return Browser(
+            url: refUrl[index],
+            title: "");
+          }));
         },
       ),
     );

@@ -50,16 +50,6 @@ class LocalShare {
   //判断是否已经有校历信息，默认false表示没有导入校历信息
   static final String IS_HAVE_XIAOLI = "is_have_xiaoli";
 
-//  one 接口需求信息
-  static String DATE = "date";
-  static String IMG_URL = 'imgUrl';
-  static String IMG_AUTHOR = "imgAuthor";
-  static String IMG_KIND = "imgKind";
-  static String WORD = "word";
-  static String WORD_FROM = "wordFrom";
-
-  static String VERSION = 'version';
-
   // 头像
   static String AVATAR = 'avatar';
 

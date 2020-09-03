@@ -4,8 +4,8 @@ import 'package:dio/dio.dart';
 import 'package:flustars/flustars.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/common/apis.dart';
-import 'package:flutter_app/common/sp_file.dart';
-import 'package:flutter_app/common/route_str.dart';
+import 'package:flutter_app/common/spFile.dart';
+import 'package:flutter_app/common/routeStr.dart';
 import 'package:flutter_app/generated/l10n.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -16,8 +16,8 @@ class SplashPage extends StatefulWidget {
 
 class _SplashPageState extends State<SplashPage> {
   bool flag;
-  var uid;
-  var passwd;
+  String uid;
+  String passwd;
 
   Future<void> get() async {
     SharedPreferences pref = await SharedPreferences.getInstance();
@@ -58,6 +58,7 @@ class _SplashPageState extends State<SplashPage> {
       await Dio().post(Constant.CALENDAR, data: formData).then((res) {
         List<String> temp = List<String>.from(res.data['info']['allYear']);
         SpUtil.putStringList(LocalShare.ALL_YEAR, temp);
+        SpUtil.putString(LocalShare.SEMESTER,temp[0]);
         SpUtil.putInt(LocalShare.SERVER_WEEK, res.data['info']['weekNum']);
       });
     }

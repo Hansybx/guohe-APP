@@ -2,11 +2,11 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flustars/flustars.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app/common/sp_file.dart';
-import 'package:flutter_app/common/route_str.dart';
-import 'package:flutter_app/common/string_file.dart';
+import 'package:flutter_app/common/spFile.dart';
+import 'package:flutter_app/common/routeStr.dart';
+import 'package:flutter_app/common/stringFile.dart';
 import 'package:flutter_app/generated/l10n.dart';
-import 'package:flutter_app/widgets/update_item.dart';
+import 'package:flutter_app/widgets/updateItem.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:share/share.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -62,18 +62,6 @@ class _MyPageState extends State<MyPage> {
           child: Column(
             children: <Widget>[
               MyInfo(),
-              new SizedBox(height: 15),
-              new Container(
-                color: Colors.white,
-                child: ListTile(
-                  title: new Text(S.of(context).about),
-                  onTap: () {
-                    Navigator.pushNamed(context, RouteStr.ABOUT);
-                  },
-                  leading: Icon(AntDesign.notification, color: Colors.orange),
-                  trailing: Icon(Icons.keyboard_arrow_right),
-                ),
-              ),
               new SizedBox(height: 15),
               new Container(
                 color: Colors.white,

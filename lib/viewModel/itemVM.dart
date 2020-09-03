@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app/utils/common_utils.dart';
+import 'package:flutter_app/utils/commonUtils.dart';
 
 class ServiceItem extends StatelessWidget {
   final ServiceItemViewModel widget;

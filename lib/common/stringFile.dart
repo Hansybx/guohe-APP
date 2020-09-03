@@ -10,7 +10,7 @@ class StringFile {
   static String feedbackImg = imgBase + "feedback.png";
 
   // 默认头像
-  static String fakeAvatar = imgBase + "fake_avatar.jpg";
+  static String fakeAvatar = imgBase + "fake_avatar.png";
 
   // 设置页面图标
   static String SETTING_PIC = imgBase + "core/settings.png";

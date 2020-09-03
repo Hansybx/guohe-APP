@@ -3,9 +3,8 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/common/apis.dart';
-import 'package:flutter_app/common/string_file.dart';
-import 'package:flutter_app/utils/common_utils.dart';
-import 'package:toast/toast.dart';
+import 'package:flutter_app/common/stringFile.dart';
+import 'package:flutter_app/utils/commonUtils.dart';
 
 class FeedBack extends StatefulWidget {
   @override

@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_app/common/route_str.dart';
+import 'package:flutter_app/common/routeStr.dart';
 import 'package:flutter_app/generated/l10n.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_xupdate/flutter_xupdate.dart';

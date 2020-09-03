@@ -6,7 +6,7 @@ import 'package:dio/dio.dart';
 import 'package:flustars/flustars.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/common/apis.dart';
-import 'package:flutter_app/common/sp_file.dart';
+import 'package:flutter_app/common/spFile.dart';
 import 'package:flutter_app/generated/l10n.dart';
 import 'package:flutter_beautiful_popup/main.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
@@ -111,7 +111,7 @@ class _SchedulePageState extends State<SchedulePage> {
     semesterValue = semesters[0] ??
         (today.year - 1).toString() + '-' + (today.year).toString() + '-2';
     weekNum = SpUtil.getInt(LocalShare.SERVER_WEEK);
-    if (weekNum > 20 || weekNum == null) {
+    if (weekNum > 20 || weekNum <= 0 || weekNum == null) {
       weekNum = 1;
     }
     weekValue = zcArray[weekNum - 1];
@@ -217,7 +217,9 @@ class _SchedulePageState extends State<SchedulePage> {
     for (var item in handledClasses) {
       var weekArray = item['classWeek']
           .toString()
-          .substring(0, item['classWeek'].toString().length - 3)
+          .substring(0, item['classWeek']
+          .toString()
+          .length - 3)
           .split(',');
       var x = 0;
       bool added = false;
@@ -370,8 +372,14 @@ class _SchedulePageState extends State<SchedulePage> {
                     child: Swiper(
                       index: 0,
                       itemCount: temp.length,
-                      itemWidth: MediaQuery.of(context).size.width/11*9,
-                      itemHeight: MediaQuery.of(context).size.height/7*5,
+                      itemWidth: MediaQuery
+                          .of(context)
+                          .size
+                          .width / 11 * 9,
+                      itemHeight: MediaQuery
+                          .of(context)
+                          .size
+                          .height / 7 * 5,
                       layout: SwiperLayout.STACK,
                       pagination: SwiperPagination(),
                       itemBuilder: (BuildContext context, int index) {
@@ -443,7 +451,7 @@ class _SchedulePageState extends State<SchedulePage> {
                                     color: Colors.blue.withOpacity(0.5),
                                     shape: RoundedRectangleBorder(
                                         borderRadius:
-                                            BorderRadius.circular(20.0)),
+                                        BorderRadius.circular(20.0)),
                                   ),
                                 ),
                               ),
@@ -487,7 +495,9 @@ class _SchedulePageState extends State<SchedulePage> {
   // 当前周对应日期
   void dateHandle(monday2Handle, today2Handle) {
     for (var i = 0; i < day7.length; i++) {
-      dayOfWeek[day7[i]] = monday2Handle.add(Duration(days: i)).day;
+      dayOfWeek[day7[i]] = monday2Handle
+          .add(Duration(days: i))
+          .day;
     }
     monthInWeek = today2Handle.month;
   }
@@ -604,7 +614,9 @@ class _SchedulePageState extends State<SchedulePage> {
                       flex: 1,
                       child: Column(
                         children: <Widget>[
-                          Text(S.of(context).mon),
+                          Text(S
+                              .of(context)
+                              .mon),
                           Text(dayOfWeek[day7[0]].toString()),
                         ],
                       ),
@@ -613,7 +625,9 @@ class _SchedulePageState extends State<SchedulePage> {
                       flex: 1,
                       child: Column(
                         children: <Widget>[
-                          Text(S.of(context).tue),
+                          Text(S
+                              .of(context)
+                              .tue),
                           Text(dayOfWeek[day7[1]].toString()),
                         ],
                       ),
@@ -622,7 +636,9 @@ class _SchedulePageState extends State<SchedulePage> {
                       flex: 1,
                       child: Column(
                         children: <Widget>[
-                          Text(S.of(context).wen),
+                          Text(S
+                              .of(context)
+                              .wen),
                           Text(dayOfWeek[day7[2]].toString()),
                         ],
                       ),
@@ -631,7 +647,9 @@ class _SchedulePageState extends State<SchedulePage> {
                       flex: 1,
                       child: Column(
                         children: <Widget>[
-                          Text(S.of(context).thus),
+                          Text(S
+                              .of(context)
+                              .thus),
                           Text(dayOfWeek[day7[3]].toString()),
                         ],
                       ),
@@ -640,7 +658,9 @@ class _SchedulePageState extends State<SchedulePage> {
                       flex: 1,
                       child: Column(
                         children: <Widget>[
-                          Text(S.of(context).fri),
+                          Text(S
+                              .of(context)
+                              .fri),
                           Text(dayOfWeek[day7[4]].toString()),
                         ],
                       ),
@@ -649,7 +669,9 @@ class _SchedulePageState extends State<SchedulePage> {
                       flex: 1,
                       child: Column(
                         children: <Widget>[
-                          Text(S.of(context).sat),
+                          Text(S
+                              .of(context)
+                              .sat),
                           Text(dayOfWeek[day7[5]].toString()),
                         ],
                       ),
@@ -658,7 +680,9 @@ class _SchedulePageState extends State<SchedulePage> {
                       flex: 1,
                       child: Column(
                         children: <Widget>[
-                          Text(S.of(context).sun),
+                          Text(S
+                              .of(context)
+                              .sun),
                           Text(dayOfWeek[day7[6]].toString()),
                         ],
                       ),

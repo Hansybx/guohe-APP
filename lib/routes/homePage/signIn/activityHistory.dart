@@ -1,10 +1,8 @@
-import 'package:dio/dio.dart';
-import 'package:flustars/flustars.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app/common/apis.dart';
-import 'package:flutter_app/common/sp_file.dart';
-import 'package:flutter_app/routes/homePage/sign-in/activityDetail.dart';
+import 'package:flutter_app/service/homeServices.dart';
+
+import 'activityDetail.dart';
 
 class ActivityHistory extends StatefulWidget {
   @override
@@ -12,22 +10,22 @@ class ActivityHistory extends StatefulWidget {
 }
 
 class _ActivityHistoryState extends State<ActivityHistory> {
-  List _activityList = [];
+
   var _statusMap = {'1': "已结束", '0': "进行中"};
   var _colorsMap = {'1': Colors.red, '0': Colors.green};
 
-  Future<void> activityGet() async {
-    Response res = await Dio().get(Constant.ACTIVITY_HISTORY,
-        queryParameters: {"id": SpUtil.getString(LocalShare.STU_ID)});
-    if (res.statusCode == 200) {
-//      print(res.data);
-      if (res.data['status'] == 200) {
-        setState(() {
-          _activityList = res.data['data'];
-        });
-      }
-    }
-  }
+//  Future<void> activityGet() async {
+//    Response res = await Dio().get(Constant.ACTIVITY_HISTORY,
+//        queryParameters: {"id": SpUtil.getString(LocalShare.STU_ID)});
+//    if (res.statusCode == 200) {
+////      print(res.data);
+//      if (res.data['status'] == 200) {
+//        setState(() {
+//          _activityList = res.data['data'];
+//        });
+//      }
+//    }
+//  }
 
   void actDetail(String signId) {
     print('signId:' + signId);
@@ -41,15 +39,14 @@ class _ActivityHistoryState extends State<ActivityHistory> {
   @override
   void initState() {
     super.initState();
-    activityGet();
+    HomeServiceMethod.activityGet();
   }
 
   Widget activityListWidget() {
     List<Widget> actInfoList = []; //先建一个数组用于存放循环生成的widget
     Widget content; //单独一个widget组件，用于返回需要生成的内容widget
-    print(_activityList.length);
-    if (_activityList.isNotEmpty) {
-      for (var item in _activityList) {
+    if (HomeServiceMethod.activityList.isNotEmpty) {
+      for (var item in HomeServiceMethod.activityList) {
         actInfoList.add(Card(
           elevation: 2.0,
           margin: EdgeInsets.only(left: 7.0, right: 7.0, top: 10.0),
@@ -158,6 +155,6 @@ class _ActivityHistoryState extends State<ActivityHistory> {
 
   @override
   Widget build(BuildContext context) {
-    return RefreshIndicator(onRefresh: activityGet, child: Container(child: activityListWidget()));
+    return RefreshIndicator(onRefresh: HomeServiceMethod.activityGet, child: Container(child: activityListWidget()));
   }
 }

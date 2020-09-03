@@ -366,11 +366,11 @@ List<ServiceItemViewModel> getEduServiceList(BuildContext context) {
         canBeClick: false,
         icon: new Image.asset("assets/imgs/core/sport.png",
             width: 35, height: 35)),
-    ServiceItemViewModel(
-        route: RouteStr.SIGNINSYS,
-        title: S.of(context).sign_in_system,
-        icon: new Image.asset("assets/imgs/sign-note.png",
-            width: 35, height: 35)),
+//    ServiceItemViewModel(
+//        route: RouteStr.SIGNINSYS,
+//        title: S.of(context).sign_in_system,
+//        icon: new Image.asset("assets/imgs/sign-note.png",
+//            width: 35, height: 35)),
 //    ServiceItemViewModel(
 //        route: RouteStr.CALENDAR,
 //        title: S.of(context).calendar,

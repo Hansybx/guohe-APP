@@ -110,11 +110,11 @@ class Router {
           settings: RouteSettings(name: RouteStr.SIGNINSYS),
           builder: (context) => SignInSystem(),
         );
-      case RouteStr.ACTIVITY_DETAIL:
-        return MaterialPageRoute(
-          settings: RouteSettings(name: RouteStr.ACTIVITY_DETAIL),
-          builder: (context) => ActivityDetail(),
-        );
+//      case RouteStr.ACTIVITY_DETAIL:
+//        return MaterialPageRoute(
+//          settings: RouteSettings(name: RouteStr.ACTIVITY_DETAIL),
+//          builder: (context) => ActivityDetail(),
+//        );
       case RouteStr.VPN:
         return MaterialPageRoute(
           settings: RouteSettings(name: RouteStr.VPN),
@@ -208,6 +208,7 @@ class RouteTitle {
   static const String ABOUT = "关于果核";
 
   static const String CALENDAR = "校历";
+  static const String ACTIVITY_DETAIL="签到";
 
   static const String VPN = "校园VPN";
   static const String JIAOWU = "教务系统";

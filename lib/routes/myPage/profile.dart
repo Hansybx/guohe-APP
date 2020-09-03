@@ -21,6 +21,7 @@ class ProfileState extends State<Profile> {
   String avatar = '';
   String uid = '';
   String major = '';
+  final picker = ImagePicker();
 
 //  var _imgPath;
 
@@ -83,14 +84,14 @@ class ProfileState extends State<Profile> {
 
   /*拍照*/
   _takePhoto() async {
-    var image = await ImagePicker.pickImage(source: ImageSource.camera);
+    var image = await picker.getImage(source: ImageSource.camera);
     _uploadImg(image);
     Navigator.pop(context);
   }
 
   /*相册*/
   _openGallery() async {
-    var image = await ImagePicker.pickImage(source: ImageSource.gallery);
+    var image = await picker.getImage(source: ImageSource.gallery);
     _uploadImg(image);
     Navigator.pop(context);
   }
@@ -190,7 +191,7 @@ class ProfileState extends State<Profile> {
                                     borderRadius: BorderRadius.circular(8),
                                     child: _buildAvatar(),
                                   ),
-                                  onTap: _chooseImage,
+//                                  onTap: _chooseImage,
                                 ),
                                 alignment: FractionalOffset.centerRight,
                               )

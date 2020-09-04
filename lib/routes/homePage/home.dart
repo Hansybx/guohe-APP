@@ -20,25 +20,25 @@ class _HomePageState extends State<HomePage> {
   bool isLargeScreen;
 
   List<Widget> imageList = List();
-  List refUrl  = [];
+  List refUrl = [];
   SwiperController _swiperController;
 
   Widget selectWidget = null;
 
-  Future<dynamic> swiperImgs () async {
+  Future<dynamic> swiperImgs() async {
     Response res = await Dio().get(Constant.SWIPERIMGS);
-      if(res.statusCode == 200){
-        if(res.data['code']==200) {
-          return res.data['info'];
-        }
+    if (res.statusCode == 200) {
+      if (res.data['code'] == 200) {
+        return res.data['info'];
       }
+    }
   }
 
   @override
   void initState() {
     swiperImgs().then((res) {
       setState(() {
-        for(var item in res){
+        for (var item in res) {
           imageList.add(CachedNetworkImage(
             placeholder: (context, url) => new Container(
               width: 80,
@@ -167,11 +167,12 @@ class _HomePageState extends State<HomePage> {
         onTap: (index) {
           //todo 完善轮播图逻辑
           print('点击了第$index');
-          Navigator.push(context,MaterialPageRoute(builder: (_){
-            return Browser(
-            url: refUrl[index],
-            title: "");
-          }));
+          if (refUrl[index].length != 0) {
+            print(refUrl[index].length != 0);
+            Navigator.push(context, MaterialPageRoute(builder: (_) {
+              return Browser(url: refUrl[index], title: "");
+            }));
+          }
         },
       ),
     );

@@ -37,7 +37,8 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     swiperImgs().then((res) {
-      setState(() {
+      if(mounted){
+        setState(() {
         for (var item in res) {
           imageList.add(CachedNetworkImage(
             placeholder: (context, url) => new Container(
@@ -51,6 +52,7 @@ class _HomePageState extends State<HomePage> {
           refUrl.add(item['url']);
         }
       });
+      }
     });
 
     _swiperController = new SwiperController();

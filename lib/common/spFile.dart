@@ -40,6 +40,8 @@ class LocalShare {
 
   //记录学期信息
   static final String SEMESTER = "semester";
+  // 记录校区
+  static final String SCHOOLAREA="schoolarea";
 
   //记录当前周次
   static final String SERVER_WEEK = "server_week";

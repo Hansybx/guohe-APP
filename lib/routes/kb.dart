@@ -8,7 +8,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/common/apis.dart';
 import 'package:flutter_app/common/spFile.dart';
 import 'package:flutter_app/generated/l10n.dart';
-import 'package:flutter_beautiful_popup/main.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:flutter_xupdate/flutter_xupdate.dart';
 
@@ -19,6 +18,8 @@ class SchedulePage extends StatefulWidget {
 
 class _SchedulePageState extends State<SchedulePage> {
   var semesterValue, semesters, weekValue, weekNum, _uid, _passwd;
+  List schoolArea = ["梦溪", "长山"];
+  String schoolAreaValue = "长山";
 
   var today = DateTime.now();
   var now = DateTime.now();
@@ -70,7 +71,8 @@ class _SchedulePageState extends State<SchedulePage> {
   bool kbHas;
   var classMore;
   var handledClassInfo = [];
-  var jieciArray = [
+  Map jieciArea;
+  var jieciArrayMengXi = [
     '''第一大节 8:00 
      9:40''',
     '''第二大节10:00
@@ -81,6 +83,30 @@ class _SchedulePageState extends State<SchedulePage> {
     17:30''',
     '''第五大节19:00
     20:40''',
+  ];
+  var jieciArrayChangShan = [
+    '''第一大节 8:30 
+     10:05''',
+    '''第二大节10:25
+    12:00''',
+    '''第三大节13:30
+    15:05''',
+    '''第四大节15:25
+    17:00''',
+    '''第五大节18:30
+    20:05''',
+  ];
+  var jieciArray = [
+    '''第一大节 8:30 
+     10:05''',
+    '''第二大节10:25
+    12:00''',
+    '''第三大节13:30
+    15:05''',
+    '''第四大节15:25
+    17:00''',
+    '''第五大节18:30
+    20:05''',
   ];
 
   var zcArray = [
@@ -115,6 +141,12 @@ class _SchedulePageState extends State<SchedulePage> {
       weekNum = 1;
     }
     weekValue = zcArray[weekNum - 1];
+    schoolAreaValue = SpUtil.getString(LocalShare.SCHOOLAREA);
+    if (schoolAreaValue.isEmpty) {
+      SpUtil.putString(LocalShare.SCHOOLAREA, "长山");
+      schoolAreaValue = "长山";
+    }
+    jieciArea = {"梦溪": jieciArrayMengXi, "长山": jieciArrayChangShan};
   }
 
   void localGet() {
@@ -217,9 +249,7 @@ class _SchedulePageState extends State<SchedulePage> {
     for (var item in handledClasses) {
       var weekArray = item['classWeek']
           .toString()
-          .substring(0, item['classWeek']
-          .toString()
-          .length - 3)
+          .substring(0, item['classWeek'].toString().length - 3)
           .split(',');
       var x = 0;
       bool added = false;
@@ -246,11 +276,8 @@ class _SchedulePageState extends State<SchedulePage> {
             break;
           }
           // 当前位置有课但是本周不上
-          var temp = {
-            'weekday': item['weekday'],
-            'jieci': item['jieci'],
-            'des': 'null'
-          };
+          var temp = item;
+          temp['color'] = Color(0xffd3d3d3);
           if (other) {
             wlist[wlist.length - 1] = temp;
           } else {
@@ -259,7 +286,7 @@ class _SchedulePageState extends State<SchedulePage> {
         }
       }
       // 同一位置有多个课程
-      if (item.length > 8 && added == false) {
+      if(item.containsKey('otherClasses')&& added == false){
         classInWeek(item['otherClasses'], other: true);
       }
     }
@@ -273,6 +300,77 @@ class _SchedulePageState extends State<SchedulePage> {
         kbBuild(5);
       });
     }
+  }
+
+  Widget courseCard(var cardWidth, var cardHeight, List courseList, int index) {
+    return Card(
+      margin: EdgeInsets.fromLTRB(cardWidth, cardHeight, cardWidth, cardHeight),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(13.0)),
+      child: Stack(
+        alignment: Alignment.center,
+        children: <Widget>[
+          Align(
+            alignment: Alignment.topCenter,
+            child: Image.asset(
+              'assets/imgs/plane.png',
+              fit: BoxFit.cover,
+            ),
+          ),
+          Positioned(
+            top: 200.0,
+            child: DefaultTextStyle(
+//                                  softWrap: true,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: Colors.black,
+                decoration: TextDecoration.none,
+              ),
+              child: Column(
+                children: <Widget>[
+                  Text(
+                    '课程详情',
+                    style: TextStyle(
+                      color: Colors.blue.withOpacity(0.85),
+                      fontSize: 35,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  SingleChildScrollView(
+                    child: Column(
+                      children: <Widget>[
+                        Text(
+                          '课程名:' + courseList[index]['courseName'].toString(),
+                        ),
+                        Text('课程号:' + courseList[index]['courseNum']),
+                        Text('教室:' + courseList[index]['classroom']),
+                        Text('周数:' + courseList[index]['classWeek']),
+                        Text('任课教师:' + courseList[index]['teacher']),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          Positioned(
+            bottom: 20.0,
+            child: SizedBox(
+              width: 260,
+              child: RaisedButton(
+                onPressed: () => Navigator.pop(context),
+                child: Text('close'),
+                color: Colors.blue.withOpacity(0.5),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20.0)),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 
   Widget kbBuild(int jieci) {
@@ -323,7 +421,7 @@ class _SchedulePageState extends State<SchedulePage> {
                   padding: EdgeInsets.all(5),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
-                    color: Color(int.parse(colorArrays[int.parse(
+                    color: wlist[i]['color']??Color(int.parse(colorArrays[int.parse(
                         Random().nextInt(colorArrays.length).toString())])),
                   ),
 //                  width: MediaQuery.of(context).size.width / 8,
@@ -334,32 +432,15 @@ class _SchedulePageState extends State<SchedulePage> {
                 ),
               ),
               onTap: () {
-                final popup = BeautifulPopup(
-                  context: context,
-                  template: TemplateSuccess,
-                );
                 // 只有一节课
+                var cardWidth = MediaQuery.of(context).size.width / 11;
+                var cardHeight = MediaQuery.of(context).size.height / 7;
                 if (wlist[i]['otherClasses'] == null) {
-                  popup.show(
-                    title: '课程详情',
-                    content: SingleChildScrollView(
-                      child: Column(
-                        children: <Widget>[
-                          Text('课程名:' + wlist[i]['courseName']),
-                          Text('课程号:' + wlist[i]['courseNum']),
-                          Text('教室:' + wlist[i]['classroom']),
-                          Text('周数:' + wlist[i]['classWeek']),
-                          Text('任课教师:' + wlist[i]['teacher']),
-                        ],
-                      ),
-                    ),
-                    actions: [
-                      popup.button(
-                        label: 'Close',
-                        onPressed: Navigator.of(context).pop,
-                      ),
-                    ],
-                  );
+                  showDialog(
+                      context: context,
+                      builder: (context) {
+                        return courseCard(cardWidth, cardHeight, wlist, i);
+                      });
                 } else {
                   // 多节课同一位置
                   List temp = [];
@@ -372,92 +453,12 @@ class _SchedulePageState extends State<SchedulePage> {
                     child: Swiper(
                       index: 0,
                       itemCount: temp.length,
-                      itemWidth: MediaQuery
-                          .of(context)
-                          .size
-                          .width / 11 * 9,
-                      itemHeight: MediaQuery
-                          .of(context)
-                          .size
-                          .height / 7 * 5,
+                      itemWidth: MediaQuery.of(context).size.width,
+                      itemHeight: MediaQuery.of(context).size.height,
                       layout: SwiperLayout.STACK,
                       pagination: SwiperPagination(),
                       itemBuilder: (BuildContext context, int index) {
-                        return Card(
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(13.0)),
-                          child: Stack(
-                            alignment: Alignment.center,
-                            children: <Widget>[
-                              Align(
-                                alignment: Alignment.topCenter,
-                                child: Image.asset(
-                                  'assets/imgs/plane.png',
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                              Positioned(
-                                top: 200.0,
-                                child: DefaultTextStyle(
-//                                  softWrap: true,
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                    decoration: TextDecoration.none,
-                                  ),
-                                  child: Column(
-                                    children: <Widget>[
-                                      Text(
-                                        '课程详情',
-                                        style: TextStyle(
-                                          color: Colors.blue.withOpacity(0.85),
-                                          fontSize: 35,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        height: 10,
-                                      ),
-                                      SingleChildScrollView(
-                                        child: Column(
-                                          children: <Widget>[
-                                            Text(
-                                              '课程名:' +
-                                                  temp[index]['courseName']
-                                                      .toString(),
-                                            ),
-                                            Text('课程号:' +
-                                                temp[index]['courseNum']),
-                                            Text('教室:' +
-                                                temp[index]['classroom']),
-                                            Text('周数:' +
-                                                temp[index]['classWeek']),
-                                            Text('任课教师:' +
-                                                temp[index]['teacher']),
-                                          ],
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              Positioned(
-                                bottom: 20.0,
-                                child: SizedBox(
-                                  width: 260,
-                                  child: RaisedButton(
-                                    onPressed: () => Navigator.pop(context),
-                                    child: Text('close'),
-                                    color: Colors.blue.withOpacity(0.5),
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                        BorderRadius.circular(20.0)),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        );
+                        return courseCard(cardWidth, cardHeight, temp, index);
                       },
                     ),
                   );
@@ -495,9 +496,7 @@ class _SchedulePageState extends State<SchedulePage> {
   // 当前周对应日期
   void dateHandle(monday2Handle, today2Handle) {
     for (var i = 0; i < day7.length; i++) {
-      dayOfWeek[day7[i]] = monday2Handle
-          .add(Duration(days: i))
-          .day;
+      dayOfWeek[day7[i]] = monday2Handle.add(Duration(days: i)).day;
     }
     monthInWeek = today2Handle.month;
   }
@@ -505,6 +504,7 @@ class _SchedulePageState extends State<SchedulePage> {
   @override
   void initState() {
     super.initState();
+
     initValue();
     initTime();
     localGet();
@@ -530,6 +530,29 @@ class _SchedulePageState extends State<SchedulePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             // 下拉筛选框
+            DropdownButton(
+              value: schoolAreaValue,
+              onChanged: (String newValue) {
+                setState(() {
+                  schoolAreaValue = newValue;
+                  SpUtil.putString(LocalShare.SCHOOLAREA, schoolAreaValue);
+                  jieciArray = jieciArea[schoolAreaValue];
+                });
+              },
+              items: <String>['梦溪', '长山']
+                  .map<DropdownMenuItem<String>>((String value) {
+                return DropdownMenuItem<String>(
+                  value: value,
+                  child: Text(
+                    value,
+                  ),
+                );
+              }).toList(),
+            ),
+            SizedBox(
+              width: 25,
+            ),
+            Text('|'),
             //学期
             DropdownButton(
               value: semesterValue,
@@ -614,9 +637,7 @@ class _SchedulePageState extends State<SchedulePage> {
                       flex: 1,
                       child: Column(
                         children: <Widget>[
-                          Text(S
-                              .of(context)
-                              .mon),
+                          Text(S.of(context).mon),
                           Text(dayOfWeek[day7[0]].toString()),
                         ],
                       ),
@@ -625,9 +646,7 @@ class _SchedulePageState extends State<SchedulePage> {
                       flex: 1,
                       child: Column(
                         children: <Widget>[
-                          Text(S
-                              .of(context)
-                              .tue),
+                          Text(S.of(context).tue),
                           Text(dayOfWeek[day7[1]].toString()),
                         ],
                       ),
@@ -636,9 +655,7 @@ class _SchedulePageState extends State<SchedulePage> {
                       flex: 1,
                       child: Column(
                         children: <Widget>[
-                          Text(S
-                              .of(context)
-                              .wen),
+                          Text(S.of(context).wen),
                           Text(dayOfWeek[day7[2]].toString()),
                         ],
                       ),
@@ -647,9 +664,7 @@ class _SchedulePageState extends State<SchedulePage> {
                       flex: 1,
                       child: Column(
                         children: <Widget>[
-                          Text(S
-                              .of(context)
-                              .thus),
+                          Text(S.of(context).thus),
                           Text(dayOfWeek[day7[3]].toString()),
                         ],
                       ),
@@ -658,9 +673,7 @@ class _SchedulePageState extends State<SchedulePage> {
                       flex: 1,
                       child: Column(
                         children: <Widget>[
-                          Text(S
-                              .of(context)
-                              .fri),
+                          Text(S.of(context).fri),
                           Text(dayOfWeek[day7[4]].toString()),
                         ],
                       ),
@@ -669,9 +682,7 @@ class _SchedulePageState extends State<SchedulePage> {
                       flex: 1,
                       child: Column(
                         children: <Widget>[
-                          Text(S
-                              .of(context)
-                              .sat),
+                          Text(S.of(context).sat),
                           Text(dayOfWeek[day7[5]].toString()),
                         ],
                       ),
@@ -680,9 +691,7 @@ class _SchedulePageState extends State<SchedulePage> {
                       flex: 1,
                       child: Column(
                         children: <Widget>[
-                          Text(S
-                              .of(context)
-                              .sun),
+                          Text(S.of(context).sun),
                           Text(dayOfWeek[day7[6]].toString()),
                         ],
                       ),

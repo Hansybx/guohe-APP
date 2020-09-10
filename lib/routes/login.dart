@@ -97,7 +97,7 @@ class _LoginState extends State<Login> {
         list.add(name);
         list.add(academy);
         list.add(major);
-        store(list);
+        store(list,major);
         print('loginflag');
         print(LocalShare.loginFlag);
         Navigator.pushReplacementNamed(context, '/main');
@@ -119,10 +119,11 @@ class _LoginState extends State<Login> {
   }
 
   // 本地存储
-  void store(List<String> list) async {
+  void store(List<String> list,String major) async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     sharedPreferences.setBool(LocalShare.IS_LOGIN, true);
     sharedPreferences.setStringList(LocalShare.STU_INFO, list);
+    sharedPreferences.setString(LocalShare.STU_MAJOR,major);
     sharedPreferences.setString(LocalShare.STU_ID, _account.trim());
     sharedPreferences.setString(LocalShare.STU_PASSWD, _password.trim());
     print('in');

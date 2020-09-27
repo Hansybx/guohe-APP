@@ -4,7 +4,9 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/common/apis.dart';
 import 'package:flutter_app/common/stringFile.dart';
+import 'package:flutter_app/generated/l10n.dart';
 import 'package:flutter_app/utils/commonUtils.dart';
+import 'package:flutter_app/widgets/commonWidget.dart';
 
 class FeedBack extends StatefulWidget {
   @override
@@ -175,25 +177,7 @@ class FeedBackState extends State<FeedBack> {
   Widget build(BuildContext context) {
     return new Scaffold(
         backgroundColor: Color.fromRGBO(248, 248, 248, 1.0),
-        appBar: new AppBar(
-            title:
-                Text('反馈', style: TextStyle(color: Colors.black, fontSize: 16)),
-            backgroundColor: Colors.white,
-            //设置appbar背景颜色
-            centerTitle: true,
-            //设置标题是否局中
-            elevation: 0.0,
-            leading: Builder(builder: (BuildContext context) {
-              return IconButton(
-                icon: const Icon(
-                  Icons.arrow_back,
-                  color: Colors.black,
-                ),
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-              );
-            })),
+        appBar: Common.appBar(context,title: S.of(context).feedback),
         body: new SingleChildScrollView(
           child: new Container(
             margin: EdgeInsets.all(8.0),

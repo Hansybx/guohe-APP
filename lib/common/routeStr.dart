@@ -4,7 +4,7 @@ import 'package:flutter_app/routes/homePage/classroom.dart';
 import 'package:flutter_app/routes/homePage/gpa.dart';
 import 'package:flutter_app/routes/homePage/pe.dart';
 import 'package:flutter_app/routes/homePage/bus.dart';
-import 'package:flutter_app/routes/homePage/signIn/activityDetail.dart';
+import 'package:flutter_app/routes/homePage/schoolMap.dart';
 import 'package:flutter_app/routes/homePage/signIn/signIn.dart';
 import 'package:flutter_app/routes/login.dart';
 import 'package:flutter_app/routes/myPage/feedback.dart';
@@ -22,6 +22,7 @@ class RouteStr {
 
   // 校园公交
   static const String BUS = "/bus";
+  static const String MAP = "/map";
 
   static const String CLASSROOM = "/classroom";
 
@@ -87,6 +88,12 @@ class Router {
           settings: RouteSettings(name: RouteStr.BUS),
           builder: (context) => SchoolBus(),
         ); //校车
+
+      case RouteStr.MAP:
+        return MaterialPageRoute(
+          settings: RouteSettings(name: RouteStr.MAP),
+          builder: (context) => SchoolMap(0),
+        );//长山校区地图
 
       case RouteStr.PE:
         return MaterialPageRoute(

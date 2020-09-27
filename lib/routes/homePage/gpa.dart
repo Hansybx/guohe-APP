@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/common/apis.dart';
 import 'package:flutter_app/common/spFile.dart';
 import 'package:flutter_app/generated/l10n.dart';
+import 'package:flutter_app/widgets/commonWidget.dart';
 import 'package:flutter_app/widgets/gpaLinear.dart';
-import 'package:flutter_icons/flutter_icons.dart';
 
 class GPA extends StatefulWidget {
   @override
@@ -206,24 +206,7 @@ class _GPAState extends State<GPA> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        centerTitle: true,
-        title: Text(
-          S.of(context).gpa,
-          style: new TextStyle(color: Colors.black),
-          textAlign: TextAlign.center,
-        ),
-        leading: IconButton(
-            icon: Icon(
-              AntDesign.back,
-              color: Colors.black,
-            ),
-            tooltip: "back",
-            onPressed: () {
-              Navigator.pop(context);
-            }),
-      ),
+      appBar: Common.appBar(context,title: S.of(context).gpa),
       body: DefaultTextStyle(
         //字体style默认继承设置
         textAlign: TextAlign.center,

@@ -4,7 +4,7 @@ description: A new Flutter application.
 # 标明版本号，例如3.0.0+5
 # 3.0.0 用于展示给用户
 # 5 用于实际判断版本号
-version: 3.0.1+6
+version: 3.0.2+7
 
 environment:
   sdk: ">=2.1.0 <3.0.0"

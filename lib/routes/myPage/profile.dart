@@ -1,14 +1,12 @@
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:dio/dio.dart';
+import 'dart:io';
+
 import 'package:flustars/flustars.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app/common/apis.dart';
 import 'package:flutter_app/common/spFile.dart';
 import 'package:flutter_app/common/stringFile.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:sy_flutter_qiniu_storage/sy_flutter_qiniu_storage.dart';
 import 'package:toast/toast.dart';
 
 class Profile extends StatefulWidget {
@@ -23,10 +21,7 @@ class ProfileState extends State<Profile> {
   String major = '';
   final picker = ImagePicker();
 
-//  var _imgPath;
-
   String token;
-  double _process = 0.0;
 
   @override
   void initState() {
@@ -51,91 +46,26 @@ class ProfileState extends State<Profile> {
         fit: BoxFit.cover,
       );
     } else {
-      return new CachedNetworkImage(
-          placeholder: (context, url) => new CircularProgressIndicator(),
-          imageUrl: avatar,
+      return Image.file(
+          File(avatar),
           fit: BoxFit.cover,
           width: 60.0,
-          height: 60.0);
+          height: 60.0
+      );
     }
   }
 
-  // 选择图片的方式
-  _chooseImage() {
-    showModalBottomSheet(
-        context: context,
-        builder: (BuildContext context) {
-          return new Column(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              new ListTile(
-                leading: new Icon(Icons.camera),
-                title: new Text("拍照"),
-                onTap: _takePhoto,
-              ),
-              new ListTile(
-                  leading: new Icon(Icons.photo_library),
-                  title: new Text("从相册中选择"),
-                  onTap: _openGallery),
-            ],
-          );
-        });
-  }
-
-  /*拍照*/
-  _takePhoto() async {
-    var image = await picker.getImage(source: ImageSource.camera);
-    _uploadImg(image);
-    Navigator.pop(context);
-  }
-
-  /*相册*/
-  _openGallery() async {
-    var image = await picker.getImage(source: ImageSource.gallery);
-    _uploadImg(image);
-    Navigator.pop(context);
-  }
-
-  // 获取七牛云token
-  Future<String> _getQiNiuToken() async {
-    Response response;
-    Dio dio = new Dio();
-    // todo 这里先用我的七牛云，后期改掉
-    // 获取七牛云token
-    response = await dio.get(Constant.QNTOKEN);
-    return response.data.toString();
-  }
-
-  // 将图片上传至七牛云
-  _uploadImg(image) async {
-    if (image == null) {
-      return;
-    }
-    var token = await _getQiNiuToken();
-    if (token != null) {
-      final syStorage = new SyFlutterQiniuStorage();
-      //监听上传进度
-      syStorage.onChanged().listen((dynamic percent) {
-        double p = percent;
-        setState(() {
-          _process = p;
-        });
-      });
-
-      String key = DateTime.now().millisecondsSinceEpoch.toString() +
-          '.' +
-          image.path.split('.').last;
-      //上传文件
-      var result = await syStorage.upload(image.path, token, key);
-      //true 上传成功，false失败
-      if (result == true) {
-        setState(() {
-          avatar = "https://ytools.xyz/" + key;
-        });
-        SpUtil.putString(LocalShare.AVATAR, avatar);
-      }
-    }
-  }
+  // 将图片切换
+//  _uploadImg() async {
+//    var image = await picker.getImage(source: ImageSource.gallery);
+//    if (image == null) {
+//      return;
+//    }
+//    setState(() {
+//      avatar = image.path;
+//    });
+//    SpUtil.putString(LocalShare.AVATAR, avatar);
+//  }
 
   @override
   Widget build(BuildContext context) {
@@ -186,12 +116,9 @@ class ProfileState extends State<Profile> {
                                 alignment: FractionalOffset.centerLeft,
                               ),
                               new Align(
-                                child: GestureDetector(
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(8),
-                                    child: _buildAvatar(),
-                                  ),
-//                                  onTap: _chooseImage,
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(8),
+                                  child: _buildAvatar(),
                                 ),
                                 alignment: FractionalOffset.centerRight,
                               )

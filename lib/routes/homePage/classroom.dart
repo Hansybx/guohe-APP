@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/common/apis.dart';
 import 'package:flutter_app/common/spFile.dart';
 import 'package:flutter_app/generated/l10n.dart';
+import 'package:flutter_app/widgets/commonWidget.dart';
 import 'package:flutter_app/widgets/dialog.dart';
 
 class EmptyClassroom extends StatefulWidget {
@@ -187,9 +188,7 @@ class _EmptyClassroomState extends State<EmptyClassroom> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(S.of(context).classroom),
-      ),
+      appBar: Common.appBar(context,title: S.of(context).classroom),
       body: DefaultTextStyle(
         textAlign: TextAlign.center,
         style: TextStyle(

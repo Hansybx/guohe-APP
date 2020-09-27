@@ -55,8 +55,14 @@ class LocalShare {
   // 头像
   static String AVATAR = 'avatar';
 
+  // 课表背景
+  static String BACKGROUND = 'background';
+
   // 是否开启启动时自动检查更新
   static String AUTO_UPDATE = "auto_update";
+
+  // 本周未上课程是否可见
+  static String CLASS_VISIBLE = "class_visible";
 
   // 设置语言
   static String LANGUAGE = "language";

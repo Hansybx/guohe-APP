@@ -40,6 +40,8 @@ class LocalShare {
 
   //记录学期信息
   static final String SEMESTER = "semester";
+  // 记录校区
+  static final String SCHOOLAREA="schoolarea";
 
   //记录当前周次
   static final String SERVER_WEEK = "server_week";
@@ -50,21 +52,17 @@ class LocalShare {
   //判断是否已经有校历信息，默认false表示没有导入校历信息
   static final String IS_HAVE_XIAOLI = "is_have_xiaoli";
 
-//  one 接口需求信息
-  static String DATE = "date";
-  static String IMG_URL = 'imgUrl';
-  static String IMG_AUTHOR = "imgAuthor";
-  static String IMG_KIND = "imgKind";
-  static String WORD = "word";
-  static String WORD_FROM = "wordFrom";
-
-  static String VERSION = 'version';
-
   // 头像
   static String AVATAR = 'avatar';
 
+  // 课表背景
+  static String BACKGROUND = 'background';
+
   // 是否开启启动时自动检查更新
   static String AUTO_UPDATE = "auto_update";
+
+  // 本周未上课程是否可见
+  static String CLASS_VISIBLE = "class_visible";
 
   // 设置语言
   static String LANGUAGE = "language";

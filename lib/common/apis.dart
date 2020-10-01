@@ -3,6 +3,8 @@ class Constant {
   static final String UPDATE =
       "https://gitee.com/hansybx/guohe-APP/raw/master/jsonapi/update.json";
 
+  static final String SHARE_URL = "https://stu.guohe3.cn/guohe3.0.2.apk";
+
   // 登录
   static final String LOGIN = 'https://guohe3.cn/api/v1/stu/login';
 
@@ -28,14 +30,22 @@ class Constant {
   static final String VERSION = 'https://guohe3.cn/api/v1/mobile/version/get';
 
   //签到
-  static final String  ACTIVITY_CREATE='https://just.guohe3.cn/api/v1/initiate';
-  static final String  ACTIVITY_HISTORY='https://just.guohe3.cn/api/v1/signInHistory';
-  static final String  ACTIVITY_ATTEND ='https://just.guohe3.cn/api/v1/signIn';
-  static final String  ACTIVITY_DETAIL='https://just.guohe3.cn/api/v1/signInfo';
-  static final String  ACTIVITY_PERSON_STATE='https://just.guohe3.cn/api/v1/statusChange';
+  static final String ACTIVITY_CREATE =
+      'https://just.guohe3.cn/api/v1/initiate';
+  static final String ACTIVITY_HISTORY =
+      'https://just.guohe3.cn/api/v1/signInHistory';
+  static final String ACTIVITY_ATTEND = 'https://just.guohe3.cn/api/v1/signIn';
+  static final String ACTIVITY_DETAIL =
+      'https://just.guohe3.cn/api/v1/signInfo';
+  static final String ACTIVITY_PERSON_STATE =
+      'https://just.guohe3.cn/api/v1/statusChange';
 
   // 获取七牛云token
-  static final String QNTOKEN = 'https://www.ytools.xyz/api/v1/img/token/get';
+  static final String QNTOKEN = 'https://guohe3.cn/api/v1/mobile/qiniu/token';
+
+  // swiper imgs
+  static final String SWIPERIMGS =
+      'https://guohe3.cn/api/v1/mobile/swiper/imgs';
 //  天气
 //  static final String WEATHER = 'https://free-api.heweather.net/s6/weather/now?location=auto_ip&key=';
 }

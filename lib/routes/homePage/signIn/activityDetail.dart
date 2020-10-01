@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/common/apis.dart';
+import 'package:flutter_app/service/homeServices.dart';
 
 class ActivityDetail extends StatefulWidget {
   ActivityDetail({this.signId});
@@ -19,7 +20,6 @@ class _ActivityDetailState extends State<ActivityDetail>
     "已签到",
     "未签到",
   ];
-  String _snackStr = 'test';
 
   var _statusTips = {
     '0': "迟到",
@@ -38,43 +38,43 @@ class _ActivityDetailState extends State<ActivityDetail>
     print(this.widget.signId);
   }
 
-  Future<void> stuStateChange(
-      String stuId, String status, String signId) async {
-    Map<String, dynamic> map = Map();
-    map['status'] = status;
-    map['signId'] = signId;
-    map['stuId'] = stuId;
-
-    Response res = await Dio().post(Constant.ACTIVITY_PERSON_STATE, data: map);
-    if (res.statusCode == 200) {
-//      print(res.data);
-      if (res.data['status'] == 200) {
-        if (status == '1') {
-          setState(() {
-            _snackStr = '已添加置已签到';
-          });
-        } else {
-          setState(() {
-            _snackStr = '已添加置未签到';
-          });
-        }
-      }else{
-        showDialog(
-          context: context,
-          child: AlertDialog(
-            content: Text("签到状态更改失败"),
-            actions: <Widget>[
-              FlatButton(
-                child: Text("确定"),
-                onPressed: () => Navigator.of(context).pop(),
-              )
-            ],
-          ),
-        );
-      }
-    }
-  }
-
+//  Future<void> stuStateChange(
+//      String stuId, String status, String signId) async {
+//    Map<String, dynamic> map = Map();
+//    map['status'] = status;
+//    map['signId'] = signId;
+//    map['stuId'] = stuId;
+//
+//    Response res = await Dio().post(Constant.ACTIVITY_PERSON_STATE, data: map);
+//    if (res.statusCode == 200) {
+////      print(res.data);
+//      if (res.data['status'] == 200) {
+//        if (status == '1') {
+//          setState(() {
+//            _snackStr = '已添加置已签到';
+//          });
+//        } else {
+//          setState(() {
+//            _snackStr = '已添加置未签到';
+//          });
+//        }
+//      }else{
+//        showDialog(
+//          context: context,
+//          child: AlertDialog(
+//            content: Text("签到状态更改失败"),
+//            actions: <Widget>[
+//              FlatButton(
+//                child: Text("确定"),
+//                onPressed: () => Navigator.of(context).pop(),
+//              )
+//            ],
+//          ),
+//        );
+//      }
+//    }
+//  }
+//
   Future<void> detailsGet() async {
     Response res = await Dio().get(Constant.ACTIVITY_DETAIL,
         queryParameters: {"id": this.widget.signId});
@@ -187,15 +187,15 @@ class _ActivityDetailState extends State<ActivityDetail>
             ),
             onDismissed: (direction) {
               if (direction == DismissDirection.endToStart) {
-                stuStateChange(personList[index]['uid'], '1', signId)
+                HomeServiceMethod.stuStateChange(context,personList[index]['uid'], '1', signId)
                     .then((value) => Scaffold.of(context).showSnackBar(SnackBar(
-                  content: Text(_snackStr),
+                  content: Text(HomeServiceMethod.snackStr),
                 )));
                 // 从右向左  也就是add
               } else if (direction == DismissDirection.startToEnd) {
-                stuStateChange(personList[index]['uid'], '2', signId)
+                HomeServiceMethod.stuStateChange(context,personList[index]['uid'], '2', signId)
                     .then((value) => Scaffold.of(context).showSnackBar(SnackBar(
-                  content: Text(_snackStr),
+                  content: Text(HomeServiceMethod.snackStr),
                 )));
               }
               // 删除后刷新列表，以达到真正的删除

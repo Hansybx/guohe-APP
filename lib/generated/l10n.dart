@@ -123,6 +123,16 @@ class S {
     );
   }
 
+  /// `Map`
+  String get map {
+    return Intl.message(
+      'Map',
+      name: 'map',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Bus`
   String get bus {
     return Intl.message(
@@ -203,6 +213,16 @@ class S {
     );
   }
 
+  /// `More`
+  String get classMore {
+    return Intl.message(
+      'More',
+      name: 'classMore',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `About`
   String get about {
     return Intl.message(
@@ -243,6 +263,16 @@ class S {
     );
   }
 
+  /// `schoolArea`
+  String get schoolAreaValue {
+    return Intl.message(
+      'schoolArea',
+      name: 'schoolAreaValue',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Setting`
   String get setting {
     return Intl.message(
@@ -258,6 +288,16 @@ class S {
     return Intl.message(
       'Check for Updates',
       name: 'update',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Other Weeks Classes Visible`
+  String get class_visible {
+    return Intl.message(
+      'Other Weeks Classes Visible',
+      name: 'class_visible',
       desc: '',
       args: [],
     );
@@ -298,6 +338,66 @@ class S {
     return Intl.message(
       'Language',
       name: 'language',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Tips`
+  String get tips {
+    return Intl.message(
+      'Tips',
+      name: 'tips',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The schedule background image has been reset`
+  String get bg_img_reset {
+    return Intl.message(
+      'The schedule background image has been reset',
+      name: 'bg_img_reset',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Image picked success`
+  String get img_pick_tip {
+    return Intl.message(
+      'Image picked success',
+      name: 'img_pick_tip',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You will logout and clear all data in local`
+  String get quit_tip {
+    return Intl.message(
+      'You will logout and clear all data in local',
+      name: 'quit_tip',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Schedule background`
+  String get scheduleBackground {
+    return Intl.message(
+      'Schedule background',
+      name: 'scheduleBackground',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Long press to reset the schedule background`
+  String get long_press_to_reset {
+    return Intl.message(
+      'Long press to reset the schedule background',
+      name: 'long_press_to_reset',
       desc: '',
       args: [],
     );

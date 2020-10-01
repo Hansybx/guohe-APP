@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_app/common/route_str.dart';
+import 'package:flutter_app/common/routeStr.dart';
 import 'package:flutter_app/generated/l10n.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_xupdate/flutter_xupdate.dart';
@@ -98,7 +98,7 @@ class _MyAppState extends State<MyApp> {
       // 讲en设置为第一项,没有适配语言时,英语为首选项
       supportedLocales: S.delegate.supportedLocales,
       // 设置页面相关信息
-      title: '果核Lite',
+      title: '果核',
       onGenerateRoute: Router.generateRoute,
 //      navigatorObservers: [AppAnalysis()],
       initialRoute: '/',

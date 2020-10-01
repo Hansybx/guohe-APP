@@ -1,13 +1,16 @@
-import 'package:cached_network_image/cached_network_image.dart';
+import 'dart:io';
+
 import 'package:flustars/flustars.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app/common/sp_file.dart';
-import 'package:flutter_app/common/route_str.dart';
-import 'package:flutter_app/common/string_file.dart';
+import 'package:flutter_app/common/apis.dart';
+import 'package:flutter_app/common/spFile.dart';
+import 'package:flutter_app/common/routeStr.dart';
+import 'package:flutter_app/common/stringFile.dart';
 import 'package:flutter_app/generated/l10n.dart';
-import 'package:flutter_app/widgets/update_item.dart';
+import 'package:flutter_app/widgets/updateItem.dart';
 import 'package:flutter_icons/flutter_icons.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:share/share.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -21,6 +24,7 @@ class _MyPageState extends State<MyPage> {
 
   String name = "Unknown";
   String id = "Unknown";
+  final picker = ImagePicker();
 
   // 登出时清空本机缓存
   Future<void> clean() async {
@@ -38,6 +42,35 @@ class _MyPageState extends State<MyPage> {
     name = SpUtil.getStringList(LocalShare.STU_INFO)[0];
     id = SpUtil.getString(LocalShare.STU_ID);
     avatar = SpUtil.getString(LocalShare.AVATAR);
+  }
+
+  // 将图片切换
+  _uploadImg() async {
+    var image = await picker.getImage(source: ImageSource.gallery);
+    if (image == null) {
+      return;
+    }
+    setState(() {
+      avatar = image.path;
+    });
+    SpUtil.putString(LocalShare.AVATAR, avatar);
+    showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            shape: RoundedRectangleBorder(
+                borderRadius: new BorderRadius.circular(15)),
+            content: Text(S.of(context).img_pick_tip),
+            actions: <Widget>[
+              FlatButton(
+                child: Text("OK"),
+                onPressed: () =>
+                    Navigator.of(context).pop(), //关闭对话框
+              ),
+            ],
+          );
+        }
+    );
   }
 
   @override
@@ -62,18 +95,6 @@ class _MyPageState extends State<MyPage> {
           child: Column(
             children: <Widget>[
               MyInfo(),
-              new SizedBox(height: 15),
-              new Container(
-                color: Colors.white,
-                child: ListTile(
-                  title: new Text(S.of(context).about),
-                  onTap: () {
-                    Navigator.pushNamed(context, RouteStr.ABOUT);
-                  },
-                  leading: Icon(AntDesign.notification, color: Colors.orange),
-                  trailing: Icon(Icons.keyboard_arrow_right),
-                ),
-              ),
               new SizedBox(height: 15),
               new Container(
                 color: Colors.white,
@@ -104,7 +125,9 @@ class _MyPageState extends State<MyPage> {
                 color: Colors.white,
                 child: ListTile(
                   title: new Text(S.of(context).share),
-                  onTap: () => Share.share('果核', subject: 'Look what I made!'),
+                  onTap: () => Share.share(
+                      '果核 \r' + Constant.SHARE_URL.toString(),
+                      subject: 'Look what I made!'),
                   leading: Icon(AntDesign.sharealt, color: Colors.green),
                   trailing: Icon(Icons.keyboard_arrow_right),
                 ),
@@ -124,11 +147,30 @@ class _MyPageState extends State<MyPage> {
               new Container(
                 color: Colors.white,
                 child: ListTile(
-                  title: new Text(S.of(context).account),
-                  leading: Icon(AntDesign.reload1, color: Colors.black54),
-                  trailing: Icon(Icons.keyboard_arrow_right),
-                  onTap: () => logout(),
-                ),
+                    title: new Text(S.of(context).account),
+                    leading: Icon(AntDesign.reload1, color: Colors.black54),
+                    trailing: Icon(Icons.keyboard_arrow_right),
+                    onTap: () => showDialog(
+                        context: context,
+                        builder: (context) {
+                          return AlertDialog(
+                            title: Text(S.of(context).tips),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: new BorderRadius.circular(15)),
+                            content: Text(S.of(context).quit_tip),
+                            actions: <Widget>[
+                              FlatButton(
+                                child: Text("NO"),
+                                onPressed: () =>
+                                    Navigator.of(context).pop(), //关闭对话框
+                              ),
+                              FlatButton(
+                                child: Text("YES"),
+                                onPressed: () => logout(),
+                              ),
+                            ],
+                          );
+                        })),
               ),
             ],
           ),
@@ -148,9 +190,12 @@ class _MyPageState extends State<MyPage> {
               child: new Container(
                 margin: EdgeInsets.only(left: 20, right: 20),
                 // 圆角图片
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(8),
-                  child: _buildAvatar(),
+                child: GestureDetector(
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(8),
+                    child: _buildAvatar(),
+                  ),
+                  onTap: _uploadImg,
                 ),
               ),
             ),
@@ -196,12 +241,14 @@ class _MyPageState extends State<MyPage> {
         height: 60.0,
       );
     } else {
-      return new CachedNetworkImage(
-          placeholder: (context, url) => new CircularProgressIndicator(),
-          imageUrl: avatar,
-          fit: BoxFit.cover,
-          width: 60.0,
-          height: 60.0);
+      return Image.file(File(avatar),
+          fit: BoxFit.cover, width: 60.0, height: 60.0);
+//      return new CachedNetworkImage(
+//          placeholder: (context, url) => new CircularProgressIndicator(),
+//          imageUrl: avatar,
+//          fit: BoxFit.cover,
+//          width: 60.0,
+//          height: 60.0);
     }
   }
 }

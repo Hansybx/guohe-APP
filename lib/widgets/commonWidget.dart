@@ -1,20 +1,36 @@
-
 import 'package:flutter/material.dart';
-
-import 'package:flutter/material.dart';
+import 'package:flutter_icons/flutter_icons.dart';
 
 class Common {
-  static appBar({title: String, actions:const <Widget>[]}) {
+  static appBar(BuildContext context,{title: String, actions:const <Widget>[]}) {
     return AppBar(
+      backgroundColor: Colors.white,
+      centerTitle: true,
       title: Text(
         title,
-        style: TextStyle(color: Color(0xFF262d50)),
+        style: new TextStyle(color: Colors.black),
+        textAlign: TextAlign.center,
       ),
-      actions: actions,
-      iconTheme: IconThemeData(color: Color(0xFF262d50)),
-      backgroundColor: Colors.white,
-      elevation: 0,
+      leading: IconButton(
+          icon: Icon(
+            AntDesign.back,
+            color: Colors.black,
+          ),
+          tooltip: "back",
+          onPressed: () {
+            Navigator.pop(context);
+          }),
     );
+//    return AppBar(
+//      title: Text(
+//        title,
+//        style: TextStyle(color: Color(0xFF262d50)),
+//      ),
+//      actions: actions,
+//      iconTheme: IconThemeData(color: Color(0xFF262d50)),
+//      backgroundColor: Colors.white,
+//      elevation: 0,
+//    );
   }
 
   static iconImage({path: String, color = const Color(0xFF262d50)}) {

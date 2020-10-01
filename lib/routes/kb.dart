@@ -4,11 +4,11 @@ import 'dart:ui';
 
 import 'package:dio/dio.dart';
 import 'package:flustars/flustars.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/common/apis.dart';
-import 'package:flutter_app/common/sp_file.dart';
+import 'package:flutter_app/common/spFile.dart';
 import 'package:flutter_app/generated/l10n.dart';
-import 'package:flutter_beautiful_popup/main.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:flutter_xupdate/flutter_xupdate.dart';
 
@@ -19,6 +19,12 @@ class SchedulePage extends StatefulWidget {
 
 class _SchedulePageState extends State<SchedulePage> {
   var semesterValue, semesters, weekValue, weekNum, _uid, _passwd;
+
+//  List schoolArea = ["梦溪", "长山"];
+  String schoolAreaValue = "长山";
+  String imgBackground = "";
+
+  Map _modifyCardValue = {};
 
   var today = DateTime.now();
   var now = DateTime.now();
@@ -53,9 +59,9 @@ class _SchedulePageState extends State<SchedulePage> {
     "0xff86e3ce",
     "0xff97d1c0",
     "0xffd76350",
-    "0xffdbdfc2",
+    "0xff7fdb93",
     "0xff92b6c7",
-    "0xffb9b4a8",
+    "0xffeee8aa",
 //    "0xffb46a7f"
 //    "0xff33CC33", // 绿
 //    "0xff3399ff", // 蓝
@@ -65,12 +71,14 @@ class _SchedulePageState extends State<SchedulePage> {
   ];
 
   var monday, tuesday, wednesday, thursday, friday, saturday, sunday;
-  var wlist = []; //要显示的课程的list
-  var kb = []; //所有课表的list
+  List wlist = []; //要显示的课程的list
+  List kb = []; //所有课表的list
   bool kbHas;
+  bool otherWeekVisible = true;
   var classMore;
-  var handledClassInfo = [];
-  var jieciArray = [
+  List handledClassInfo = [];
+  Map jieciArea;
+  List jieciArrayMengXi = [
     '''第一大节 8:00 
      9:40''',
     '''第二大节10:00
@@ -81,6 +89,30 @@ class _SchedulePageState extends State<SchedulePage> {
     17:30''',
     '''第五大节19:00
     20:40''',
+  ];
+  List jieciArrayChangShan = [
+    '''第一大节 8:30 
+     10:05''',
+    '''第二大节10:25
+    12:00''',
+    '''第三大节13:30
+    15:05''',
+    '''第四大节15:25
+    17:00''',
+    '''第五大节18:30
+    20:05''',
+  ];
+  List jieciArray = [
+    '''第一大节 8:30 
+     10:05''',
+    '''第二大节10:25
+    12:00''',
+    '''第三大节13:30
+    15:05''',
+    '''第四大节15:25
+    17:00''',
+    '''第五大节18:30
+    20:05''',
   ];
 
   var zcArray = [
@@ -106,15 +138,21 @@ class _SchedulePageState extends State<SchedulePage> {
     '第20周'
   ];
 
+  Map otherWeekColor = {'true': Color(0xffd3d3d3), 'false': Colors.transparent};
+
   void initValue() {
     semesters = SpUtil.getStringList(LocalShare.ALL_YEAR);
     semesterValue = semesters[0] ??
         (today.year - 1).toString() + '-' + (today.year).toString() + '-2';
     weekNum = SpUtil.getInt(LocalShare.SERVER_WEEK);
-    if (weekNum > 20 || weekNum == null) {
+    if (weekNum > 20 || weekNum <= 0 || weekNum == null) {
       weekNum = 1;
     }
     weekValue = zcArray[weekNum - 1];
+    otherWeekVisible = SpUtil.getBool(LocalShare.CLASS_VISIBLE, defValue: true);
+    schoolAreaValue = SpUtil.getString(LocalShare.SCHOOLAREA, defValue: "长山");
+    imgBackground = SpUtil.getString(LocalShare.BACKGROUND);
+    jieciArea = {"梦溪": jieciArrayMengXi, "长山": jieciArrayChangShan};
   }
 
   void localGet() {
@@ -164,6 +202,9 @@ class _SchedulePageState extends State<SchedulePage> {
                 var temp = {
                   'weekday': day7[i],
                   'jieci': x,
+                  'courseName':'',
+                  'classroom':'',
+                  'courseNum': '',
                   'classWeek': '0-20(周)',
                   'des': 'null'
                 }; // 当前课节没有课
@@ -222,42 +263,42 @@ class _SchedulePageState extends State<SchedulePage> {
       var x = 0;
       bool added = false;
       for (var wItem in weekArray) {
-        x++;
-
-        var ss = wItem.split('-');
-        var begin = int.parse(ss[0]);
+        try {
+          x++;
+          var ss = wItem.split('-');
+          var begin = int.parse(ss[0]);
 //        var temp =ss
-        var end = int.parse(ss[ss.length - 1]);
-        if (weekNum >= begin && weekNum <= end ||
-            weekNum == begin ||
-            weekNum == end) {
-          if (other) {
-            wlist[wlist.length - 1] = item;
-            return null;
-          } else {
-            wlist.add(item);
-          }
+          var end = int.parse(ss[ss.length - 1]);
+          if (weekNum >= begin && weekNum <= end ||
+              weekNum == begin ||
+              weekNum == end) {
+            if (other) {
+              wlist[wlist.length - 1] = item;
+              return null;
+            } else {
+              wlist.add(item);
+            }
 //          wlist.add(item);
-          added = true;
-        } else if (x == weekArray.length) {
-          if (added) {
-            break;
+            added = true;
+          } else if (x == weekArray.length) {
+            if (added) {
+              break;
+            }
+            // 当前位置有课但是本周不上
+            Map temp = Map.from(item);
+            temp['otherWeek'] = true;
+            if (other) {
+              wlist[wlist.length - 1] = temp;
+            } else {
+              wlist.add(temp);
+            }
           }
-          // 当前位置有课但是本周不上
-          var temp = {
-            'weekday': item['weekday'],
-            'jieci': item['jieci'],
-            'des': 'null'
-          };
-          if (other) {
-            wlist[wlist.length - 1] = temp;
-          } else {
-            wlist.add(temp);
-          }
+        } catch (e) {
+          continue;
         }
       }
       // 同一位置有多个课程
-      if (item.length > 8 && added == false) {
+      if (item.containsKey('otherClasses') && added == false) {
         classInWeek(item['otherClasses'], other: true);
       }
     }
@@ -273,6 +314,214 @@ class _SchedulePageState extends State<SchedulePage> {
     }
   }
 
+  Widget courseCard(var cardWidth, var cardHeight, List courseList, int index) {
+    return Card(
+      margin: EdgeInsets.fromLTRB(cardWidth, cardHeight, cardWidth, cardHeight),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(13.0)),
+      child: Stack(
+        alignment: Alignment.center,
+        children: <Widget>[
+          Align(
+            alignment: Alignment.topCenter,
+            child: Image.asset(
+              'assets/imgs/plane.png',
+              fit: BoxFit.cover,
+            ),
+          ),
+          Positioned(
+            top: 200.0,
+            child: DefaultTextStyle(
+//                                  softWrap: true,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: Colors.black,
+                decoration: TextDecoration.none,
+              ),
+              child: Column(
+                children: <Widget>[
+                  Text(
+                    '课程详情',
+                    style: TextStyle(
+                      color: Colors.blue.withOpacity(0.85),
+                      fontSize: 35,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  SingleChildScrollView(
+                    child: Column(
+                      children: <Widget>[
+                        Text(
+                          '课程名:' + courseList[index]['courseName'].toString() ??
+                              " ",
+                        ),
+                        Text('课程号:' +
+                                courseList[index]['courseNum'].toString() ??
+                            " "),
+                        Text(
+                            '教室:' + courseList[index]['classroom'].toString() ??
+                                " "),
+                        Text(
+                            '周数:' + courseList[index]['classWeek'].toString() ??
+                                " "),
+                        Text(
+                            '任课教师:' + courseList[index]['teacher'].toString() ??
+                                " "),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          Positioned(
+            bottom: 20.0,
+            child: SizedBox(
+              width: 260,
+              child: RaisedButton(
+                onPressed: () => Navigator.pop(context),
+                child: Text('关闭'),
+                color: Colors.blue.withOpacity(0.5),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20.0)),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget modifyCardTextField(String labelText, String changeValueKey,
+      {String initValue, String hintText}) {
+    return TextFormField(
+      autofocus: true,
+      keyboardType: TextInputType.text,
+      initialValue: initValue,
+      decoration: new InputDecoration(
+          focusedBorder: UnderlineInputBorder(
+            borderSide: BorderSide(color: Colors.grey),
+          ),
+          hintText: hintText ?? "",
+          labelText: labelText,
+          prefixIcon: Icon(
+            Icons.fiber_new,
+          )),
+      onChanged: (val) {
+        setState(() {
+          _modifyCardValue[changeValueKey] = val;
+        });
+        print(val);
+      },
+    );
+  }
+
+  void modifyCourse(BuildContext context, int index) {
+    String des = "";
+    des += _modifyCardValue['courseName'].toString().length > 0
+        ? _modifyCardValue['courseName'].toString()
+        : "";
+    des += _modifyCardValue['classroom'].toString().length > 0
+        ? "@" + _modifyCardValue['classroom'].toString()
+        : "";
+    _modifyCardValue['des'] = des.length > 0 ? des : "null";
+    if (_modifyCardValue['classWeek'].toString().indexOf('周') == -1) {
+      _modifyCardValue['classWeek'] += "(周)";
+    }
+    setState(() {
+      wlist[index] = _modifyCardValue;
+      SpUtil.putObjectList(LocalShare.HANDLED_KB, wlist);
+    });
+    Navigator.pop(context);
+  }
+
+  Widget modifyCard({List course, int index}) {
+    return Card(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(13.0)),
+      child: Scaffold(
+        body: SingleChildScrollView(
+          child: Center(
+            child: Column(
+              children: <Widget>[
+                Container(
+                  child: Image(
+                    width: 250,
+                    height: 191,
+                    image: AssetImage('assets/imgs/modify_card.png'),
+                  ),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                SingleChildScrollView(
+                  padding: EdgeInsets.all(16.0),
+                  child: Column(
+                    children: <Widget>[
+                      Container(
+                        child: modifyCardTextField('课程名', 'courseName',
+                            initValue: course == null
+                                ? ''
+                                : course[index]['courseName']),
+                      ),
+                      SizedBox(
+                        height: 15,
+                      ),
+                      Container(
+                        child: modifyCardTextField('教室位置', 'classroom',
+                            initValue: course == null
+                                ? ''
+                                : course[index]['classroom']),
+                      ),
+                      SizedBox(
+                        height: 15,
+                      ),
+                      Container(
+                        child: modifyCardTextField('上课周次', 'classWeek',
+                            initValue: course == null
+                                ? ''
+                                : course[index]['classWeek']
+                                    .toString()
+                                    .substring(0,
+                                        course[index]['classWeek'].length - 3),
+                            hintText: "连续周次使用-连接，隔开的周次使用,分隔"),
+                      ),
+                      SizedBox(
+                        height: 15,
+                      ),
+                      Container(
+                        child: modifyCardTextField('老师', 'teacher',
+                            initValue:
+                                course == null ? '' : course[index]['teacher']),
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  height: MediaQuery.of(context).size.height / 13,
+                ),
+                SizedBox(
+                  width: 260,
+                  child: RaisedButton(
+                    onPressed: () => modifyCourse(context, index),
+                    child: Text('关闭'),
+                    color: Colors.blue.withOpacity(0.5),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20.0)),
+                  ),
+                ),
+                SizedBox(
+                  height: 50,
+                )
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
   Widget kbBuild(int jieci) {
     List<Widget> info = [];
     Widget content;
@@ -281,12 +530,12 @@ class _SchedulePageState extends State<SchedulePage> {
     info.add(Container(
       height: 120,
       width: 40,
+      color: Colors.white,
       child: Text(
-        jieciArray[jieci - 1],
+        jieciArea[schoolAreaValue][jieci - 1],
         textAlign: TextAlign.center,
       ),
     ));
-//    for (var item in wlist) {
     for (var i = 0; i < wlist.length; i++) {
       // 当前课节是否有课程
       if (wlist[i]['des'] == 'null' && wlist[i]['jieci'] == jieci) {
@@ -295,10 +544,19 @@ class _SchedulePageState extends State<SchedulePage> {
             flex: 1,
             child: Padding(
               padding: const EdgeInsets.fromLTRB(1, 0, 1, 1),
-              child: Container(
-                color: Colors.white70,
-                height: 120,
-//              child: Text('test'),
+              child: InkWell(
+                onTap: () => print(1),
+                onLongPress: () => showDialog(
+                    context: context,
+                    builder: (context) {
+                      _modifyCardValue = wlist[i];
+                      return modifyCard(index: i);
+                    }),
+                child: Container(
+                  color: Colors.transparent,
+                  height: 120,
+//                   child: Text('test'),
+                ),
               ),
             ),
           ),
@@ -314,15 +572,21 @@ class _SchedulePageState extends State<SchedulePage> {
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 14,
-                  color: Colors.white,
+                  color: wlist[i]['otherWeek'] != null
+                      ? otherWeekVisible == false
+                          ? Colors.transparent
+                          : Colors.white
+                      : Colors.white,
                   decoration: TextDecoration.none,
                 ),
                 child: Container(
                   padding: EdgeInsets.all(5),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
-                    color: Color(int.parse(colorArrays[int.parse(
-                        Random().nextInt(colorArrays.length).toString())])),
+                    color: wlist[i]['otherWeek'] != null
+                        ? otherWeekColor[otherWeekVisible.toString()]
+                        : Color(int.parse(colorArrays[int.parse(
+                            Random().nextInt(colorArrays.length).toString())])),
                   ),
 //                  width: MediaQuery.of(context).size.width / 8,
                   height: 117,
@@ -332,32 +596,17 @@ class _SchedulePageState extends State<SchedulePage> {
                 ),
               ),
               onTap: () {
-                final popup = BeautifulPopup(
-                  context: context,
-                  template: TemplateSuccess,
-                );
                 // 只有一节课
                 if (wlist[i]['otherClasses'] == null) {
-                  popup.show(
-                    title: '课程详情',
-                    content: SingleChildScrollView(
-                      child: Column(
-                        children: <Widget>[
-                          Text('课程名:' + wlist[i]['courseName']),
-                          Text('课程号:' + wlist[i]['courseNum']),
-                          Text('教室:' + wlist[i]['classroom']),
-                          Text('周数:' + wlist[i]['classWeek']),
-                          Text('任课教师:' + wlist[i]['teacher']),
-                        ],
-                      ),
-                    ),
-                    actions: [
-                      popup.button(
-                        label: 'Close',
-                        onPressed: Navigator.of(context).pop,
-                      ),
-                    ],
-                  );
+                  showDialog(
+                      context: context,
+                      builder: (context) {
+                        return courseCard(
+                            MediaQuery.of(context).size.width / 11,
+                            MediaQuery.of(context).size.height / 7,
+                            wlist,
+                            i);
+                      });
                 } else {
                   // 多节课同一位置
                   List temp = [];
@@ -370,91 +619,27 @@ class _SchedulePageState extends State<SchedulePage> {
                     child: Swiper(
                       index: 0,
                       itemCount: temp.length,
-                      itemWidth: MediaQuery.of(context).size.width/11*9,
-                      itemHeight: MediaQuery.of(context).size.height/7*5,
+                      itemWidth: MediaQuery.of(context).size.width,
+                      itemHeight: MediaQuery.of(context).size.height,
                       layout: SwiperLayout.STACK,
                       pagination: SwiperPagination(),
                       itemBuilder: (BuildContext context, int index) {
-                        return Card(
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(13.0)),
-                          child: Stack(
-                            alignment: Alignment.center,
-                            children: <Widget>[
-                              Align(
-                                alignment: Alignment.topCenter,
-                                child: Image.asset(
-                                  'assets/imgs/plane.png',
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                              Positioned(
-                                top: 200.0,
-                                child: DefaultTextStyle(
-//                                  softWrap: true,
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                    decoration: TextDecoration.none,
-                                  ),
-                                  child: Column(
-                                    children: <Widget>[
-                                      Text(
-                                        '课程详情',
-                                        style: TextStyle(
-                                          color: Colors.blue.withOpacity(0.85),
-                                          fontSize: 35,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        height: 10,
-                                      ),
-                                      SingleChildScrollView(
-                                        child: Column(
-                                          children: <Widget>[
-                                            Text(
-                                              '课程名:' +
-                                                  temp[index]['courseName']
-                                                      .toString(),
-                                            ),
-                                            Text('课程号:' +
-                                                temp[index]['courseNum']),
-                                            Text('教室:' +
-                                                temp[index]['classroom']),
-                                            Text('周数:' +
-                                                temp[index]['classWeek']),
-                                            Text('任课教师:' +
-                                                temp[index]['teacher']),
-                                          ],
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              Positioned(
-                                bottom: 20.0,
-                                child: SizedBox(
-                                  width: 260,
-                                  child: RaisedButton(
-                                    onPressed: () => Navigator.pop(context),
-                                    child: Text('close'),
-                                    color: Colors.blue.withOpacity(0.5),
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(20.0)),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        );
+                        return courseCard(
+                            MediaQuery.of(context).size.width / 11,
+                            MediaQuery.of(context).size.height / 7,
+                            temp,
+                            index);
                       },
                     ),
                   );
                 }
               },
+              onLongPress: () => showDialog(
+                  context: context,
+                  builder: (context) {
+                    _modifyCardValue = wlist[i];
+                    return modifyCard(course: wlist, index: i);
+                  }),
             ),
           ),
         ));
@@ -492,9 +677,55 @@ class _SchedulePageState extends State<SchedulePage> {
     monthInWeek = today2Handle.month;
   }
 
+  Widget timeRow() {
+    List weekdayList = [
+      S.of(context).mon,
+      S.of(context).tue,
+      S.of(context).wen,
+      S.of(context).thus,
+      S.of(context).fri,
+      S.of(context).sat,
+      S.of(context).sun
+    ];
+    List<Widget> weekList = [];
+    Widget content;
+    weekList.add(Container(
+      width: 40,
+      color: Colors.white,
+      child: Column(
+        children: <Widget>[
+          Text(monthInWeek.toString()),
+          Text('月'),
+        ],
+      ),
+    ));
+
+    for (int i = 0; i < weekdayList.length; i++) {
+      weekList.add(Expanded(
+        flex: 1,
+        child: Container(
+          color: Colors.white,
+          child: Column(
+            children: <Widget>[
+              Text(weekdayList[i]),
+              Text(dayOfWeek[day7[i]].toString()),
+            ],
+          ),
+        ),
+      ));
+    }
+
+    content = Row(
+      children: weekList,
+    );
+
+    return content;
+  }
+
   @override
   void initState() {
     super.initState();
+
     initValue();
     initTime();
     localGet();
@@ -510,6 +741,18 @@ class _SchedulePageState extends State<SchedulePage> {
     }
   }
 
+  _buildBackground() {
+    if (imgBackground == '' || imgBackground == null) {
+      return BoxDecoration();
+    } else {
+      return BoxDecoration(
+        image: DecorationImage(
+          image: FileImage(File(imgBackground)),
+        )
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -520,7 +763,6 @@ class _SchedulePageState extends State<SchedulePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             // 下拉筛选框
-            //学期
             DropdownButton(
               value: semesterValue,
               onChanged: (val) {
@@ -556,7 +798,6 @@ class _SchedulePageState extends State<SchedulePage> {
                   wlist.clear();
                   classInWeek(handledClassInfo);
 
-//                      var temp = today;
                   now = now.add(Duration(days: gapWeek * 7));
                   mondayJudge(now);
                   dateHandle(mondayInWeek, now);
@@ -574,120 +815,51 @@ class _SchedulePageState extends State<SchedulePage> {
       ),
       body: RefreshIndicator(
         onRefresh: getSchedule,
-        child: SingleChildScrollView(
-          child: Column(
-            children: <Widget>[
-              new Container(
-                height: 10,
-              ),
-
-              // 月份 日期
-              DefaultTextStyle(
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 16,
-                  color: Colors.black87,
-                  decoration: TextDecoration.none,
+        child: Container(
+          decoration: _buildBackground(),
+          child: SingleChildScrollView(
+            child: Column(
+              children: <Widget>[
+                new Container(
+                  height: 10,
+                  color: Colors.white,
                 ),
-                child: Row(
+
+                // 月份 日期
+                DefaultTextStyle(
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: Colors.black87,
+                    decoration: TextDecoration.none,
+                  ),
+                  child: timeRow(),
+                ),
+                new Container(
+                  height: 2,
+                ),
+                // 当前节次对应课程
+                kbBuild(1),
+                kbBuild(2),
+                kbBuild(3),
+                kbBuild(4),
+                kbBuild(5),
+                Row(
                   children: <Widget>[
                     Container(
-                      width: 40,
-                      child: Column(
-                        children: <Widget>[
-                          Text(monthInWeek.toString()),
-                          Text('月'),
-                        ],
-                      ),
+                      color: Colors.white,
+                      width: 30,
+                      child: Text(S.of(context).classMore),
                     ),
                     Expanded(
                       flex: 1,
-                      child: Column(
-                        children: <Widget>[
-                          Text(S.of(context).mon),
-                          Text(dayOfWeek[day7[0]].toString()),
-                        ],
-                      ),
-                    ),
-                    Expanded(
-                      flex: 1,
-                      child: Column(
-                        children: <Widget>[
-                          Text(S.of(context).tue),
-                          Text(dayOfWeek[day7[1]].toString()),
-                        ],
-                      ),
-                    ),
-                    Expanded(
-                      flex: 1,
-                      child: Column(
-                        children: <Widget>[
-                          Text(S.of(context).wen),
-                          Text(dayOfWeek[day7[2]].toString()),
-                        ],
-                      ),
-                    ),
-                    Expanded(
-                      flex: 1,
-                      child: Column(
-                        children: <Widget>[
-                          Text(S.of(context).thus),
-                          Text(dayOfWeek[day7[3]].toString()),
-                        ],
-                      ),
-                    ),
-                    Expanded(
-                      flex: 1,
-                      child: Column(
-                        children: <Widget>[
-                          Text(S.of(context).fri),
-                          Text(dayOfWeek[day7[4]].toString()),
-                        ],
-                      ),
-                    ),
-                    Expanded(
-                      flex: 1,
-                      child: Column(
-                        children: <Widget>[
-                          Text(S.of(context).sat),
-                          Text(dayOfWeek[day7[5]].toString()),
-                        ],
-                      ),
-                    ),
-                    Expanded(
-                      flex: 1,
-                      child: Column(
-                        children: <Widget>[
-                          Text(S.of(context).sun),
-                          Text(dayOfWeek[day7[6]].toString()),
-                        ],
-                      ),
-                    ),
+                      child: Container(
+                          color: Colors.white, child: Text(classMore ?? '无')),
+                    )
                   ],
-                ),
-              ),
-              new Container(
-                height: 10,
-              ),
-              // 当前节次对应课程
-              kbBuild(1),
-              kbBuild(2),
-              kbBuild(3),
-              kbBuild(4),
-              kbBuild(5),
-              Row(
-                children: <Widget>[
-                  Container(
-                    width: 30,
-                    child: Text('备注'),
-                  ),
-                  Expanded(
-                    flex: 1,
-                    child: Text(classMore ?? '无'),
-                  )
-                ],
-              )
-            ],
+                )
+              ],
+            ),
           ),
         ),
       ),

@@ -2,8 +2,9 @@ import 'package:dio/dio.dart';
 import 'package:flustars/flustars.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/common/apis.dart';
-import 'package:flutter_app/common/sp_file.dart';
+import 'package:flutter_app/common/spFile.dart';
 import 'package:flutter_app/generated/l10n.dart';
+import 'package:flutter_app/widgets/commonWidget.dart';
 import 'package:flutter_app/widgets/dialog.dart';
 
 class EmptyClassroom extends StatefulWidget {
@@ -14,15 +15,17 @@ class EmptyClassroom extends StatefulWidget {
 class _EmptyClassroomState extends State<EmptyClassroom> {
   var _passwd, _uid;
   List ClsEmptyRes = [];
-  String areaValue = '东校区', zcValue = '第1周', weekValue = "周一";
+  String areaValue = '梦溪校区(东校区)', zcValue = '第1周', weekValue = "周一";
   var buildValue = "综合楼C";
+  var _semester = "2020-2021-1";
 
   Map areaParaList = {
-    "东校区": '01',
+    "梦溪校区(东校区)": '01',
     "南校区": '02',
     "西校区": '03',
     "张家港": '04',
-    "苏州理工": '05'
+    "苏州理工": '05',
+    "长山校区": 'd5'
   };
 
   var eastBuildingArray = ["综合楼B", "综合楼C", "综合楼D", "教三", "教四", "实验楼11", "计算中心"];
@@ -30,6 +33,7 @@ class _EmptyClassroomState extends State<EmptyClassroom> {
   var westBuildingArray = ["西综", "图书馆"];
   var zhangBuildingArray = ["教学楼E", "教学楼F"];
   var suBuildingArray = ["教学楼A", "教学楼B", "教学楼C", "教学楼D", "外语楼", "经管数理", "船海土木"];
+  var changshangBuildingArray = ["12号楼-文理大楼","13号楼-教学楼B1","14号楼-教学楼B2","16号楼-教学楼C"];
   var orderArray = ['第一大节', '第二大节', '第三大节', '第四大节', '第五大节'];
   var zcArray = [
     '第1周',
@@ -76,23 +80,29 @@ class _EmptyClassroomState extends State<EmptyClassroom> {
     "教学楼D": 21,
     "外语楼": 22,
     "经管数理": 24,
-    "船海土木": 25
+    "船海土木": 25,
+    '12号楼-文理大楼':'D125477CBD644218826C99653EA4B96C',
+    '13号楼-教学楼B1':"31D5B6B2A5664092A19527E80194D896",
+    '14号楼-教学楼B2':"0B58165E4E5B4E6E9FDD26F78CCA1231",
+    '16号楼-教学楼C':"57F3153B05B641EBA83F586E3CFC9B33"
   };
 
   var chooseBuildingArray = Map();
 
   void chooseBuildingArrayInit() {
-    chooseBuildingArray['东校区'] = eastBuildingArray;
-    chooseBuildingArray['南校区'] = southBuildingArray;
-    chooseBuildingArray['西校区'] = westBuildingArray;
+    chooseBuildingArray['梦溪校区(东校区)'] = eastBuildingArray;
+//    chooseBuildingArray['南校区'] = southBuildingArray;
+//    chooseBuildingArray['西校区'] = westBuildingArray;
     chooseBuildingArray['张家港'] = zhangBuildingArray;
     chooseBuildingArray['苏州理工'] = suBuildingArray;
+    chooseBuildingArray['长山校区'] = changshangBuildingArray;
   }
 
   //  获取学号密码
   void futureReady() {
     _uid = SpUtil.getString(LocalShare.STU_ID);
     _passwd = SpUtil.getString(LocalShare.STU_PASSWD);
+    _semester = SpUtil.getStringList(LocalShare.ALL_YEAR)[0];
   }
 
   //空教室获取
@@ -111,11 +121,6 @@ class _EmptyClassroomState extends State<EmptyClassroom> {
       "building_id": buildingId,
       "week": week.toString(),
     });
-
-    print(areaId);
-    print(semester);
-    print(buildingId);
-    print(week);
 
     Response response =
         await Dio().post(Constant.CLASSROOM_EMPTY, data: formData);
@@ -183,9 +188,7 @@ class _EmptyClassroomState extends State<EmptyClassroom> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(S.of(context).classroom),
-      ),
+      appBar: Common.appBar(context,title: S.of(context).classroom),
       body: DefaultTextStyle(
         textAlign: TextAlign.center,
         style: TextStyle(
@@ -219,7 +222,7 @@ class _EmptyClassroomState extends State<EmptyClassroom> {
                               buildValue = chooseBuildingArray[areaValue][0];
                             });
                           },
-                          items: <String>['东校区', '南校区', '西校区', '张家港', '苏州理工']
+                          items: <String>['梦溪校区(东校区)', '张家港', '苏州理工','长山校区']
                               .map<DropdownMenuItem<String>>((String value) {
                             return DropdownMenuItem<String>(
                               value: value,
@@ -336,7 +339,7 @@ class _EmptyClassroomState extends State<EmptyClassroom> {
                         context,
                         _uid,
                         _passwd,
-                        '2019-2020-2',
+                        _semester,
                         areaParaList[areaValue],
                         buildingParaList[buildValue].toString(),
                         zcArray.indexOf(zcValue) + 1),

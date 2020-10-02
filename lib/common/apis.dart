@@ -3,7 +3,7 @@ class Constant {
   static final String UPDATE =
       "https://gitee.com/hansybx/guohe-APP/raw/master/jsonapi/update.json";
 
-  static final String SHARE_URL = "https://stu.guohe3.cn/guohe3.0.2.apk";
+  static final String SHARE_URL = "https://stu.guohe3.cn/guohe3.0.3.apk";
 
   // 登录
   static final String LOGIN = 'https://guohe3.cn/api/v1/stu/login';

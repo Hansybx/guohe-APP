@@ -29,6 +29,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "bus" : MessageLookupByLibrary.simpleMessage("Bus"),
     "calendar" : MessageLookupByLibrary.simpleMessage("Calendar"),
     "campus" : MessageLookupByLibrary.simpleMessage("Campus"),
+    "cancel" : MessageLookupByLibrary.simpleMessage("Cancel"),
     "classMore" : MessageLookupByLibrary.simpleMessage("More"),
     "class_visible" : MessageLookupByLibrary.simpleMessage("Other Weeks Classes Visible"),
     "classroom" : MessageLookupByLibrary.simpleMessage("Classroom"),
@@ -48,6 +49,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "map" : MessageLookupByLibrary.simpleMessage("Map"),
     "me" : MessageLookupByLibrary.simpleMessage("Me"),
     "mon" : MessageLookupByLibrary.simpleMessage("Mon"),
+    "no" : MessageLookupByLibrary.simpleMessage("NO"),
     "quit_tip" : MessageLookupByLibrary.simpleMessage("You will logout and clear all data in local"),
     "sat" : MessageLookupByLibrary.simpleMessage("Sat"),
     "schedule" : MessageLookupByLibrary.simpleMessage("Schedule"),
@@ -60,6 +62,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "sport" : MessageLookupByLibrary.simpleMessage("Sport/Club"),
     "sports_system" : MessageLookupByLibrary.simpleMessage("Sports"),
     "sun" : MessageLookupByLibrary.simpleMessage("Sun"),
+    "sure" : MessageLookupByLibrary.simpleMessage("Sure"),
     "system" : MessageLookupByLibrary.simpleMessage("System"),
     "thus" : MessageLookupByLibrary.simpleMessage("Thus"),
     "tips" : MessageLookupByLibrary.simpleMessage("Tips"),
@@ -67,6 +70,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "update" : MessageLookupByLibrary.simpleMessage("Check for Updates"),
     "version" : MessageLookupByLibrary.simpleMessage("Version is :"),
     "vpn" : MessageLookupByLibrary.simpleMessage("VPN"),
-    "wen" : MessageLookupByLibrary.simpleMessage("Wen")
+    "week_advance" : MessageLookupByLibrary.simpleMessage("Advanced weeks"),
+    "wen" : MessageLookupByLibrary.simpleMessage("Wen"),
+    "yes" : MessageLookupByLibrary.simpleMessage("YES")
   };
 }

@@ -1,4 +1,9 @@
 {
+  "yes": "是",
+  "no": "否",
+  "sure": "确定",
+  "cancel": "取消",
+
   "discover": "发现",
   "system": "系统",
   "campus": "校园",
@@ -37,6 +42,7 @@
   "quit_tip": "你将会退出并清除所有本地缓存",
   "scheduleBackground": "课表背景",
   "long_press_to_reset" : "长按重置课表背景",
+  "week_advance": "提前周次数",
 
   "sport": "早操俱乐部",
   "calendar": "校历",

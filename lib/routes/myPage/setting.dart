@@ -1,4 +1,5 @@
 import 'package:flustars/flustars.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/common/spFile.dart';
 import 'package:flutter_app/common/stringFile.dart';
@@ -29,6 +30,7 @@ class _SettingsPageState extends State<SettingsPage> {
 
   bool flag, classFlag;
   String language, schoolArea, imgBackground;
+  List weekAdvance = [-2,-1,0,1,2];
 
   @override
   void initState() {
@@ -109,7 +111,7 @@ class _SettingsPageState extends State<SettingsPage> {
     });
     SpUtil.putString(LocalShare.BACKGROUND, imgBackground);
     showDialog(
-      context: context,
+        context: context,
         builder: (context) {
           return AlertDialog(
             shape: RoundedRectangleBorder(
@@ -118,13 +120,11 @@ class _SettingsPageState extends State<SettingsPage> {
             actions: <Widget>[
               FlatButton(
                 child: Text("OK"),
-                onPressed: () =>
-                    Navigator.of(context).pop(), //关闭对话框
+                onPressed: () => Navigator.of(context).pop(), //关闭对话框
               ),
             ],
           );
-        }
-    );
+        });
   }
 
   Widget scheduleBackground() {
@@ -164,6 +164,97 @@ class _SettingsPageState extends State<SettingsPage> {
             });
       },
     );
+  }
+
+  // 周次位移量
+  void _showWeekPicker(BuildContext cxt) {
+    int index = 0;
+    List<Widget> info = [];
+    for(int i=0;i<weekAdvance.length;i++){
+      info.add(Text(weekAdvance[i].toString()));
+    }
+    final weekPicker = CupertinoPicker(
+        backgroundColor: Colors.white,
+        useMagnifier: true,
+        magnification: 1.2,
+        itemExtent: 30,
+        onSelectedItemChanged: (position) {
+          print('The position is $position');
+          setState(() {
+            index = position;
+          });
+        },
+        children: info
+    );
+
+    showCupertinoModalPopup(
+        context: cxt,
+        builder: (cxt) {
+          return Container(
+            height: 300,
+            child: Column(
+              children: <Widget>[
+                Expanded(flex: 4, child: weekPicker),
+                Expanded(
+                  flex: 1,
+                  child: Container(
+                    color: Colors.white,
+                    child: Row(
+                      children: <Widget>[
+                        SizedBox(
+                          width: MediaQuery.of(cxt).size.width/6,
+                        ),
+                        Expanded(
+                          flex: 1,
+                          child: Container(
+                            height: 50,
+                            child: FlatButton(
+                              color: Color(0xffdcdcdc),
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: new BorderRadius.circular(9)),
+                              child: Text(
+                                S.of(context).cancel,
+                                style: TextStyle(color: Color(0xff00c973)),
+                              ),
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          width: 20,
+                        ),
+                        Expanded(
+                          flex: 1,
+                          child: Container(
+                            height: 50,
+                            child: FlatButton(
+                              child: Text(S.of(context).sure,style: TextStyle(color: Colors.white),),
+                              color: Color(0xff00c973),
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: new BorderRadius.circular(9)),
+                              onPressed: () {
+                                print(index);
+                                setState(() {
+                                  SpUtil.putInt(LocalShare.WEEK_ADVANCE, weekAdvance[index]);
+                                });
+                                Navigator.pop(context);
+                              },
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          width: MediaQuery.of(cxt).size.width/6,
+                        ),
+                      ],
+                    ),
+                  ),
+                )
+              ],
+            ),
+          );
+        });
   }
 
   @override
@@ -266,6 +357,21 @@ class _SettingsPageState extends State<SettingsPage> {
                   },
                 ),
                 classVisibleSwitch(),
+                ListTile(
+                  title: Text(
+                    S.of(context).week_advance,
+                    style: whiteBoldText,
+                  ),
+                  subtitle: Text(
+                    SpUtil.getInt(LocalShare.WEEK_ADVANCE,defValue: 0).toString(),
+                    style: greyText,
+                  ),
+                  trailing: Icon(
+                    Icons.keyboard_arrow_right,
+                    color: Colors.grey.shade400,
+                  ),
+                  onTap: () => _showWeekPicker(context),
+                )
               ],
             ),
           ),

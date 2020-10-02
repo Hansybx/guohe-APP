@@ -144,7 +144,7 @@ class _SchedulePageState extends State<SchedulePage> {
     semesters = SpUtil.getStringList(LocalShare.ALL_YEAR);
     semesterValue = semesters[0] ??
         (today.year - 1).toString() + '-' + (today.year).toString() + '-2';
-    weekNum = SpUtil.getInt(LocalShare.SERVER_WEEK);
+    weekNum = SpUtil.getInt(LocalShare.SERVER_WEEK)+SpUtil.getInt(LocalShare.WEEK_ADVANCE,defValue: 0);
     if (weekNum > 20 || weekNum <= 0 || weekNum == null) {
       weekNum = 1;
     }
@@ -743,7 +743,7 @@ class _SchedulePageState extends State<SchedulePage> {
 
   _buildBackground() {
     if (imgBackground == '' || imgBackground == null) {
-      return BoxDecoration();
+      return BoxDecoration(color: Colors.white);
     } else {
       return BoxDecoration(
         image: DecorationImage(

@@ -3,6 +3,7 @@ import 'package:flutter_app/generated/l10n.dart';
 import 'package:flutter_app/routes/homePage/home.dart';
 import 'package:flutter_app/routes/kb.dart';
 import 'package:flutter_app/routes/myPage/me.dart';
+import 'package:flutter_app/widgets/iconFont.dart';
 
 class Tabs extends StatefulWidget {
   @override
@@ -45,7 +46,7 @@ class _TabsState extends State<Tabs> with SingleTickerProviderStateMixin {
             ),
             new Tab(
               text: S.of(context).discover,
-              icon: new Icon(Icons.brightness_5),
+              icon: new Icon(IconFont.icon_LC_icon_light_line),
             ),
             new Tab(
               text: S.of(context).me,

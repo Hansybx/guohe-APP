@@ -33,6 +33,46 @@ class S {
     return Localizations.of<S>(context, S);
   }
 
+  /// `YES`
+  String get yes {
+    return Intl.message(
+      'YES',
+      name: 'yes',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `NO`
+  String get no {
+    return Intl.message(
+      'NO',
+      name: 'no',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sure`
+  String get sure {
+    return Intl.message(
+      'Sure',
+      name: 'sure',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cancel`
+  String get cancel {
+    return Intl.message(
+      'Cancel',
+      name: 'cancel',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Discover`
   String get discover {
     return Intl.message(
@@ -398,6 +438,16 @@ class S {
     return Intl.message(
       'Long press to reset the schedule background',
       name: 'long_press_to_reset',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Advanced weeks`
+  String get week_advance {
+    return Intl.message(
+      'Advanced weeks',
+      name: 'week_advance',
       desc: '',
       args: [],
     );

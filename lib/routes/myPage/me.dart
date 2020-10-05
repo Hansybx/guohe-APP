@@ -126,8 +126,7 @@ class _MyPageState extends State<MyPage> {
                 child: ListTile(
                   title: new Text(S.of(context).share),
                   onTap: () => Share.share(
-                      '果核 \r' + Constant.SHARE_URL.toString(),
-                      subject: 'Look what I made!'),
+                      '果核 \r' + Constant.SHARE_URL.toString()+'\r一次奇妙的尝试',),
                   leading: Icon(AntDesign.sharealt, color: Colors.green),
                   trailing: Icon(Icons.keyboard_arrow_right),
                 ),

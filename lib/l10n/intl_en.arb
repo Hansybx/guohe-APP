@@ -1,4 +1,9 @@
 {
+  "yes": "YES",
+  "no": "NO",
+  "sure": "Sure",
+  "cancel": "Cancel",
+
   "discover": "Discover",
   "system": "System",
   "campus": "Campus",
@@ -37,6 +42,7 @@
   "quit_tip": "You will logout and clear all data in local",
   "scheduleBackground": "Schedule background",
   "long_press_to_reset" : "Long press to reset the schedule background",
+  "week_advance": "Advanced weeks",
 
   "sport": "Sport/Club",
   "calendar": "Calendar",

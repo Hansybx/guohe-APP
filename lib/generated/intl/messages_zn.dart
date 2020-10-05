@@ -29,6 +29,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "bus" : MessageLookupByLibrary.simpleMessage("校车"),
     "calendar" : MessageLookupByLibrary.simpleMessage("校历"),
     "campus" : MessageLookupByLibrary.simpleMessage("校园"),
+    "cancel" : MessageLookupByLibrary.simpleMessage("取消"),
     "classMore" : MessageLookupByLibrary.simpleMessage("备注"),
     "class_visible" : MessageLookupByLibrary.simpleMessage("其它周次课程是否可见"),
     "classroom" : MessageLookupByLibrary.simpleMessage("空教室"),
@@ -48,6 +49,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "map" : MessageLookupByLibrary.simpleMessage("长山地图"),
     "me" : MessageLookupByLibrary.simpleMessage("我"),
     "mon" : MessageLookupByLibrary.simpleMessage("一"),
+    "no" : MessageLookupByLibrary.simpleMessage("否"),
     "quit_tip" : MessageLookupByLibrary.simpleMessage("你将会退出并清除所有本地缓存"),
     "sat" : MessageLookupByLibrary.simpleMessage("六"),
     "schedule" : MessageLookupByLibrary.simpleMessage("课表"),
@@ -60,6 +62,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "sport" : MessageLookupByLibrary.simpleMessage("早操俱乐部"),
     "sports_system" : MessageLookupByLibrary.simpleMessage("体育系统"),
     "sun" : MessageLookupByLibrary.simpleMessage("日"),
+    "sure" : MessageLookupByLibrary.simpleMessage("确定"),
     "system" : MessageLookupByLibrary.simpleMessage("系统"),
     "thus" : MessageLookupByLibrary.simpleMessage("四"),
     "tips" : MessageLookupByLibrary.simpleMessage("提示"),
@@ -67,6 +70,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "update" : MessageLookupByLibrary.simpleMessage("检查更新"),
     "version" : MessageLookupByLibrary.simpleMessage("当前版本"),
     "vpn" : MessageLookupByLibrary.simpleMessage("校园VPN"),
-    "wen" : MessageLookupByLibrary.simpleMessage("三")
+    "week_advance" : MessageLookupByLibrary.simpleMessage("提前周次数"),
+    "wen" : MessageLookupByLibrary.simpleMessage("三"),
+    "yes" : MessageLookupByLibrary.simpleMessage("是")
   };
 }

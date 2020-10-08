@@ -37,21 +37,21 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     swiperImgs().then((res) {
-      if(mounted){
+      if (mounted) {
         setState(() {
-        for (var item in res) {
-          imageList.add(CachedNetworkImage(
-            placeholder: (context, url) => new Container(
-              width: 80,
-              height: 80,
-              child: new Center(child: new CircularProgressIndicator()),
-            ),
-            imageUrl: item['img'],
-            fit: BoxFit.fill,
-          ));
-          refUrl.add(item['url']);
-        }
-      });
+          for (var item in res) {
+            imageList.add(CachedNetworkImage(
+              placeholder: (context, url) => new Container(
+                width: 80,
+                height: 80,
+                child: new Center(child: new CircularProgressIndicator()),
+              ),
+              imageUrl: item['img'],
+              fit: BoxFit.fill,
+            ));
+            refUrl.add(item['url']);
+          }
+        });
       }
     });
 
@@ -94,15 +94,6 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Colors.white,
-//        appBar: AppBar(
-//          elevation: 0,
-//          centerTitle: true,
-//          backgroundColor: Colors.white,
-//          title: Text(
-//            S.of(context).discover,
-//            style: new TextStyle(color: Colors.black),
-//          ),
-//        ),
         body: new OrientationBuilder(builder: (context, ori) {
           //判断屏幕宽度
           if (MediaQuery.of(context).size.width > 600) {
@@ -111,40 +102,45 @@ class _HomePageState extends State<HomePage> {
             isLargeScreen = false;
           }
           return SingleChildScrollView(
-            child: Column(
-              children: <Widget>[
-                SizedBox(height: 10),
-                swiper(),
-                ListTile(
-                  title: Text(S.of(context).campus),
-                ),
-                GridView.count(
-                  shrinkWrap: true,
-                  physics: new NeverScrollableScrollPhysics(),
-                  crossAxisCount: 4,
-                  padding: EdgeInsets.symmetric(vertical: 0),
-                  children: getEduServiceList(context)
-                      .map((item) => ServiceItem(widget: item))
-                      .toList(),
-                ),
-                new Divider(),
-                ListTile(
-                  title: Text(S.of(context).system),
-                ),
-                GridView.count(
-                  shrinkWrap: true,
-                  physics: new NeverScrollableScrollPhysics(),
-                  crossAxisCount: 4,
-                  padding: EdgeInsets.symmetric(vertical: 0),
-                  children: getSystemList(context)
-                      .map((item) => ServiceItem(widget: item))
-                      .toList(),
-                ),
-                new Divider(),
-              ],
-            ),
-          );
+              child: isLargeScreen
+                  ? Center(child: Container(width: 600, child: homePage()))
+                  : homePage());
         }));
+  }
+
+  Widget homePage() {
+    return Column(
+      children: <Widget>[
+        SizedBox(height: 10),
+        swiper(),
+        ListTile(
+          title: Text(S.of(context).campus),
+        ),
+        GridView.count(
+          shrinkWrap: true,
+          physics: new NeverScrollableScrollPhysics(),
+          crossAxisCount: 4,
+          padding: EdgeInsets.symmetric(vertical: 0),
+          children: getEduServiceList(context)
+              .map((item) => ServiceItem(widget: item))
+              .toList(),
+        ),
+        new Divider(),
+        ListTile(
+          title: Text(S.of(context).system),
+        ),
+        GridView.count(
+          shrinkWrap: true,
+          physics: new NeverScrollableScrollPhysics(),
+          crossAxisCount: 4,
+          padding: EdgeInsets.symmetric(vertical: 0),
+          children: getSystemList(context)
+              .map((item) => ServiceItem(widget: item))
+              .toList(),
+        ),
+        new Divider(),
+      ],
+    );
   }
 
   // 轮播图
@@ -152,7 +148,7 @@ class _HomePageState extends State<HomePage> {
     return Container(
       padding: const EdgeInsets.fromLTRB(0, 0, 0, 5),
       width: MediaQuery.of(context).size.width,
-      height: 250,
+      height: isLargeScreen ? 400 : 250,
       child: Swiper(
         itemCount: imageList.length,
         itemBuilder: _swiperBuilder,

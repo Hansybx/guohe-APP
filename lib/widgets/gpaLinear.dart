@@ -85,9 +85,6 @@ class _GPALinearState extends State<GPALinear> {
           margin: 12,
         ),
       ),
-//      borderData: FlBorderData(
-//          show: true,
-//          border: Border.all(color: const Color(0xff37434d), width: 1)),
       minX: -1,
       maxX: gpas.length.toDouble(),
       minY: 0,

@@ -61,7 +61,6 @@ class HomeServiceMethod {
 ////    return _locationData;
 //  }
 
-
   static Future<dynamic> realPosition() async {
     var status = await Permission.location.status;
     print(status);
@@ -71,7 +70,6 @@ class HomeServiceMethod {
     ].request();
 
     print(statuses[Permission.location]);
-
 
     //启动一下
     await AMapLocationClient.startup(new AMapLocationOption(
@@ -168,7 +166,7 @@ class HomeServiceMethod {
           showDialog(
             context: context,
             child: AlertDialog(
-              content: Text("活动创建失败,"+res.data['message'].toString()),
+              content: Text("活动创建失败," + res.data['message'].toString()),
               actions: <Widget>[
                 FlatButton(
                   child: Text("确定"),
@@ -198,7 +196,6 @@ class HomeServiceMethod {
 
   // sign in activity create end
 
-
   //sign in activity attend start
   static Future<void> attendCheck(BuildContext context) async {
     if (_checkboxInCreate) {
@@ -221,7 +218,7 @@ class HomeServiceMethod {
     signMap['latitude'] = latitude;
     signMap['signId'] = checkCode;
 
-    await Dio().post(Constant.ACTIVITY_ATTEND, data: signMap).then((res){
+    await Dio().post(Constant.ACTIVITY_ATTEND, data: signMap).then((res) {
       if (res.statusCode == 200) {
         Navigator.pop(context);
 //      print(res);
@@ -268,7 +265,6 @@ class HomeServiceMethod {
         );
       }
     });
-
   }
 
   //sign in activity attend end
@@ -369,8 +365,8 @@ List<ServiceItemViewModel> getEduServiceList(BuildContext context) {
     ServiceItemViewModel(
         route: RouteStr.MAP,
         title: S.of(context).map,
-        icon: new Image.asset("assets/imgs/core/map.png",
-            width: 35, height: 35)),
+        icon:
+            new Image.asset("assets/imgs/core/map.png", width: 35, height: 35)),
 //    ServiceItemViewModel(
 //        route: RouteStr.SIGNINSYS,
 //        title: S.of(context).sign_in_system,

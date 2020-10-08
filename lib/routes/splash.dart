@@ -15,6 +15,9 @@ class SplashPage extends StatefulWidget {
 }
 
 class _SplashPageState extends State<SplashPage> {
+  // 判断是否是大屏幕
+  bool isLargeScreen;
+
   bool flag;
   String uid;
   String passwd;
@@ -58,7 +61,7 @@ class _SplashPageState extends State<SplashPage> {
       await Dio().post(Constant.CALENDAR, data: formData).then((res) {
         List<String> temp = List<String>.from(res.data['info']['allYear']);
         SpUtil.putStringList(LocalShare.ALL_YEAR, temp);
-        SpUtil.putString(LocalShare.SEMESTER,temp[0]);
+        SpUtil.putString(LocalShare.SEMESTER, temp[0]);
         SpUtil.putInt(LocalShare.SERVER_WEEK, res.data['info']['weekNum']);
       });
     }
@@ -74,8 +77,6 @@ class _SplashPageState extends State<SplashPage> {
   // 初始化语言
   Future<void> _initLocale() {
     String language = SpUtil.getString(LocalShare.LANGUAGE);
-    print("default language:" + language);
-//    print("default language:" + _locale.languageCode);
     setState(() {
       if (language == "简体中文") S.load(Locale('zn', 'CN'));
       if (language == "English") S.load(Locale('en', 'US'));
@@ -84,11 +85,24 @@ class _SplashPageState extends State<SplashPage> {
 
   @override
   Widget build(BuildContext context) {
+    //判断屏幕宽度
+    if (MediaQuery.of(context).size.width > 600) {
+      isLargeScreen = true;
+    } else {
+      isLargeScreen = false;
+    }
     return Container(
-      child: Image(
-        image: AssetImage('assets/imgs/splash.png'),
-        fit: BoxFit.fill,
-      ),
+        child: isLargeScreen
+            ? Container(
+                color: Colors.white,
+                child: Center(child: Container(width: 600, child: splashImg())))
+            : splashImg());
+  }
+
+  Widget splashImg() {
+    return Image(
+      image: AssetImage('assets/imgs/splash.png'),
+      fit: BoxFit.fill,
     );
   }
 }

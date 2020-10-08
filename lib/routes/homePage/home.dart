@@ -157,14 +157,12 @@ class _HomePageState extends State<HomePage> {
             margin: const EdgeInsets.fromLTRB(0, 0, 20, 10),
             builder: DotSwiperPaginationBuilder(
                 color: Colors.black54, activeColor: Colors.white)),
-//        controller: SwiperController(),
         loop: false,
         controller: _swiperController,
         scrollDirection: Axis.horizontal,
         autoplay: true,
         onTap: (index) {
           //todo 完善轮播图逻辑
-          print('点击了第$index');
           if (refUrl[index].length != 0) {
             print(refUrl[index].length != 0);
             Navigator.push(context, MaterialPageRoute(builder: (_) {

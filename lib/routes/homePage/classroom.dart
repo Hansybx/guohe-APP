@@ -33,7 +33,12 @@ class _EmptyClassroomState extends State<EmptyClassroom> {
   var westBuildingArray = ["西综", "图书馆"];
   var zhangBuildingArray = ["教学楼E", "教学楼F"];
   var suBuildingArray = ["教学楼A", "教学楼B", "教学楼C", "教学楼D", "外语楼", "经管数理", "船海土木"];
-  var changshangBuildingArray = ["12号楼-文理大楼","13号楼-教学楼B1","14号楼-教学楼B2","16号楼-教学楼C"];
+  var changshangBuildingArray = [
+    "12号楼-文理大楼",
+    "13号楼-教学楼B1",
+    "14号楼-教学楼B2",
+    "16号楼-教学楼C"
+  ];
   var orderArray = ['第一大节', '第二大节', '第三大节', '第四大节', '第五大节'];
   var zcArray = [
     '第1周',
@@ -81,10 +86,10 @@ class _EmptyClassroomState extends State<EmptyClassroom> {
     "外语楼": 22,
     "经管数理": 24,
     "船海土木": 25,
-    '12号楼-文理大楼':'D125477CBD644218826C99653EA4B96C',
-    '13号楼-教学楼B1':"31D5B6B2A5664092A19527E80194D896",
-    '14号楼-教学楼B2':"0B58165E4E5B4E6E9FDD26F78CCA1231",
-    '16号楼-教学楼C':"57F3153B05B641EBA83F586E3CFC9B33"
+    '12号楼-文理大楼': 'D125477CBD644218826C99653EA4B96C',
+    '13号楼-教学楼B1': "31D5B6B2A5664092A19527E80194D896",
+    '14号楼-教学楼B2': "0B58165E4E5B4E6E9FDD26F78CCA1231",
+    '16号楼-教学楼C': "57F3153B05B641EBA83F586E3CFC9B33"
   };
 
   var chooseBuildingArray = Map();
@@ -133,7 +138,6 @@ class _EmptyClassroomState extends State<EmptyClassroom> {
         setState(() {
           ClassRoomBuild();
         });
-        print(ClsEmptyRes);
       }
     }
   }
@@ -188,7 +192,7 @@ class _EmptyClassroomState extends State<EmptyClassroom> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: Common.appBar(context,title: S.of(context).classroom),
+      appBar: Common.appBar(context, title: S.of(context).classroom),
       body: DefaultTextStyle(
         textAlign: TextAlign.center,
         style: TextStyle(
@@ -222,7 +226,7 @@ class _EmptyClassroomState extends State<EmptyClassroom> {
                               buildValue = chooseBuildingArray[areaValue][0];
                             });
                           },
-                          items: <String>['梦溪校区(东校区)', '张家港', '苏州理工','长山校区']
+                          items: <String>['梦溪校区(东校区)', '张家港', '苏州理工', '长山校区']
                               .map<DropdownMenuItem<String>>((String value) {
                             return DropdownMenuItem<String>(
                               value: value,

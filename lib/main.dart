@@ -38,13 +38,15 @@ class _MyAppState extends State<MyApp> {
   // 加载微信SDK
   // todo 先添加 android 端，ios端稍后做
   Future<void> _initFluwx() async {
-    await registerWxApi(
-        appId: "wx31c614cef0a3c2b1",
-        doOnAndroid: true,
-        doOnIOS: false,
-        universalLink: "https://your.univerallink.com/link/");
-    var result = await isWeChatInstalled;
-    print("WeChat SDK is installed $result");
+    if (Platform.isAndroid || Platform.isIOS) {
+      await registerWxApi(
+          appId: "wx31c614cef0a3c2b1",
+          doOnAndroid: true,
+          doOnIOS: false,
+          universalLink: "https://your.univerallink.com/link/");
+      var result = await isWeChatInstalled;
+      print("WeChat SDK is installed $result");
+    }
   }
 
   // 初始化更新插件
@@ -99,7 +101,7 @@ class _MyAppState extends State<MyApp> {
       supportedLocales: S.delegate.supportedLocales,
       // 设置页面相关信息
       title: '果核',
-      onGenerateRoute: Router.generateRoute,
+      onGenerateRoute: RouterPath.generateRoute,
 //      navigatorObservers: [AppAnalysis()],
       initialRoute: '/',
       // 设置主页

@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -18,9 +19,9 @@ class _BrowserState extends State<Browser> {
   @override
   void initState() {
     super.initState();
+
     //监听页面状态改变
     flutterWebviewPlugin.onUrlChanged.listen((String url) {
-      print(url);
       if (url.startsWith("weixin://")) {
         flutterWebviewPlugin.close();
         launch(url);
@@ -41,7 +42,6 @@ class _BrowserState extends State<Browser> {
       withZoom: true,
       displayZoomControls: true,
       useWideViewPort: true,
-
       withOverviewMode: true,
     );
   }

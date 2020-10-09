@@ -29,7 +29,7 @@ dependencies:
   flutter_swiper: ^1.1.6
   flutter_xupdate: ^0.0.3
   flustars: ^0.3.3
-  fluwx: ^2.2.0
+  fluwx: ^2.3.0
   fl_chart: ^0.10.1
   image_picker: ^0.6.7+4
   package_info: ^0.4.1

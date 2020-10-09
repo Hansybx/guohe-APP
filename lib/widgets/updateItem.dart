@@ -34,11 +34,11 @@ class UpdateListTileState extends State<UpdateListTile> {
       //todo ios的升级判断，跳转至app store
       if (Platform.isAndroid) {
         FlutterXUpdate.checkUpdate(url: Constant.UPDATE);
-      }else if(Platform.isIOS){
+      } else if (Platform.isIOS) {
         print("跳转至app store");
       }
     } else {
-      Toast.show("当前已是最新版本" + buildNumber, context);
+      Toast.show("当前已是最新版本", context);
     }
   }
 

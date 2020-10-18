@@ -55,6 +55,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "schedule" : MessageLookupByLibrary.simpleMessage("课表"),
     "scheduleBackground" : MessageLookupByLibrary.simpleMessage("课表背景"),
     "schoolAreaValue" : MessageLookupByLibrary.simpleMessage("校区"),
+    "schoolService" : MessageLookupByLibrary.simpleMessage("校园服务"),
     "semester" : MessageLookupByLibrary.simpleMessage("请选择学期"),
     "setting" : MessageLookupByLibrary.simpleMessage("设置"),
     "share" : MessageLookupByLibrary.simpleMessage("分享"),

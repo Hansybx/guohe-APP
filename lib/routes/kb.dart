@@ -298,7 +298,7 @@ class _SchedulePageState extends State<SchedulePage> {
         }
       }
       // 同一位置有多个课程
-      if (item.containsKey('otherClasses') && added == false) {
+      if (item.containsKey('otherClass-es') && added == false) {
         classInWeek(item['otherClasses'], other: true);
       }
     }

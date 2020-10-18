@@ -146,3 +146,6 @@
 -keep class com.google.gson.examples.android.model.** { *; }
 # xupdate
 -keep class com.xuexiang.xupdate.entity.** { *; }
+
+# flutter local notification
+-keep class com.dexterous.** { *; }

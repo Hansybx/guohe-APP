@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_app/common/routeStr.dart';
 import 'package:flutter_app/generated/l10n.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -20,6 +21,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   Locale _locale = const Locale('zn', 'CN');
+//  final JPush jpush = new JPush();
 
   @override
   void initState() {
@@ -33,6 +35,7 @@ class _MyAppState extends State<MyApp> {
 
     _initFluwx();
     _initUpdate();
+//    _initJPush();
   }
 
   // 加载微信SDK

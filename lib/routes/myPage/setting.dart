@@ -1,11 +1,13 @@
 import 'package:flustars/flustars.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_app/common/spFile.dart';
 import 'package:flutter_app/common/stringFile.dart';
 import 'package:flutter_app/generated/l10n.dart';
 import 'package:flutter_app/widgets/dialog.dart';
 import 'package:flutter_icons/flutter_icons.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:image_picker/image_picker.dart';
 
 class SettingsPage extends StatefulWidget {
@@ -30,7 +32,7 @@ class _SettingsPageState extends State<SettingsPage> {
 
   bool flag, classFlag;
   String language, schoolArea, imgBackground;
-  List weekAdvance = [-2,-1,0,1,2];
+  List weekAdvance = [-2, -1, 0, 1, 2];
 
   @override
   void initState() {
@@ -41,6 +43,7 @@ class _SettingsPageState extends State<SettingsPage> {
     language = SpUtil.getString(LocalShare.LANGUAGE, defValue: "简体中文");
     schoolArea = SpUtil.getString(LocalShare.SCHOOLAREA, defValue: "长山");
   }
+
 
   Widget schoolAreaListTile() {
     return ListTile(
@@ -170,7 +173,7 @@ class _SettingsPageState extends State<SettingsPage> {
   void _showWeekPicker(BuildContext cxt) {
     int index = 0;
     List<Widget> info = [];
-    for(int i=0;i<weekAdvance.length;i++){
+    for (int i = 0; i < weekAdvance.length; i++) {
       info.add(Text(weekAdvance[i].toString()));
     }
     final weekPicker = CupertinoPicker(
@@ -184,8 +187,7 @@ class _SettingsPageState extends State<SettingsPage> {
             index = position;
           });
         },
-        children: info
-    );
+        children: info);
 
     showCupertinoModalPopup(
         context: cxt,
@@ -202,7 +204,7 @@ class _SettingsPageState extends State<SettingsPage> {
                     child: Row(
                       children: <Widget>[
                         SizedBox(
-                          width: MediaQuery.of(cxt).size.width/6,
+                          width: MediaQuery.of(cxt).size.width / 6,
                         ),
                         Expanded(
                           flex: 1,
@@ -230,14 +232,18 @@ class _SettingsPageState extends State<SettingsPage> {
                           child: Container(
                             height: 50,
                             child: FlatButton(
-                              child: Text(S.of(context).sure,style: TextStyle(color: Colors.white),),
+                              child: Text(
+                                S.of(context).sure,
+                                style: TextStyle(color: Colors.white),
+                              ),
                               color: Color(0xff00c973),
                               shape: RoundedRectangleBorder(
                                   borderRadius: new BorderRadius.circular(9)),
                               onPressed: () {
                                 print(index);
                                 setState(() {
-                                  SpUtil.putInt(LocalShare.WEEK_ADVANCE, weekAdvance[index]);
+                                  SpUtil.putInt(LocalShare.WEEK_ADVANCE,
+                                      weekAdvance[index]);
                                 });
                                 Navigator.pop(context);
                               },
@@ -245,7 +251,7 @@ class _SettingsPageState extends State<SettingsPage> {
                           ),
                         ),
                         SizedBox(
-                          width: MediaQuery.of(cxt).size.width/6,
+                          width: MediaQuery.of(cxt).size.width / 6,
                         ),
                       ],
                     ),
@@ -363,7 +369,8 @@ class _SettingsPageState extends State<SettingsPage> {
                     style: whiteBoldText,
                   ),
                   subtitle: Text(
-                    SpUtil.getInt(LocalShare.WEEK_ADVANCE,defValue: 0).toString(),
+                    SpUtil.getInt(LocalShare.WEEK_ADVANCE, defValue: 0)
+                        .toString(),
                     style: greyText,
                   ),
                   trailing: Icon(
@@ -371,7 +378,7 @@ class _SettingsPageState extends State<SettingsPage> {
                     color: Colors.grey.shade400,
                   ),
                   onTap: () => _showWeekPicker(context),
-                )
+                ),
               ],
             ),
           ),

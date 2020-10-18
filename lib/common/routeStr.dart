@@ -35,6 +35,8 @@ class RouteStr {
 
   static const String CALENDAR = "/calendar";
 
+  static const String PRINT_SERVICE = "/printService";
+
   static const String VPN = "/vpn";
   static const String JIAOWU = "/jiaowu";
   static const String INFOSYS = "/infoSys";

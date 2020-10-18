@@ -55,6 +55,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "schedule" : MessageLookupByLibrary.simpleMessage("Schedule"),
     "scheduleBackground" : MessageLookupByLibrary.simpleMessage("Schedule background"),
     "schoolAreaValue" : MessageLookupByLibrary.simpleMessage("schoolArea"),
+    "schoolService" : MessageLookupByLibrary.simpleMessage("School Service"),
     "semester" : MessageLookupByLibrary.simpleMessage("Select the semester"),
     "setting" : MessageLookupByLibrary.simpleMessage("Setting"),
     "share" : MessageLookupByLibrary.simpleMessage("Share"),

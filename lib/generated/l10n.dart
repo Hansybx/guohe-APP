@@ -103,6 +103,16 @@ class S {
     );
   }
 
+  /// `School Service`
+  String get schoolService {
+    return Intl.message(
+      'School Service',
+      name: 'schoolService',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Schedule`
   String get schedule {
     return Intl.message(

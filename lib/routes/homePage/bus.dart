@@ -11,23 +11,21 @@ class SchoolBus extends StatelessWidget {
       appBar: Common.appBar(context,title: S.of(context).bus),
       body: Container(
         height: MediaQuery.of(context).size.height,
-        child: SingleChildScrollView(
-          child: ExtendedImage.asset(
-            'assets/imgs/schoolbus.png',
-            mode: ExtendedImageMode.gesture,
+        child: ExtendedImage.asset(
+          'assets/imgs/schoolbus.png',
+          mode: ExtendedImageMode.gesture,
 //              fit: BoxFit.contain,
-            initGestureConfigHandler: (state) {
-              return GestureConfig(
-                  minScale: 0.9,
-                  animationMinScale: 0.7,
-                  maxScale: 3.0,
-                  animationMaxScale: 3.5,
-                  speed: 1.0,
-                  inertialSpeed: 100.0,
-                  initialScale: 1.0,
-                  inPageView: false);
-            },
-          ),
+          initGestureConfigHandler: (state) {
+            return GestureConfig(
+                minScale: 0.9,
+                animationMinScale: 0.7,
+                maxScale: 3.0,
+                animationMaxScale: 3.5,
+                speed: 1.0,
+                inertialSpeed: 100.0,
+                initialScale: 1.0,
+                inPageView: false);
+          },
         ),
       ),
     );

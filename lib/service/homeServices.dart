@@ -388,6 +388,18 @@ List<ServiceItemViewModel> getEduServiceList(BuildContext context) {
   return eduServiceList;
 }
 
+// 校园服务的item
+//List<ServiceItemViewModel> getSchoolServiceList(BuildContext context) {
+//  List<ServiceItemViewModel> schoolServiceList = [
+//    ServiceItemViewModel(
+//        route: RouteStr.PRINT_SERVICE,
+//        title: S.of(context).printService,
+//        icon:
+//        new Image.asset("assets/imgs/core/print_service.png", width: 35, height: 35)),
+//  ];
+//  return schoolServiceList;
+//}
+
 // 校园系统的item
 List<ServiceItemViewModel> getSystemList(BuildContext context) {
   List<ServiceItemViewModel> eduSystemList = [

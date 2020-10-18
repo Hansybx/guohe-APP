@@ -23,11 +23,13 @@ dependencies:
   dio: 3.0.9
   extended_image: ^0.9.0
   flutter_launcher_icons: ^0.7.5
+  flutter_local_notifications: ^2.0.0  # iOS todo
   flutter_spinkit: ^4.1.2+1
   flutter_webview_plugin: ^0.3.11
   flutter_icons: ^1.1.0
   flutter_swiper: ^1.1.6
   flutter_xupdate: ^0.0.3
+
   flustars: ^0.3.3
   fluwx: ^2.3.0
   fl_chart: ^0.10.1

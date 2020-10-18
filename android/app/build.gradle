@@ -40,12 +40,20 @@ android {
 
     lintOptions {
         disable 'InvalidPackage'
+        checkReleaseBuilds false
+        abortOnError false
     }
 
     defaultConfig {
         applicationId "com.just.guohe"
         minSdkVersion 21
         targetSdkVersion 30
+        manifestPlaceholders = [
+                AMAP_KEY : "6c65296a2567b8fdd27aad89e11d1068", /// 高德地图key
+                JPUSH_PKGNAME : applicationId,
+                JPUSH_APPKEY : "b7ab7a9b59f83d49e649d74f", // NOTE: JPush 上注册的包名对应的 Appkey.
+                JPUSH_CHANNEL : "developer-default", //暂时填写默认值即可.
+        ]
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
     }
@@ -67,10 +75,16 @@ android {
             signingConfig signingConfigs.release
 
             // 开启混淆
-            minifyEnabled true
+//            minifyEnabled true
             useProguard true
 
+            minifyEnabled false
+            shrinkResources false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
+            ndk{
+                abiFilters "armeabi-v7a"
+            }
         }
     }
 }
@@ -81,4 +95,5 @@ flutter {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'com.amap.api:location:5.1.0'
 }

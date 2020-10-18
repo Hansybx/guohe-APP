@@ -126,6 +126,19 @@ class _HomePageState extends State<HomePage> {
               .toList(),
         ),
         new Divider(),
+//        ListTile(
+//          title: Text(S.of(context).schoolService),
+//        ),
+//        GridView.count(
+//          shrinkWrap: true,
+//          physics: new NeverScrollableScrollPhysics(),
+//          crossAxisCount: 4,
+//          padding: EdgeInsets.symmetric(vertical: 0),
+//          children: getSchoolServiceList(context)
+//              .map((item) => ServiceItem(widget: item))
+//              .toList(),
+//        ),
+//        new Divider(),
         ListTile(
           title: Text(S.of(context).system),
         ),

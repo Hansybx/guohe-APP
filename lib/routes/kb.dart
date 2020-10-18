@@ -817,8 +817,8 @@ class _SchedulePageState extends State<SchedulePage> {
         onRefresh: getSchedule,
         child: Container(
           decoration: _buildBackground(),
-          child: SingleChildScrollView(
-            child: Column(
+            child: ListView(
+              physics: AlwaysScrollableScrollPhysics(),
               children: <Widget>[
                 new Container(
                   height: 10,
@@ -860,7 +860,6 @@ class _SchedulePageState extends State<SchedulePage> {
                 )
               ],
             ),
-          ),
         ),
       ),
     );
